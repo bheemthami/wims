@@ -1,0 +1,571 @@
+
+.page {
+	background-color: white ;
+	font-family: sans-serif;
+	margin:auto;
+	display: block;
+	align-content: center;
+}
+
+.page-padding {
+	padding-bottom: 40px;
+	padding-top: 10px;
+}
+
+.first-border{
+	border: 4px solid red;
+	margin: 10px auto !important;
+}
+
+.second-border{
+	border: 2px solid red;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.main-wrapper{
+	display: block;
+	margin-top: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.sheet-body{
+	font-weight: 14px !important;
+	font-size: 14px !important;
+	text-align: justify;
+	color: blue;
+}
+
+.symbol-no{
+	color: blue;
+}
+
+.office-address{
+	font-size: 12px;
+	font-weight: bold;
+	margin-top: 5px;
+	color: blue !important;
+}
+
+.header-municipality{
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 10px;
+	color: blue !important;
+	text-transform: capitalize !important;
+}
+
+.header-government{
+	font-size: 15px;
+	font-weight: 20px;
+	margin-top: 10px;
+	color:blue !important; 
+	text-transform: capitalize;
+}
+
+.header-office{
+	font-size: 16px !important;
+	margin-top: 10px !important;
+	font-weight: bold !important;
+	color:blue !important; 
+}
+
+.committee{
+	margin-top: 20px !important;
+	margin-bottom: 20px !important;
+	font-size: 18px !important;
+	color:blue !important;
+	text-transform: uppercase !important;
+}
+
+.grade-sheet{
+	font-weight: bold;
+	font-size: 18px;
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+	text-transform: uppercase;
+	color:blue !important;
+}
+
+.class-no{
+	font-size: 20px;
+	font-weight: normal;
+	padding: 1px;
+	margin-top: 15px;
+}
+
+.class-no > span{
+	border: 2px solid blue;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+	color:blue !important;
+}
+
+.header-row{
+	margin:10px auto !important;
+	display: flex;
+}
+
+.logo{
+	height: auto;
+	width: 15% !important;
+	display: block;
+	margin: 5px auto;
+}
+
+.logo >img{
+	height: 80px !important;
+	width: auto !important;
+	margin-top: 10px !important;
+	margin-bottom: 3px !important;
+	margin-right: 3px !important;
+	margin-left: 10px;
+
+}
+
+
+.header-content{
+	height: auto;
+	width: 72% !important;
+	color: blue;
+	text-align: center;
+	padding: 2px;
+	line-height: 15px !important;
+}
+.student-image{
+	height: auto;
+	width: 13% !important;
+	margin-top: 10px;
+	float: right;
+}
+
+.photo{
+	border: 1px solid blue;
+	margin: 3px auto;
+	height: 110px !important;
+	width: 90px !important;
+}
+.photo > h1{
+	padding-top: 40px;
+	font-size: 25px;
+	padding-left: 25px;
+}
+
+
+#symbol-no-row{
+	font-weight: bold;
+	color:blue;
+	font-size: 20px;
+	margin: 10px auto;
+}
+
+.details-row{
+	color:blue;
+	margin:10px auto;
+	line-height: 14px !important;
+	font-size: 14px;
+}
+
+.details-row > p{
+	text-align: justify;
+	font-size: 14px !important;
+	line-height: 14px !important;
+}
+.table-row{
+	display: grid;
+	margin-top: 8px auto;
+}
+
+
+.pretext {
+	color: blue !important;
+}
+
+.posttext {
+	color: blue !important;
+	font-weight: bold !important;
+}
+
+.signature-row{
+	margin-top: 60px !important;
+	color: blue
+}
+
+.issue-date-row {
+	margin-top: 115px !important;
+	display: block;
+	margin: 20px auto;
+	color: blue;
+	font-size: 15px;
+}
+.sign{
+	margin: auto;
+	color:blue !important;
+	width: 50%;
+	float: left;
+	font-size: 15px;
+	text-align: left;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.cao-sign{
+	margin: auto;
+	font-weight: bold;
+	color: blue;
+	font-size: 15px;
+	text-align: center;
+	width: 50%;
+	float: left;
+}
+
+.sign-border{
+	margin: auto;
+	font-weight: bold;
+	color: blue !important;
+	font-size: 15px;
+	border-top:2px solid blue;
+	text-transform: uppercase;
+}
+
+.designation-border{
+	margin: auto;
+	font-weight: bold;
+	color: blue !important;
+	font-size: 18px;
+}
+
+.d-inline-block{
+	display: inline-block;
+	font-size: 20px;
+	text-decoration: underline;
+}
+
+.plain-text {
+	font-size: 20px;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.detail-wrapper{
+	font-size: 11px !important ;
+	text-transform: uppercase !important;
+}
+
+.sheet-wrapper{
+	display: flex;
+}
+
+.left-part {
+	height: auto;
+	width: 35%;
+	display: block;
+	margin: 5px auto;
+}
+
+.right-part{
+	display: block;
+	height: auto;
+	width: 65%;
+	float: right;
+	border-bottom: 1px solid blue;
+	margin: 5px auto;
+}
+
+.dob-left {
+	height: auto;
+	width: 25%;
+	display: block;
+	margin: 5px auto;
+}
+
+.dob-right{
+	display: block;
+	height: auto;
+	width: 75%;
+	float: right;
+	border-bottom: 1px solid blue;
+	margin: 5px auto;
+}
+
+.roll-1 {
+	height: auto;
+	width: 10%;
+	display: block;
+	margin: 5px auto;
+}
+
+.roll-2 {
+	display: block;
+	height: auto;
+	width: 60%;
+	float: right;
+	border-bottom: 1px solid blue;
+	margin: 5px auto;
+}
+
+.roll-3 {
+	height: auto;
+	width: 15%;
+	display: block;
+	margin: 5px auto;
+}
+
+.roll-4 {
+	display: block;
+	height: auto;
+	width: 15%;
+	float: right;
+	border-bottom: 1px solid blue;
+	margin: 5px auto;
+}
+
+.of-left {
+	height: auto;
+	width: 5%;
+	display: block;
+	margin: 5px auto;
+}
+
+.of-right{
+	display: block;
+	height: auto;
+	width: 95%;
+	float: right;
+	border-bottom: 1px solid blue;
+	margin: 5px auto;
+}
+
+.last-row-1 {
+	height: auto;
+	width: 60%;
+	display: block;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.last-row-2 {
+	display: block;
+	height: auto;
+	width: 20%;
+	float: right;
+	border-bottom: 1px solid blue;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.last-row-3 {
+	height: auto;
+	width: 20%;
+	display: block;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.sheet-copy {
+	color: red !important;
+	border: 1px solid blue; 
+	text-align: center; 
+	font-size: 8px;
+	color: blue !important;
+}
+
+.sn-row{
+	margin:10px auto !important;
+	font-size: 14px solid blue;
+	display: flex;
+}
+
+.exam-level{
+	font-weight: bold;
+	font-size: 20px;
+	padding: 2px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color:blue !important;
+}
+
+.contact-address{
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 5px;
+	color: blue !important;
+}
+
+.table-row{
+	display: grid;
+	margin-top: 5px auto;
+}
+
+.table > thead > tr{
+	border: 1px solid blue !important;
+	text-align: center;
+	line-height: 13px !important;
+	font-size: 12px;
+	padding: 3px !important;
+	font-family: sans-serif;
+	color: blue !important;
+}
+
+.table > thead > tr > th{
+	border: 1px solid blue !important;
+	text-align: center;
+	line-height: 13px !important;
+	font-size: 12px;
+	padding: 3px !important;
+	font-family: sans-serif;
+	color: blue !important;
+}
+
+.table > tbody > tr{
+	border: 1px solid blue !important;
+	text-align: center;
+	line-height: 13px !important;
+	font-size: 12px;
+	padding: 3px !important;
+	font-family: sans-serif;
+	color: blue !important;
+}
+
+.table > tbody > tr > td{
+	border: 1px solid blue !important;
+	text-align: center;
+	line-height: 13px !important;
+	font-size: 12px;
+	padding: 3px !important;
+	font-family: sans-serif;
+	color: blue !important;
+}
+
+
+#gs-table tr:nth-child(2) {
+	font-weight: bold;
+}
+
+#remarks-table > tbody >tr> td {
+	text-align: left !important;
+}
+
+
+.attendance-row {
+	height: auto;
+	width: 40%;
+	display: block;
+	margin: 5px auto;
+	float: left;
+	position: relative;
+	margin-right: 5px;
+}
+
+.performance-row {
+	height: auto;
+	width: 59%;
+	display: block;
+	margin: 5px auto;
+	float: left;
+	position: relative;
+
+}
+
+.rotate {
+
+	transform: rotate(-90deg);
+
+	/* Legacy vendor prefixes that you probably don't need... */
+
+	/* Safari */
+	-webkit-transform: rotate(-90deg);
+
+	/* Firefox */
+	-moz-transform: rotate(-90deg);
+
+	/* IE */
+	-ms-transform: rotate(-90deg);
+
+	/* Opera */
+	-o-transform: rotate(-90deg);
+
+	/* Internet Explorer */
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
+
+.rotate-90 {
+	position: absolute;
+	text-align:center;
+	white-space:nowrap;
+	transform-origin: 0 0;
+	transform: rotate(-90deg);
+
+	vertical-align: middle;
+
+}
+
+
+
+th.rotate {
+	/* Something you can count on */
+	height: 140px;
+	white-space: nowrap;
+}
+
+th.rotate > div {
+	transform: 
+	/* Magic Numbers */
+	translate(25px, 51px)
+	/* 45 is really 360 - 45 */
+	rotate(315deg);
+	width: 30px;
+}
+th.rotate > div > span {
+	border-bottom: 1px solid #ccc;
+	padding: 5px 10px;
+}
+
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #FAFAFA;
+}
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.page {
+	width: 21cm;
+	min-height: 29.7cm;
+	padding: 1.5cm;
+	margin: 1cm auto;
+	border: 1px #D3D3D3 solid;
+	border-radius: 5px;
+	background: white;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+@page {
+	size: A4;
+	margin: 0;
+}
+@media print {
+	.page {
+		margin: 0;
+		border: initial;
+		border-radius: initial;
+		width: initial;
+		min-height: initial;
+		box-shadow: initial;
+		background: initial;
+		page-break-after: always;
+	}
+}
+
+
+
+
+

@@ -1,0 +1,241 @@
+    body {
+    	width: 100%;
+    	height: 100%;
+    	margin: 0;
+    	padding: 0;
+    	background-color: #FAFAFA;
+    	font-size: 
+    }
+    * {
+    	box-sizing: border-box;
+    	-moz-box-sizing: border-box;
+    }
+    .page {
+    	width: 210mm;
+    	min-height: 297mm;
+    	padding: 20mm;
+    	margin: 10mm auto;
+    	border: 1px #D3D3D3 solid;
+    	border-radius: 5px;
+    	background: white;
+    	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    @page {
+    	size: A4;
+    	margin: 0;
+    }
+    @media print {
+    	html, body {
+    		width: 210mm;
+    		height: 297mm;        
+    	}
+    	.page {
+    		margin: 0;
+    		border: initial;
+    		border-radius: initial;
+    		width: initial;
+    		min-height: initial;
+    		box-shadow: initial;
+    		background: initial;
+    		page-break-after: always;
+    		font-size: 
+    	}
+
+    	.first-border{
+    		border: 4px solid red;
+    		margin: 15px auto;
+    	}
+
+    	.second-border{
+    		border: 2px solid red;
+    		margin-top: 5px;
+    		margin-bottom: 5px;
+    		margin-left: 5px;
+    		margin-right: 5px;
+    	}
+    	.main-wrapper{
+    		display: block;
+    		margin-top: 7px;
+    		margin-left: 20px;
+    		margin-right: 20px;
+    	}
+
+    	.sheet-body{
+    		font-weight: 16px;
+    		font-size: 16px;
+    		text-align: justify;
+    		color: blue;
+    	}
+
+    	.symbol-no{
+    		color: blue;
+    	}
+
+    	.header-municipality{
+    		font-size: 15px;
+    		font-weight: 20px;
+    		margin-top: 7px;
+    	}
+
+    	.header-office{
+    		font-size: 15px;
+    		margin-top: 7px;
+    	}
+
+    	.exam-level{
+    		font-weight: bold;
+    		font-size: 19px;
+    		padding: 2px;
+    		margin-top: 7px;
+    	}
+
+    	.grade-sheet{
+    		font-weight: bold;
+    		font-size: 19px;
+    		margin-top: 7px;
+    	}
+
+    	.class-no{
+    		font-size: 19px;
+    		font-weight: normal;
+    		padding: 1px;
+    		margin-top: 7px;
+    	}
+
+
+    	.header-row{
+    		margin:20px auto;
+    		display: flex;
+    	}
+
+    	.logo{
+    		height: auto;
+    		width: 25%;
+    		display: block;
+    		margin: 5px auto;
+    	}
+
+    	.logo >img{
+    		height: 150px;
+    		width: 150px;
+    		margin-top: 5px;
+    		margin-bottom: 5px;
+    		margin-right: 5px;
+    		margin-left: 10px;
+
+    	}
+
+
+    	.header-content{
+    		height: auto;
+    		width: 50%;
+    		color: blue;
+    		text-align: center;
+    		padding: 2px;
+    		line-height: 19px;
+    	}
+    	.student-image{
+    		height: auto;
+    		width: 25%;
+    		margin-top: 7px;
+    		float: right;
+    	}
+
+    	.photo{
+    		border: 1px solid blue;
+    		margin: 5px auto;
+    		height: 140px;
+    		width: 125px;
+    	}
+    	.photo > h1{
+    		padding-top: 46px;
+    		padding-left: 27px;
+    	}
+
+    	#symbol-no-row{
+    		font-weight: bold;
+    		color:blue;
+    		font-size: 15px;
+    		margin: 10px auto;
+    	}
+
+    	.details-row{
+    		color:blue;
+    		margin:10px auto;
+    		line-height: 20px;
+    		font-size: 16px;
+    	}
+
+    	.details-row > p{
+    		text-align: justify;
+    		font-size: 15px;
+    		line-height: 30px !important;
+    	}
+    	.table-row{
+    		display: grid;
+    		margin-top: 10px auto;
+    	}
+
+    	td{
+    		border: 1px solid black !important;
+    		text-align: center;
+    		line-height: 23px !important;
+    		font-size: 16px;
+    		padding: 5px !important;
+    	}
+
+    	th{
+    		border: 1px solid black !important;
+    		text-align: center !important;
+    		line-height: 23px !important;
+    		font-size: 16px;
+    		padding: 5px !important;
+    	}
+
+    	.signature-row{
+    		margin-top: 50px;
+    		font-weight: bold;
+    	}
+
+    	.issue-date-row {
+    		display: block;
+    		margin: 15px auto;
+    		color: blue;
+    	}
+    	.sign{
+    		margin: auto;
+    		color: blue;
+    		width: 20%;
+    		float: left;
+    		font-size: 18px;
+    		text-align: center;
+    	}
+
+    	.school-seal{
+    		margin: auto;
+    		color: blue;
+    		width: 15%;
+    		float: left;
+    		font-size: 18px;
+    		text-align: center;
+    	}
+
+    	.secretary{
+    		margin: auto;
+    		color: blue;
+    		width: 15%;
+    		float: left;
+    		font-size: 18px;
+    		text-align: center;
+    	}
+
+    	.cao-sign{
+    		margin: auto;
+    		font-weight: bold;
+    		color: blue;
+    		font-size: 18px;
+    		text-align: center;
+    	}
+
+    }

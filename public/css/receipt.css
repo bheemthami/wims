@@ -1,0 +1,36 @@
+
+.receipt{
+	margin:10px auto;
+	display: flex;
+}
+
+.receipt-logo{
+	height: auto;
+	width: 15%;
+}
+
+.receipt >img{
+	height: 100px;
+	width: 100px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	margin-left: 10px;
+
+}
+
+
+.receipt-content{
+	height: auto;
+	width: 70%;
+	color: blue;
+	text-align: center;
+	padding: 2px;
+	line-height: 15px;
+}
+
+#receipt-sign {
+	height: auto;
+	margin-left: 400px;
+	text-align: center;
+}

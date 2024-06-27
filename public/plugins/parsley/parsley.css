@@ -1,0 +1,114 @@
+input.parsley-success,
+select.parsley-success,
+textarea.parsley-success {
+  color: #468847;
+  background-color: #DFF0D8;
+  border: 1px solid #D6E9C6;
+}
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: 1px solid #EED3D7;
+}
+
+.parsley-errors-list {
+  margin: 2px 0 3px;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  opacity: 0;
+  color: #b53232;
+
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+}
+
+/* back end enhance*/
+
+.skin-blue .main-header .logo {
+    background-color: #de151e;
+}
+
+.skin-blue .main-header .navbar {
+    background-color: #EE1C25;
+}
+
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+    background-color: #EE1C25;
+}
+
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
+    background-color: #343434;
+}
+
+
+
+.content-wrapper, .right-side {
+  background-color: #fff;
+}
+
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
+    color: #fff;
+    background: #D99100;
+    border-left-color: #EE1C25;
+}
+
+.skin-blue .main-header li.user-header {
+    background-color: #EE1C25;
+}
+
+
+.bg-aqua{
+  background-color: #b92912  !important;
+}
+
+
+.bg-yellow{
+  background-color: #d22a0f  !important;
+}
+
+.bg-green{
+  background-color: #e06e0b !important;
+}
+
+.bg-red{
+  background-color: #FF9D01 !important;
+}
+
+
+.btn-primary {
+    background-color: #EE1C25;
+    border-color: #EE1C25;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary.hover {
+    background-color: #de151e;
+    border-color: #de151e;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #EE1C25;
+    border-color: #EE1C25;
+}
+
+
+
+.main-footer {
+  padding: 5px;
+}
+
+
+

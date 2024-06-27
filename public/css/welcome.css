@@ -1,0 +1,173 @@
+
+.first-border{
+	border: 1px solid red;
+	margin: auto;
+	border-radius: 5px;
+}
+
+.second-border{
+	border: 2px solid red;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.page-wrapper {
+	margin: 10px 20px 20px 10px;
+}
+
+.main-wrapper{
+	display: block;
+	margin-top: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.footer-wrapper{
+	display: block;
+	margin-top: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+
+.flex{
+	display: flex;
+	align-content: center;
+	margin-left: 20%;
+}
+
+
+
+.header-municipality{
+	font-size: 20px;
+	margin: auto;
+}
+
+.header-address{
+	font-size: 15px;
+	font-weight: 20px;
+	margin-top: 10px;
+}
+
+.header-office{
+	font-size: 20px;
+	margin-top: 10px;
+}
+
+.portal{
+	font-weight: bold;
+	font-size: 25px;
+	padding: 2px;
+	margin-top: 10px;
+}
+
+.portal > span {
+	border: 1px solid red;
+	background: red;
+	color: white;
+	padding: 5px 5px 5px 5px;
+	border-radius: 5px;
+}
+
+
+.header-row{
+	margin:20px auto;
+	display: flex;
+}
+
+.office-wrapper{
+	text-align: center;
+	color: darkred;
+}
+
+.logo{
+	height: auto;
+	display: block;
+	margin: 5px auto;
+}
+
+.logo{
+	height: 80px;
+	width: 80px;
+	margin-top: 20px;
+	margin-bottom: 5px;
+	margin-right: 10px;
+	margin-left: 5px;
+
+}
+
+.flag{
+	height: 80px;
+	width: 80px;
+	margin-top: 20px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	margin-left: 10px;
+
+}
+
+.header-content{
+	height: auto;
+	text-align: center;
+	padding: 2px;
+	line-height: 25px;
+}
+.student-image{
+	height: auto;
+	margin-top: 10px;
+	float: right;
+}
+
+.panel {
+	background-color: #84bed3;
+}
+
+.panel-footer {
+	background-color: #d9edf7;
+}
+
+.panel-body {
+	padding: 0px !important;
+	padding-top: 15px !important;
+}
+
+.table-bordered> thead > tr > th, 
+.table-bordered> tbody > tr > th, 
+.table-bordered> tfoot > tr > th, 
+.table-bordered> thead > tr > td, 
+.table-bordered> tbody > tr > td, 
+.table-bordered> tfoot > tr > td {
+	border: 1px solid #801919 !important;
+}
+
+.table > thead > tr > th{
+	border: 1px solid #801919 !important;
+	text-align: center;
+	line-height: 13px !important;
+	font-size: 12px;
+	padding: 3px !important;
+	font-family: sans-serif;
+	color: #801919 !important;
+	vertical-align: middle !important;
+
+}
+
+.header-content {
+	color: #030354;
+}
+
+.result-wrapper {
+	padding-top: 15px !important;
+	height: 300px;
+	width: auto;
+}
+
+.portal {
+	text-align: center;
+	color: #030354;
+	font-size: 20px;
+}
+
+

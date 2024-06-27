@@ -1,0 +1,426 @@
+body {
+	overflow-x: hidden !important;
+}
+
+#right-reserved {
+	color: whitesmoke;
+	text-align: left;
+}
+
+#dd-by {
+	color: whitesmoke;
+	text-align: right;
+}
+
+.post-tabs {
+	background: #0a2048;
+}
+
+.nav-pills .nav-link{
+	border-radius: 0px !important;
+}
+
+.nav-pills .nav-link:hover{
+	color:#fff !important;
+}
+
+.post-tabs li {
+	color: #fff !important;
+}
+
+
+.list-group-item a {
+	color: #111f49;
+	font-size: 15px;
+}
+
+.list-group-item a:hover {
+	color: #0a2048;
+	text-decoration: underline;
+}
+
+.published-date {
+	font-size: 12px;
+	color: #3c79ef ;
+	font-weight: bold;
+}
+
+.view-all {
+	padding: 8px;
+	border-radius: 5px;
+	font-size: 16px;
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align: center;
+}
+
+.view-all:hover {
+	color: #f5c900;
+}
+
+
+.highlight {
+	font-size: 1.1em;
+	color: white;
+	background: #2a5bb6;
+	text-align: center;
+	margin: auto auto;
+}
+
+.highlight-content {
+	background-color: #2a5bb6;
+	height: 40px;
+}
+
+
+.footer-menu ul li {
+	width: 100% !important;
+}
+
+.main-bodies{
+	text-align: center;
+}
+
+.main-body-details{
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.team-thumb{
+	text-align: center;
+}
+
+
+.team-thumb img{
+	width: 60%;
+}
+
+
+.marquee-container {
+	overflow: hidden;
+	width: 100%;
+}
+
+.marquee {
+	white-space: nowrap;
+	animation: marquee 25s linear infinite;
+}
+
+.marquee span {
+	display: inline-block;
+	padding: 0 20px;
+	color: white;
+}
+
+.marquee span a {
+	color: white;
+	font-size: 0.8em;
+}
+
+.marquee span a:hover {
+	color: #fdc800;
+}
+
+@keyframes marquee {
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+.about-title-section p {
+	padding-right: 20px !important;
+}
+
+.header-bottom-icon ul li a {
+	padding-left: 10px !important;
+}
+
+.nav-link.active {
+	color: #fff imo !important;
+}
+
+.post-content-wrapper {
+	display: flex;
+}
+
+.post-serial-number {
+	background:#0a2048 ;
+	color: #fff;
+	text-align: left;
+	padding: 5px;
+}
+
+.post-content {
+	text-align: left;
+	padding-left: 20px;
+}
+
+.quick-link {
+	border-top: 1px solid #0a2048;
+}
+
+.quick-link-item {
+	border-bottom: 1px solid #0a2048;
+	padding: 10px;
+}
+
+.quick-link li a {
+	color: #0a2048;
+}
+
+.quick-link li a:hover {
+	color: #f5c900;
+}
+
+.list-group li a:hover {
+	color: #f5c900;
+}
+
+
+.video-item {
+	padding: 20px;
+	display: inline-block;
+}
+
+
+.frontend-img {
+	width: 100px;
+	border-radius: 10%;
+	border: 1px solid;
+}
+
+.frontend-img-wrapper {
+	display:grid;
+	place-items: center !important;
+	color: #002147;
+}
+
+.frontend-img-wrapper p{
+	color: #002147;
+	padding:5px;
+}
+
+.table-bordered td, .table-bordered th {
+	vertical-align: middle !important;
+}
+
+.logo-brand-wrapper {
+	display: flex;
+	align-items: center;
+	color: #407ffc;
+}
+* {
+	box-sizing: border-box;
+}
+
+.clear {
+	clear: both;
+}
+
+a {
+	color: #fff;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #01695f;
+	text-decoration: none;
+}
+
+.scroll {
+	border: 1px solid #00000020;
+	border-radius: 5px;
+	background-color: #fff;
+	width: auto;
+	min-height: 200px;
+	max-height: 580px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	text-align: center;
+	padding: 20px;
+}
+
+.published-text {
+	font-size: 12px;
+	font-style: italic;
+}
+
+.primary-bg {
+	background: #2a5bb6 !important;
+}
+
+.main-menu ul li a {
+	color: #2a5bb6 !important;
+}
+
+.about-title-section h1 {
+	color: #3c79ef !important;
+}
+
+.main-menu ul li ul.submenu {
+	background: #3c79ef !important; 
+}
+
+.main-menu ul li ul.submenu li a {
+	color: #fff !important;
+}
+
+.photo-galleries {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+}
+
+.photo-galleries-item {
+	margin: 10px;
+}
+
+.photo-animate {
+	overflow: hidden;
+	border: 1px solid #00000020;
+/*	padding: 10px;*/
+border-radius: 5px;
+}
+
+.photo-animate img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	transition: all ease 1s;
+}
+
+.photo-animate:hover img {
+	scale: 1.2;
+}
+
+h5 a {
+	color: #5076f3 !important;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+h5 a:hover {
+	color: #fdc800 !important;
+	text-decoration: underline;
+}
+
+.footer-heading h1 {
+	color: #fff !important;
+}
+
+.photo-gallery-title {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.photo-gallery-title a {
+	color: #5076f3 !important;
+}
+
+.photo-gallery-title a:hover {
+	color: #fdc800 !important;
+	text-decoration: underline;
+}
+
+/*.facility-images {
+	margin-bottom: 20px;
+}*/
+
+.facility-images > img {
+/*	border-radius: 0px 0px 10px 10px;*/
+}
+
+.feature-wrapper {
+	padding-top: 10px !important;
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+	padding-bottom: 10px !important;
+	border-left: 0px !important;
+	margin-right: 0px !important;
+	box-shadow: none !important;
+}
+
+.feature-title-heading, .feature-text {
+	text-align: center !important;
+}
+
+.feature-title-heading > h3 {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-weight: 400 !important;
+	color: #fff;
+}
+
+.feature-text > p {
+	margin-top: 10px !important;
+	color: #blue;
+}
+
+.feature-details{
+	background-color: #3c79ef;
+	border-top: 10px solid #fff;
+	border-radius: 0px 0px 10px 10px;
+}
+
+.btn-text {
+	background-color: #2a5bb6 !important;
+	color: #fff !important;
+}
+
+#scrollUp  {
+	background: #e01f1c !important;
+}
+
+.btn {
+	background: #2a5bb6 !important;
+	color: #fff !important;
+}
+
+.contact-icon i {
+	background-color: #2a5bb6 !important;
+	color: #fff;
+}
+
+.nav-pills {
+	background: #2a5bb6;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.course-details-tabs ul li a {
+	color: #fff;
+}
+
+.course-details-tabs .nav-pills .nav-link.active {
+	text-decoration: underline;
+	text-decoration-color: #fff;
+	color: #fff;
+}
+
+
+element.style {
+}
+.mean-container .mean-bar, .mean-container .mean-bar * {
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+.mean-container .mean-nav {
+	background: #3a59b9 none repeat scroll 0 0;
+}
+
+.btn-text {
+	text-align: center !important;
+}
+
+
+
