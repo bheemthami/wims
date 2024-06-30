@@ -71,7 +71,7 @@
 							<td>{{ $sno++ }}</td>
 							<td>{{ $gallery->type }}</td>
 							<td>
-								{{ substr($gallery->title, 15) }}
+								{{ $gallery ? $gallery->title : 'Title'  }}
 							</td>
 							<td>
 								@if($gallery->type == 'image')

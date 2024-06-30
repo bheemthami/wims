@@ -284,13 +284,13 @@
 
 
 <!-- events start -->
-<div id="events" class="events-area events-bg-height pt-70 pb-70" style="background-image: url(frontend/img/events/events_bg.jpg)">
+<div id="events" class="events-area events-bg-height pt-70 pb-70">
   <div class="container">
     <div class="row">
       <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
         <div class="section-title mb-50 text-center">
           <div class="section-title-heading mb-20">
-            <h1 class="primary-color">Upcoming Events</h1>
+            <h1 class="primary-color">Our Events</h1>
           </div>
         </div>
       </div>
