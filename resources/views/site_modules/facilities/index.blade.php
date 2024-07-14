@@ -19,15 +19,14 @@
 			<h3 class="box-title"> List</h3>
 			<div class="box-tools pull-right">
 				<a class="btn btn-sm btn-success" href="{{ route('facilities.create')}}"> <i class="fa fa-plus"></i> Add New Facility</a>
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body table-responsive no-padding">
 			<div class="filteration">
 				<div class="col-md-3">
-					<label for="first_name"> Title  </label>
+					<label for="first_name"> Title </label>
 					<div class="form-group">
 						<input id="title" name="title" class="form-control" placeholder="title">
 					</div>
@@ -41,7 +40,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="table-wrapper" >
+			<div id="table-wrapper">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<th>S.No.</th>
@@ -61,11 +60,11 @@
 								{{ $facility->title }}
 							</td>
 							<td>
-								<img src="{{asset('uploads/facilities/'.$facility->image)}}" width="80px">
+								<img src="{{asset('uploads/media/'.$facility->images[0]->image)}}" width="80px">
 							</td>
 							<td>{{ $facility->order }}</td>
 							<td>{!! substr($facility->summary,0,100) !!}</td>
-							
+
 							<td>
 								@if($facility->status == 1)
 								<label class="label label-success">Published</label>
@@ -102,32 +101,34 @@
 	<!-- /.box -->
 </section>
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$('#dob').nepaliDatePicker();
 	});
 </script>
 
 <script>
-	$(document).ready(function(){
-		$('#search-button').click(function(){
+	$(document).ready(function() {
+		$('#search-button').click(function() {
 			var title = $('#title').val();
-			var baseUrl = "<?php echo url('admin/facilities')?>";
+			var baseUrl = "<?php echo url('admin/facilities') ?>";
 			$.ajax({
-				url : baseUrl,
-				data : {'title':title},
-				success:function(response){
+				url: baseUrl,
+				data: {
+					'title': title
+				},
+				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
 				}
 			});
 		});
 
-		$('#clear-button').click(function(){
+		$('#clear-button').click(function() {
 			$('#title').val('');
 		});
 	});
 </script>
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$('#dob').nepaliDatePicker();
 	});
 </script>

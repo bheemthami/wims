@@ -4,37 +4,55 @@
 
 @section('content')
 
-<div class="pt-70 pb-70">
+<div class="pt-50 pb-50">
     <div class="container">
         <div class="row">
             <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <div class="section-title mb-50 text-center">
                     <div class="section-title-heading mb-20">
-                        <h1 class="primary-color">Our Facilities</h1>
+                        <h1 class="primary-color">Facilities we provide</h1>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            @forelse($facilities as $key =>$facility)
-            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                <div class="blog-wrapper mb-30">
-                    <div class="blog-thumb mb-25 photo-animate">
-                        <img src="{{ asset('uploads/facilities/'.$facility->image)}}" alt="" height="260" width="370">
 
-                    </div>
-                    <div class="blog-content">
-                        <h5> <strong>    {{++$key}}. </strong> {{ $facility->title}}</h5>
-                        <p>{{ substr($facility->summary,0,300) }}</p>
+        @forelse($facilities as $key =>$facility)
+        <div class="row mt-50 mb-50">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                <div class="custom-wrapper mb-30">
+                    <div class="custom-thumb mb-25 photo-animate">
+                        <img class="img img-responsive" src="{{ asset('uploads/media/'.$facility->images[0]->image)}}" alt="No Image">
                     </div>
                 </div>
             </div>
-            @empty
+
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                <div class="custom-content mb-30">
+                    <h3 class="section-header-color"> {{ $facility->title}}</h3>
+                    <p>{!! $facility->description !!}</p>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                <div class="custom-wrapper mb-30">
+                    <div class="custom-thumb mb-25 photo-animate">
+                        @if($facility->images[1])
+                        <img class="img img-responsive" src="{{ asset('uploads/media/'.$facility->images[1]->image)}}" alt="No Image">
+                        @else
+                        <img class="img img-responsive" src="{{ asset('uploads/media/'.$facility->images[0]->image)}}" alt="No Image">
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+        @empty
+        <div class="row">
             <div class="col-xl-12 col-lg-12 text-center">
                 NO DATA
             </div>
-            @endforelse  
         </div>
+        @endforelse
+
     </div>
 </div>
 

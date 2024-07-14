@@ -15,36 +15,37 @@ class FacilityManager
 		$this->facility = $facility;
 	}
 
-	public function all($params= null, $perPage){
-		$query = $this->facility::select('*'); 
+	public function all($params = null, $perPage)
+	{
+		$query = $this->facility::with('images')->select('*');
 
-		if($params['title']){
-			$query = $query->where('title','like','%'.$params['title'].'%');
+		if ($params['title']) {
+			$query = $query->where('title', 'like', '%' . $params['title'] . '%');
 		}
 
-		return  $facilities = $query->orderBy('order','ASC')->paginate($perPage);
-
+		return  $facilities = $query->orderBy('order', 'ASC')->paginate($perPage);
 	}
 
-	public function count($status = null){
-		$query = $this->facility::select('*'); 
+	public function count($status = null)
+	{
+		$query = $this->facility::select('*');
 
-		if($status){
-			$query = $query->where(['status'=>$status]);
+		if ($status) {
+			$query = $query->where(['status' => $status]);
 		}
 
 		return  $facilities = $query->count();
-
 	}
 
-	public function publishedFacilities(){
-		$query = $this->facility::where(['status'=>1])->orderBy('order','ASC');
-		
+	public function publishedFacilities()
+	{
+		$query = $this->facility::with('images')->where(['status' => 1])->orderBy('order', 'ASC');
 		return $query->get();
 	}
 
-	public function topPublishedFacilities($limit = null){
-		$query = $this->facility::where(['status'=>1])->orderBy('order','ASC');
+	public function topPublishedFacilities($limit = null)
+	{
+		$query = $this->facility::where(['status' => 1])->orderBy('order', 'ASC');
 
 		if ($limit) {
 			$query->limit($limit);
@@ -52,19 +53,20 @@ class FacilityManager
 		return $query->get();
 	}
 
-	public function find($id){
+	public function find($id)
+	{
 		return $this->facility::find($id);
 	}
 
 
-	public function getFacilityBySlug($slug){
-		return $this->facility::where(['slug'=>$slug])->first();
+	public function getFacilityBySlug($slug)
+	{
+		return $this->facility::where(['slug' => $slug])->first();
 	}
 
 
-	public function publishedFacilityBySlug($slug,$id){
-		return $this->facility::where(['slug'=>$slug,'id'=>$id])->first();
+	public function publishedFacilityBySlug($slug, $id)
+	{
+		return $this->facility::where(['slug' => $slug, 'id' => $id])->first();
 	}
-
-	
 }

@@ -9,11 +9,12 @@ class Department extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','slug','order','status'];
+    protected $fillable = ['title', 'slug', 'order', 'status'];
 
     protected $table = 'departments';
 
-    public function officials(){
-        return $this->hasMany('App/Models/Teacher','teacher_id','id');
+    public function officials()
+    {
+        return $this->hasMany('App\Models\Frontend\Official');
     }
 }

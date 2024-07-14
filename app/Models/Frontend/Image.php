@@ -9,13 +9,18 @@ class Image extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','image','order','gallery_id'];
+    protected $fillable = ['title', 'image', 'order', 'gallery_id'];
 
     protected $table = 'images';
 
 
     public function gallery()
     {
-       return $this->belongsTo('App\Models\Frontend\Gallery');
+        return $this->belongsTo('App\Models\Frontend\Gallery');
+    }
+
+    public function imageable()
+    {
+        return $this->morphTo();
     }
 }

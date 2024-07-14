@@ -17,26 +17,18 @@
         </div>
 
         <div class="row">
-            @forelse($videos as  $video)
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                <!-- <div class="col-xl-12">
-                    <div class="video-wrapper text-center">
-                        <div class="video-content"> -->
-                            <a class="popup-video btn-text btn-block" href="{{ $video->link ? $video->link : '#' }}">
-                                <img src="frontend/img/video/play_icon.png" alt="">
-                            </a>
-                            <p> <strong> {{ $video->title }} </strong></p>
-                            <p> <strong> Published On - {{ $video->date }} </strong></p>
-                       <!--  </div>
-                    </div>
-                </div> -->
+            @forelse($videos as $video)
+            <div class="col-md-6 col-sm-12">
+                <div class="iframe-container">
+                    <iframe width="560" height="315" src="{{$video->link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
             </div>
             @empty
             <div class="video-item">
                 <p>NO DATA</p>
             </div>
             @endforelse
+
         </div>
     </div>
-</div>
-@endsection
+    @endsection

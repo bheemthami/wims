@@ -1,4 +1,3 @@
-
 <!-- header-start -->
 <header id="home">
     <div class="header-area">
@@ -9,7 +8,7 @@
                     <div class="col-xl-6 col-lg-6 col-md-6 col-12">
                         <div class="header-contact-info d-flex">
                             <div class="header-contact header-contact-phone">
-                                <span class="ti-headphone"></span>
+                                <span class="ti-mobile"></span>
                                 <p class="phone-number">{{$settings['setting']->phone}}</p>
                             </div>
                             <div class="header-contact header-contact-email">
@@ -64,75 +63,66 @@
         <!-- /end header-top -->
         <!-- header-bottom -->
         <div class="header-bottom-area header-sticky" style="transition: .6s;">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-1 col-lg-1 col-md-6 col-6">
-                        <div class="logo">
-                            <a href="{{ route('index')}}">
-                                <img src="{{ asset('uploads/setting/'.$settings['setting']->local_logo)}}" alt="LOGO"
-                                width="250px">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-11 col-lg-11 col-md-6 col-6">
-                        <div class="main-menu f-right">
-                            <nav id="mobile-menu" style="display: block;">
-                                <ul>
+            <div class="row top-menu-wrapper">
+                <a href="{{ route('index')}}">
+                    <img src="{{ asset('uploads/setting/'.$settings['setting']->local_logo)}}" alt="LOGO" width="250px">
+                </a>
+                <div class="main-menu f-right">
+                    <nav id="mobile-menu" style="display: block;">
+                        <ul>
+                            <li>
+                                <a href="{{ route('index')}}"> <i class="fa fa-home"></i> Home <i class="fa fa-angle-down"></i> </a>
+                                <ul class="submenu">
                                     <li>
-                                        <a href="{{ route('index')}}"> <i class="fa fa-home"></i> Home <i class="fa fa-angle-down"></i> </a>
-                                        <ul class="submenu">
-                                            <li>
-                                                <a href="{{ route('about-us')}}">About Us</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('frontend.page',['slug'=>'message-from-chairman'])}}">Message from Chairman</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('frontend.page',['slug'=>'message-from-principal'])}}">Message from Principal</a>
-                                            </li>
-                                        </ul>
+                                        <a href="{{ route('about-us')}}">About Us</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('programs') }}">Programs</a>
+                                        <a href="{{ route('frontend.page',['slug'=>'message-from-chairman'])}}">Message from Chairman</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('trainings') }}">Trainings</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('faculties')}}">Faculties</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('facilities')}}">Facilities</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Gallery <i class="fa fa-angle-down"></i></a>
-                                        <ul class="submenu">
-                                            <li>
-                                                <a href="{{ route('photo-gallery')}}">Photo Gallary</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('video-gallery')}}">Video Gallery</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="{{route('publications')}}">Publications</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('contact-us')}}">Contact Us</a>
+                                        <a href="{{ route('frontend.page',['slug'=>'message-from-principal'])}}">Message from Principal</a>
                                     </li>
                                 </ul>
-                            </nav>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="mobile-menu"></div>
-                    </div>
+                            </li>
+                            <li>
+                                <a href="{{ route('programs') }}">Programs</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('trainings') }}">Trainings</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('faculties')}}">Faculties</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('facilities')}}">Facilities</a>
+                            </li>
+                            <li>
+                                <a href="#">Gallery <i class="fa fa-angle-down"></i></a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="{{ route('photo-gallery')}}">Photo Gallary</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('video-gallery')}}">Video Gallery</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="{{route('publications')}}">Publications</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('contact-us')}}">Contact Us</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-12">
+                    <div class="mobile-menu"></div>
                 </div>
             </div>
         </div>
         <!-- /end header-bottom -->
     </div>
 </header>
-    <!-- header-end -->
+<!-- header-end -->
