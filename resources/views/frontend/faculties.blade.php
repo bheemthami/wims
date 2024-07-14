@@ -16,57 +16,39 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xl-10 col-lg-10 offset-xl-1 offset-lg-1">
-                <table class="table table-hover table-bordered ">
-                    <thead>
-                        <tr>
-                            <th>S.N.</th>
-                            <th>Full Name</th>
-                            <th>Designation</th>
-                            <th>Contact No.</th>
-                            <th>Email</th>
-                            <th>Remarks</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($faculties as $faculty)
-                        <tr>
-                            <td colspan="6" style="color: #002147"><strong> {{ $faculty['title'] }} </strong> </td>
-                        </tr>
-                        @forelse($faculty['officials'] as $key=>$official)
-                        <tr>
-                            <td>{{ ++$key}}</td>
-                            <td>
-                                <span class="frontend-img-wrapper">
-                                <img class="frontend-img" src="{{asset('uploads/officials/'.$official->image)}}" alt="NO PHOTO">
-                                <p> <strong> {{ $official->first_name }}  {{ $official->middle_name }}  {{ $official->last_name }} </strong></p>
-                                </span>
-                            </td>
-                            <td>{{ $official->designation->name }}</td>
-                            <td>{{ $official->mobile }}</td>
-                            <td>{{ $official->email }}</td>
-                            <td></td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6">NO DATA</td>
-                        </tr>
-                        @endforelse
-                        <tr>
-
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6">NO DATA</td>
-                        </tr>
-                        @endforelse
-                        
-                    </tbody>
-                </table>
+        @forelse($faculties as $faculty)
+        <h3 class="primary-color">{{$faculty['title']}}</h3>
+        <hr style=" border-bottom: 1px solid #8a8a8a;" />
+        <div class="row justify-content-center">
+            @forelse($faculty['officials'] as $key=>$official)
+            <div class="col-lg-3 col-md-3 mb-3">
+                <div class="official-wrapper">
+                    <div class="d-flex justify-content-center">
+                        <img class="img-fluid" src="{{asset('uploads/officials/'.$official->image)}}" alt="No Image" width="200">
+                    </div>
+                    <div class="pt-2 text-center">
+                        <h6 class="m-0 fw-bold text-primary">{{ $official->first_name }} {{ $official->middle_name }} {{ $official->last_name }}</h6>
+                        <p class="mb-10 fw-bold">{{ $official->designation->name}}</p>
+                    </div>
+                </div>
+            </div>
+            @empty
+            <div class="col-md-3">
+                <p>No Data</p>
+            </div>
+            @endforelse
+        </div>
+        @empty
+        <div class="row justify-content-center">
+            <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                <div class="section-title mb-50 text-center">
+                    <div class="section-title-heading mb-20">
+                        <h1 class="primary-color">Data Not Found!</h1>
+                    </div>
+                </div>
             </div>
         </div>
+        @endforelse
     </div>
 </div>
-
 @endsection

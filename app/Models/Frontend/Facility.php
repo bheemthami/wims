@@ -9,7 +9,12 @@ class Facility extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','slug','description','image','attachment','order','status','summary'];
+    protected $fillable = ['title', 'slug', 'description', 'image', 'attachment', 'order', 'status', 'summary'];
 
     protected $table = 'facilities';
+
+    public function images()
+    {
+        return $this->morphMany(Media::class, 'taggable');
+    }
 }

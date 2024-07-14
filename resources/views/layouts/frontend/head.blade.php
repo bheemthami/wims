@@ -2,10 +2,10 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title> @yield('title')</title>
-    <meta name="description" content="">
+
+    <meta name="description" content="{{$settings['setting']->office}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="manifest" href="site.html">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('uploads/setting/'.$settings['setting']->favicon)}}">
     <!-- Place favicon.ico in the root directory -->
 
