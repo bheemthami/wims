@@ -1,4 +1,4 @@
-<div id="table-wrapper" >
+<div id="table-wrapper">
 	<table class="table table-bordered table-striped">
 		<thead>
 			<th>S.No.</th>
@@ -25,9 +25,10 @@
 					@endif
 				</td>
 				<td>
-					<a class="btn btn-sm btn-success" href="{{ route('training-types.edit',[$training_type->id])}}"><i class="fa fa-edit"></i></a>
-					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$training_type->id}}" data-route="{{route('training-types.destroy', $training_type->id) }}"> <i class="fa fa-trash"></i></a>
-
+					<div class="action-button-list">
+						<a class="btn btn-sm btn-success" href="{{ route('training-types.edit',[$training_type->id])}}"><i class="fa fa-edit"></i></a>
+						<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$training_type->id}}" data-route="{{route('training-types.destroy', $training_type->id) }}"> <i class="fa fa-trash"></i></a>
+					</div>
 				</td>
 			</tr>
 			@empty

@@ -19,9 +19,8 @@
 			<h3 class="box-title">Officials List</h3>
 			<div class="box-tools pull-right">
 				<a class="btn btn-sm btn-success" href="{{ route('officials.create')}}"> <i class="fa fa-users"></i> Add New Official</a>
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body table-responsive no-padding">
@@ -60,7 +59,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="table-wrapper" >
+			<div id="table-wrapper">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<th>S.No.</th>
@@ -84,7 +83,7 @@
 								{{ strtoupper($official->last_name)}}
 							</td>
 							<td>{{ ucwords($official->mobile)}}</td>
-							
+
 							<td>
 								@if($official->working_status == 1)
 								<label class="label label-success">YES</label>
@@ -103,10 +102,11 @@
 
 							<td>{{ $official->order }}</td>
 							<td>
-								<a class="btn btn-sm btn-primary" href="{{ route('officials.show',[$official->id])}}"><i class="fa fa-eye"></i></a>
-								<a class="btn btn-sm btn-success" href="{{ route('officials.edit',[$official->id])}}"><i class="fa fa-edit"></i></a>
-								<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$official->id}}" data-route="{{route('officials.destroy', $official->id) }}"> <i class="fa fa-trash"></i></a>
-
+								<div class="action-button-list">
+									<a class="btn btn-sm btn-primary" href="{{ route('officials.show',[$official->id])}}"><i class="fa fa-eye"></i></a>
+									<a class="btn btn-sm btn-success" href="{{ route('officials.edit',[$official->id])}}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$official->id}}" data-route="{{route('officials.destroy', $official->id) }}"> <i class="fa fa-trash"></i></a>
+								</div>
 							</td>
 						</tr>
 						@empty
@@ -132,30 +132,30 @@
 </section>
 
 <script>
-	$(document).ready(function(){
-		$('#search-button').click(function(){
+	$(document).ready(function() {
+		$('#search-button').click(function() {
 			var first_name = $('#first_name').val();
 			var department_id = $('#department_id').val();
 			var working_status = $('#working_status').val();
 			var is_teaching_official = $('#is_teaching_official').val();
 			var status = $('#status').val();
-			var baseUrl = "<?php echo url('admin/officials')?>";
+			var baseUrl = "<?php echo url('admin/officials') ?>";
 			$.ajax({
-				url : baseUrl,
-				data : {
-					'first_name':first_name,
-					'department_id':department_id,
-					'working_status':working_status,
-					'is_teaching_official':is_teaching_official,
-					'status':status
+				url: baseUrl,
+				data: {
+					'first_name': first_name,
+					'department_id': department_id,
+					'working_status': working_status,
+					'is_teaching_official': is_teaching_official,
+					'status': status
 				},
-				success:function(response){
+				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
 				}
 			});
 		});
 
-		$('#clear-button').click(function(){
+		$('#clear-button').click(function() {
 			$('#first_name').val('');
 			$('#department_id').val('');
 			$('#working_status').val('');

@@ -1,4 +1,4 @@
-<div id="table-wrapper" >
+<div id="table-wrapper">
 	<table class="table table-bordered table-striped">
 		<thead>
 			<th>S.No.</th>
@@ -22,7 +22,7 @@
 				</td>
 				<td>{{ $facility->order }}</td>
 				<td>{!! substr($facility->summary,0,100) !!}</td>
-				
+
 				<td>
 					@if($facility->status == 1)
 					<label class="label label-success">Active</label>
@@ -31,10 +31,11 @@
 					@endif
 				</td>
 				<td>
-					<a class="btn btn-sm btn-primary" href="{{ route('facilities.show',[$facility->id])}}"><i class="fa fa-eye"></i></a>
-					<a class="btn btn-sm btn-success" href="{{ route('facilities.edit',[$facility->id])}}"><i class="fa fa-edit"></i></a>
-					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$facility->id}}" data-route="{{route('facilities.destroy', $facility->id) }}"> <i class="fa fa-trash"></i></a>
-
+					<div class="action-button-list">
+						<a class="btn btn-sm btn-primary" href="{{ route('facilities.show',[$facility->id])}}"><i class="fa fa-eye"></i></a>
+						<a class="btn btn-sm btn-success" href="{{ route('facilities.edit',[$facility->id])}}"><i class="fa fa-edit"></i></a>
+						<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$facility->id}}" data-route="{{route('facilities.destroy', $facility->id) }}"> <i class="fa fa-trash"></i></a>
+					</div>
 				</td>
 			</tr>
 			@empty

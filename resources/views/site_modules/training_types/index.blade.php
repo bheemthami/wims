@@ -19,15 +19,14 @@
 			<h3 class="box-title">Training Types List</h3>
 			<div class="box-tools pull-right">
 				<a class="btn btn-sm btn-success" href="{{ route('training-types.create')}}"> <i class="fa fa-plus"></i> Add New Training Type</a>
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body table-responsive no-padding">
 			<div class="filteration">
 				<div class="col-md-3">
-					<label for="first_name"> Title  </label>
+					<label for="first_name"> Title </label>
 					<div class="form-group">
 						<input id="title" name="title" class="form-control" placeholder="title">
 					</div>
@@ -41,7 +40,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="table-wrapper" >
+			<div id="table-wrapper">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<th>S.No.</th>
@@ -59,7 +58,7 @@
 								{{ $training_type->title }}
 							</td>
 							<td>{{ $training_type->order }}</td>
-														
+
 							<td>
 								@if($training_type->status == 1)
 								<label class="label label-success">Publish</label>
@@ -68,9 +67,10 @@
 								@endif
 							</td>
 							<td>
-								<a class="btn btn-sm btn-success" href="{{ route('training-types.edit',[$training_type->id])}}"><i class="fa fa-edit"></i></a>
-								<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$training_type->id}}" data-route="{{route('training-types.destroy', $training_type->id) }}"> <i class="fa fa-trash"></i></a>
-
+								<div class="action-button-list">
+									<a class="btn btn-sm btn-success" href="{{ route('training-types.edit',[$training_type->id])}}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$training_type->id}}" data-route="{{route('training-types.destroy', $training_type->id) }}"> <i class="fa fa-trash"></i></a>
+								</div>
 							</td>
 						</tr>
 						@empty
@@ -96,20 +96,22 @@
 </section>
 
 <script>
-	$(document).ready(function(){
-		$('#search-button').click(function(){
+	$(document).ready(function() {
+		$('#search-button').click(function() {
 			var title = $('#title').val();
-			var baseUrl = "<?php echo url('admin/training-types')?>";
+			var baseUrl = "<?php echo url('admin/training-types') ?>";
 			$.ajax({
-				url : baseUrl,
-				data : {'title':title},
-				success:function(response){
+				url: baseUrl,
+				data: {
+					'title': title
+				},
+				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
 				}
 			});
 		});
 
-		$('#clear-button').click(function(){
+		$('#clear-button').click(function() {
 			$('#title').val('');
 		});
 	});

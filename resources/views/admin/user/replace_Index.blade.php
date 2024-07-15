@@ -9,7 +9,7 @@
 	<tbody>
 		@php $sno = 1; @endphp
 		@forelse($wards as $ward)
-		<tr>	
+		<tr>
 			<td>{{ $sno++ }}</td>
 			<td>{{ ucfirst($ward->name) }}</td>
 			<td>{{ $ward->ward_no }}</td>
@@ -23,7 +23,7 @@
 			</td>
 		</tr>
 		@empty
-		<tr>	
+		<tr>
 			<td colspan="5">Data not found!!!</td>
 		</tr>
 		@endforelse

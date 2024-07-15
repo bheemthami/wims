@@ -19,15 +19,14 @@
 			<h3 class="box-title">Events List</h3>
 			<div class="box-tools pull-right">
 				<a class="btn btn-sm btn-success" href="{{ route('events.create')}}"> <i class="fa fa-plus"></i> Add New Event</a>
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body table-responsive no-padding">
 			<div class="filteration">
 				<div class="col-md-3">
-					<label for="first_name"> Title  </label>
+					<label for="first_name"> Title </label>
 					<div class="form-group">
 						<input id="title" name="title" class="form-control" placeholder="title">
 					</div>
@@ -41,7 +40,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="table-wrapper" >
+			<div id="table-wrapper">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<th>S.No.</th>
@@ -68,7 +67,7 @@
 								{{ date('Y-m-d',strtotime($event->end_time)) }}, {{ $event->end_time}}
 							</td>
 							<td>{{ $event->speaker ? $event->speaker : '-'}}</td>
-							
+
 							<td>
 								@if($event->status == 1)
 								<label class="label label-success">Published</label>
@@ -77,10 +76,11 @@
 								@endif
 							</td>
 							<td>
-								<a class="btn btn-sm btn-primary" href="{{ route('events.show',[$event->id])}}"><i class="fa fa-eye"></i></a>
-								<a class="btn btn-sm btn-success" href="{{ route('events.edit',[$event->id])}}"><i class="fa fa-edit"></i></a>
-								<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$event->id}}" data-route="{{route('events.destroy', $event->id) }}"> <i class="fa fa-trash"></i></a>
-
+								<div class="action-button-list">
+									<a class="btn btn-sm btn-primary" href="{{ route('events.show',[$event->id])}}"><i class="fa fa-eye"></i></a>
+									<a class="btn btn-sm btn-success" href="{{ route('events.edit',[$event->id])}}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$event->id}}" data-route="{{route('events.destroy', $event->id) }}"> <i class="fa fa-trash"></i></a>
+								</div>
 							</td>
 						</tr>
 						@empty
@@ -105,32 +105,34 @@
 	<!-- /.box -->
 </section>
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$('#dob').nepaliDatePicker();
 	});
 </script>
 
 <script>
-	$(document).ready(function(){
-		$('#search-button').click(function(){
+	$(document).ready(function() {
+		$('#search-button').click(function() {
 			var title = $('#title').val();
-			var baseUrl = "<?php echo url('admin/events')?>";
+			var baseUrl = "<?php echo url('admin/events') ?>";
 			$.ajax({
-				url : baseUrl,
-				data : {'title':title},
-				success:function(response){
+				url: baseUrl,
+				data: {
+					'title': title
+				},
+				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
 				}
 			});
 		});
 
-		$('#clear-button').click(function(){
+		$('#clear-button').click(function() {
 			$('#title').val('');
 		});
 	});
 </script>
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$('#dob').nepaliDatePicker();
 	});
 </script>

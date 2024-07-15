@@ -22,70 +22,71 @@
 					<h3 class="box-title">Default Settings</h3>
 
 					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-						title="Collapse">
-						<i class="fa fa-minus"></i>
-					</button>
-					<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-						<i class="fa fa-times"></i>
-					</button>
+						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+							<i class="fa fa-minus"></i>
+						</button>
+						<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+							<i class="fa fa-times"></i>
+						</button>
+					</div>
 				</div>
+				<div class="box-body">
+					<div class="col-md-12 form-group">
+						<label class="col-md-4">Current Academic Year</label>
+						<div class="col-md-8">{{ $setting->academicYear->year }}</div>
+					</div>
+					<div class="col-md-12 form-group">
+						<label class="col-md-4">Office/Institute</label>
+						<div class="col-md-8">{{ $setting->office }}</div>
+					</div>
+					<div class="col-md-12 form-group">
+						<label class="col-md-4">Office/Institute Address</label>
+						<div class="col-md-8">{{ $setting->office_address }}</div>
+					</div>
+					<div class="col-md-12 form-group">
+						<label class="col-md-4">Municipality</label>
+						<div class="col-md-8">{{ $setting->municipality }}</div>
+					</div>
+					<div class="col-md-12 form-group">
+						<label class="col-md-4">Province Name</label>
+						<div class="col-md-8">{{ $setting->province_name }}</div>
+					</div>
+					<div class="col-md-12 form-group">
+						<label class="col-md-4">District Name</label>
+						<div class="col-md-8">{{ $setting->district_name }}</div>
+					</div>
+					<div class="col-md-12 form-group">
+						<label class="col-md-4">Phone</label>
+						<div class="col-md-8">{{ $setting->phone }}</div>
+					</div>
+					<div class="col-md-12 form-group">
+						<label class="col-md-4">Email</label>
+						<div class="col-md-8">{{ $setting->email }}</div>
+					</div>
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer">
+					<a class="btn btn-primary btn-sm" href="{{ route('settings.edit',$setting->id) }}"> <i class="fa fa-edit"></i> Edit Setting</a>
+				</div>
+				<!-- /.box-footer-->
 			</div>
-			<div class="box-body">
-				<div class="col-md-12 form-group">
-					<label class="col-md-4">Municipality</label>
-					<div class="col-md-8">{{ $setting->municipality }}</div>
-				</div>
-				<div class="col-md-12 form-group">
-					<label class="col-md-4">Office</label>
-					<div class="col-md-8">{{ $setting->office }}</div>
-				</div>
-
-				<div class="col-md-12 form-group">
-					<label class="col-md-4">Office Address</label>
-					<div class="col-md-8">{{ $setting->office_address }}</div>
-				</div>
-				<div class="col-md-12 form-group">
-					<label class="col-md-4">Province Name</label>
-					<div class="col-md-8">{{ $setting->province_name }}</div>
-				</div>
-				<div class="col-md-12 form-group">
-					<label class="col-md-4">Province No.</label>
-					<div class="col-md-8">{{ $setting->province_no }}</div>
-				</div>
-				<div class="col-md-12 form-group">
-					<label class="col-md-4">Phone</label>
-					<div class="col-md-8">{{ $setting->phone }}</div>
-				</div>
-				<div class="col-md-12 form-group">
-					<label class="col-md-4">Email</label>
-					<div class="col-md-8">{{ $setting->email }}</div>
-				</div>
-			</div>
-			<!-- /.box-body -->
-			<div class="box-footer">
-				<a class="btn btn-primary btn-sm" href="{{ route('settings.edit',$setting->id) }}"> <i class="fa fa-edit"></i> Edit Setting</a>
-			</div>
-			<!-- /.box-footer-->
+			<!-- /.box -->
 		</div>
-		<!-- /.box -->
 	</div>
-</div>
 
-<div class="col-lg-6">
-	<div class="content">
+	<div class="col-lg-6">
+		<div class="content">
 
-		<!-- Default box -->
-		<div class="box">
-			<div class="box-header with-border">
-				<h3 class="box-title">System  Settings</h3>
+			<!-- Default box -->
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">System Settings</h3>
 
-				<div class="box-tools pull-right">
-					<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-					title="Collapse">
-					<i class="fa fa-minus"></i></button>
-					<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-						<i class="fa fa-times"></i></button>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+							<i class="fa fa-minus"></i></button>
+						<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+							<i class="fa fa-times"></i></button>
 					</div>
 				</div>
 				<div class="box-body">
@@ -119,11 +120,6 @@
 					<div class="col-md-12 form-group">
 						<label class="col-md-4">Tag Line</label>
 						<div class="col-md-8">{{ $setting->tag_line }}</div>
-					</div>
-
-					<div class="col-md-12 form-group">
-						<label class="col-md-4">Display per page</label>
-						<div class="col-md-8"> <span class="badge badge-default">{{ $setting->per_page }} </span></div>
 					</div>
 				</div>
 				<!-- /.box-body -->

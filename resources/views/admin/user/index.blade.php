@@ -20,9 +20,8 @@ Users
 		<div class="box-header with-border">
 			<a class="btn btn-sm btn-success" href="{{ route('users.create') }}"> <i class="fa fa-plus"></i> Add User</a>
 			<div class="box-tools pull-right">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body">
@@ -40,15 +39,15 @@ Users
 					<tbody>
 						@php $sno = 1*$users->currentPage(); @endphp
 						@forelse($users as $user)
-						<tr>	
+						<tr>
 							<td>{{ $sno++ }}</td>
 							<td>
 								<label class="label label-success">
 									@foreach($user->role as $role)
-									{{ $role->name }} 
+									{{ $role->name }}
 									@if(count($user->role) > 1)<span>,</span> @endif
 									@endforeach
-								</label> 
+								</label>
 							</td>
 							<td>{{ $user->first_name}} {{ $user->last_name}}</td>
 							<td>{{ $user->email }}</td>
@@ -57,14 +56,15 @@ Users
 							</td>
 							<td>{{ date('Y-m-d',strtotime($user->created_at))}}</td>
 							<td>
-								<a class="btn btn-sm btn-success" href="{{route('users.edit',$user->id)}}"><i class="fa fa-edit"></i></a>
-								<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$user->id}}" data-route="{{route('users.destroy', $user->id) }}"><i class="fa fa-trash"></i></a>
-
-								<a class="btn btn-sm btn-warning" href="{{route('users.restore-default-password',$user->id)}}"><i class="fa fa-key"></i>Restore default password</a>
+								<div class="action-button-list">
+									<a class="btn btn-sm btn-success" href="{{route('users.edit',$user->id)}}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$user->id}}" data-route="{{route('users.destroy', $user->id) }}"><i class="fa fa-trash"></i></a>
+									<a class="btn btn-sm btn-warning" href="{{route('users.restore-default-password',$user->id)}}"><i class="fa fa-key"></i>Restore default password</a>
+								</div>
 							</td>
 						</tr>
 						@empty
-						<tr>	
+						<tr>
 							<td colspan="5">Data not found!!!</td>
 						</tr>
 						@endforelse
@@ -81,21 +81,23 @@ Users
 </section>
 
 <script type="text/javascript">
-	function paginate(page){
+	function paginate(page) {
 		loadPaginatedData(page);
 	}
 
-	function loadPaginatedData(page = 1, perPage = 1){
+	function loadPaginatedData(page = 1, perPage = 1) {
 		$.ajax({
 			url: '{{ url("admin/academic-years") }}',
-			method:'GET',
-			data: {'page':page,'perPage':perPage},
-		}).done(function(response){
+			method: 'GET',
+			data: {
+				'page': page,
+				'perPage': perPage
+			},
+		}).done(function(response) {
 			$('#replaceTable').replaceWith(response);
-		}).fail(function(){
+		}).fail(function() {
 			alert('Something went wrong, Try again later!!!')
 		})
 	}
-
 </script>
 @endsection

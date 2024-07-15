@@ -1,4 +1,4 @@
-<div id="table-wrapper" >
+<div id="table-wrapper">
 	<table class="table table-bordered table-striped">
 		<thead>
 			<th>S.No.</th>
@@ -22,7 +22,7 @@
 					{{ strtoupper($official->last_name)}}
 				</td>
 				<td>{{ ucwords($official->mobile)}}</td>
-				
+
 				<td>
 					@if($official->working_status == 1)
 					<label class="label label-success">YES</label>
@@ -41,10 +41,11 @@
 
 				<td>{{ $official->order }}</td>
 				<td>
-					<a class="btn btn-sm btn-primary" href="{{ route('officials.show',[$official->id])}}"><i class="fa fa-eye"></i></a>
-					<a class="btn btn-sm btn-success" href="{{ route('officials.edit',[$official->id])}}"><i class="fa fa-edit"></i></a>
-					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$official->id}}" data-route="{{route('officials.destroy', $official->id) }}"> <i class="fa fa-trash"></i></a>
-
+					<div class="action-button-list">
+						<a class="btn btn-sm btn-primary" href="{{ route('officials.show',[$official->id])}}"><i class="fa fa-eye"></i></a>
+						<a class="btn btn-sm btn-success" href="{{ route('officials.edit',[$official->id])}}"><i class="fa fa-edit"></i></a>
+						<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$official->id}}" data-route="{{route('officials.destroy', $official->id) }}"> <i class="fa fa-trash"></i></a>
+					</div>
 				</td>
 			</tr>
 			@empty

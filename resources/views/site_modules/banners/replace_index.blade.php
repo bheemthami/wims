@@ -1,4 +1,4 @@
-<div id="table-wrapper" >
+<div id="table-wrapper">
 	<table class="table table-bordered table-striped">
 		<thead>
 			<th>S.No.</th>
@@ -22,7 +22,7 @@
 				</td>
 				<td>{{ $banner->order }}</td>
 				<td>{{ $banner->tagline }}</td>
-				
+
 				<td>
 					@if($banner->status == 1)
 					<label class="label label-success">Publish</label>
@@ -31,9 +31,10 @@
 					@endif
 				</td>
 				<td>
-					<a class="btn btn-sm btn-success" href="{{ route('banners.edit',[$banner->id])}}"><i class="fa fa-edit"></i></a>
-					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$banner->id}}" data-route="{{route('banners.destroy', $banner->id) }}"> <i class="fa fa-trash"></i></a>
-
+					<div class="action-button-list">
+						<a class="btn btn-sm btn-success" href="{{ route('banners.edit',[$banner->id])}}"><i class="fa fa-edit"></i></a>
+						<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$banner->id}}" data-route="{{route('banners.destroy', $banner->id) }}"> <i class="fa fa-trash"></i></a>
+					</div>
 				</td>
 			</tr>
 			@empty

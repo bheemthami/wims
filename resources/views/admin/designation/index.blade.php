@@ -20,9 +20,8 @@
 		<div class="box-header with-border">
 			<a class="btn btn-sm btn-success" href="{{ route('designations.create') }}"> <i class="fa fa-plus"></i> Add Designation</a>
 			<div class="box-tools pull-right">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body">
@@ -37,18 +36,20 @@
 					<tbody>
 						@php $sno = 1*$designations->currentPage(); @endphp
 						@forelse($designations as $designation)
-						<tr>	
+						<tr>
 							<td>{{ $sno++ }}</td>
 							<td>{{ $designation->name }}</td>
 							<td>{{ $designation->order}}</td>
-							
+
 							<td>
-								<a class="btn btn-sm btn-success" href="{{route('designations.edit',$designation->id)}}"><i class="fa fa-edit"></i></a>
-								<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$designation->id}}" data-route="{{route('designations.destroy', $designation->id) }}"><i class="fa fa-trash"></i></a>
+								<div class="action-button-list">
+									<a class="btn btn-sm btn-success" href="{{route('designations.edit',$designation->id)}}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$designation->id}}" data-route="{{route('designations.destroy', $designation->id) }}"><i class="fa fa-trash"></i></a>
+								</div>
 							</td>
 						</tr>
 						@empty
-						<tr>	
+						<tr>
 							<td colspan="5">Data not found!!!</td>
 						</tr>
 						@endforelse
@@ -65,21 +66,23 @@
 </section>
 
 <script type="text/javascript">
-	function paginate(page){
+	function paginate(page) {
 		loadPaginatedData(page);
 	}
 
-	function loadPaginatedData(page = 1, perPage = 1){
+	function loadPaginatedData(page = 1, perPage = 1) {
 		$.ajax({
 			url: '{{ url("admin/designations") }}',
-			method:'GET',
-			data: {'page':page,'perPage':perPage},
-		}).done(function(response){
+			method: 'GET',
+			data: {
+				'page': page,
+				'perPage': perPage
+			},
+		}).done(function(response) {
 			$('#replaceTable').replaceWith(response);
-		}).fail(function(){
+		}).fail(function() {
 			alert('Something went wrong, Try again later!!!')
 		})
 	}
-
 </script>
 @endsection

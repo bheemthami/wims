@@ -20,9 +20,8 @@ Roles
 		<div class="box-header with-border">
 			<a class="btn btn-sm btn-success" href="{{ route('roles.create') }}"> <i class="fa fa-plus"></i> Add Role</a>
 			<div class="box-tools pull-right">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body">
@@ -37,7 +36,7 @@ Roles
 					<tbody>
 						@php $sno = 1*$roles->currentPage(); @endphp
 						@forelse($roles as $role)
-						<tr>	
+						<tr>
 							<td>{{ $sno++ }}</td>
 							<td>{{ $role->name }}</td>
 							<td>
@@ -65,12 +64,14 @@ Roles
 								@endif
 							</td>
 							<td>
-								<a class="btn btn-sm btn-success" href="{{route('roles.edit',$role->id)}}"><i class="fa fa-edit"></i></a>
-								<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$role->id}}" data-route="{{route('roles.destroy', $role->id) }}"><i class="fa fa-trash"></i></a>
+								<div class="action-button-list">
+									<a class="btn btn-sm btn-success" href="{{route('roles.edit',$role->id)}}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$role->id}}" data-route="{{route('roles.destroy', $role->id) }}"><i class="fa fa-trash"></i></a>
+								</div>
 							</td>
 						</tr>
 						@empty
-						<tr>	
+						<tr>
 							<td colspan="5">Data not found!!!</td>
 						</tr>
 						@endforelse
@@ -87,21 +88,23 @@ Roles
 </section>
 
 <script type="text/javascript">
-	function paginate(page){
+	function paginate(page) {
 		loadPaginatedData(page);
 	}
 
-	function loadPaginatedData(page = 1, perPage = 1){
+	function loadPaginatedData(page = 1, perPage = 1) {
 		$.ajax({
 			url: '{{ url("admin/roles") }}',
-			method:'GET',
-			data: {'page':page,'perPage':perPage},
-		}).done(function(response){
+			method: 'GET',
+			data: {
+				'page': page,
+				'perPage': perPage
+			},
+		}).done(function(response) {
 			$('#replaceTable').replaceWith(response);
-		}).fail(function(){
+		}).fail(function() {
 			alert('Something went wrong, Try again later!!!')
 		})
 	}
-
 </script>
 @endsection

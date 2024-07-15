@@ -19,15 +19,14 @@
 			<h3 class="box-title">Quick Links List</h3>
 			<div class="box-tools pull-right">
 				<a class="btn btn-sm btn-success" href="{{ route('quick-links.create')}}"> <i class="fa fa-plus"></i> Add New Quick Link</a>
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body table-responsive no-padding">
 			<div class="filteration">
 				<div class="col-md-3">
-					<label for="first_name"> Title  </label>
+					<label for="first_name"> Title </label>
 					<div class="form-group">
 						<input id="title" name="title" class="form-control" placeholder="title">
 					</div>
@@ -41,7 +40,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="table-wrapper" >
+			<div id="table-wrapper">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<th>S.No.</th>
@@ -61,7 +60,7 @@
 								<a href="{{$quick_link->link}}" target="_blank"> {{ $quick_link->title }} <i class="fa fa-external-link"></i></a>
 							</td>
 							<td>{{ $quick_link->order }}</td>
-														
+
 							<td>
 								@if($quick_link->status == 1)
 								<label class="label label-success">Publish</label>
@@ -70,9 +69,10 @@
 								@endif
 							</td>
 							<td>
-								<a class="btn btn-sm btn-success" href="{{ route('quick-links.edit',[$quick_link->id])}}"><i class="fa fa-edit"></i></a>
-								<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$quick_link->id}}" data-route="{{route('quick-links.destroy', $quick_link->id) }}"> <i class="fa fa-trash"></i></a>
-
+								<div class="action-button-list">
+									<a class="btn btn-sm btn-success" href="{{ route('quick-links.edit',[$quick_link->id])}}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$quick_link->id}}" data-route="{{route('quick-links.destroy', $quick_link->id) }}"> <i class="fa fa-trash"></i></a>
+								</div>
 							</td>
 						</tr>
 						@empty
@@ -98,20 +98,22 @@
 </section>
 
 <script>
-	$(document).ready(function(){
-		$('#search-button').click(function(){
+	$(document).ready(function() {
+		$('#search-button').click(function() {
 			var title = $('#title').val();
-			var baseUrl = "<?php echo url('admin/quick-links')?>";
+			var baseUrl = "<?php echo url('admin/quick-links') ?>";
 			$.ajax({
-				url : baseUrl,
-				data : {'title':title},
-				success:function(response){
+				url: baseUrl,
+				data: {
+					'title': title
+				},
+				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
 				}
 			});
 		});
 
-		$('#clear-button').click(function(){
+		$('#clear-button').click(function() {
 			$('#title').val('');
 		});
 	});
