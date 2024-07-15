@@ -18,11 +18,10 @@
 	<!-- Default box -->
 	<div class="box">
 		<div class="box-header with-border">
-			<a class="btn btn-sm btn-success disabled" href="{{ route('academic-years.create') }}" > <i class="fa fa-plus"></i> Add </a>
+			<a class="btn btn-sm btn-success disabled" href="{{ route('academic-years.create') }}"> <i class="fa fa-plus"></i> Add </a>
 			<div class="box-tools pull-right">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body">
@@ -41,7 +40,7 @@
 					<tbody>
 						@php $sno = 1*$visitor_queries->currentPage(); @endphp
 						@forelse($visitor_queries as $visitor_query)
-						<tr>	
+						<tr>
 							<td>{{ $sno++ }} </td>
 							<td>{{ $visitor_query->academicYear->year }}</td>
 							<td>{{ $visitor_query->qid }}</td>
@@ -60,13 +59,14 @@
 							</td>
 
 							<td>
-								<a class="btn btn-sm btn-info" href="{{route('visitor_queries.show',$visitor_query->id)}}"><i class="fa fa-eye"></i></a>
-
-								<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$visitor_query->id}}" data-route="{{route('visitor_queries.destroy', $visitor_query->id) }}"><i class="fa fa-trash"></i></a>
+								<div class="action-button-list">
+									<a class="btn btn-sm btn-info" href="{{route('visitor_queries.show',$visitor_query->id)}}"><i class="fa fa-eye"></i></a>
+									<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$visitor_query->id}}" data-route="{{route('visitor_queries.destroy', $visitor_query->id) }}"><i class="fa fa-trash"></i></a>
+								</div>
 							</td>
 						</tr>
 						@empty
-						<tr>	
+						<tr>
 							<td colspan="5">Data not found!!!</td>
 						</tr>
 						@endforelse
@@ -83,21 +83,23 @@
 </section>
 
 <script type="text/javascript">
-	function paginate(page){
+	function paginate(page) {
 		loadPaginatedData(page);
 	}
 
-	function loadPaginatedData(page = 1, perPage = 1){
+	function loadPaginatedData(page = 1, perPage = 1) {
 		$.ajax({
 			url: '{{ url("admin/academic-years") }}',
-			method:'GET',
-			data: {'page':page,'perPage':perPage},
-		}).done(function(response){
+			method: 'GET',
+			data: {
+				'page': page,
+				'perPage': perPage
+			},
+		}).done(function(response) {
 			$('#replaceTable').replaceWith(response);
-		}).fail(function(){
+		}).fail(function() {
 			alert('Something went wrong, Try again later!!!')
 		})
 	}
-
 </script>
 @endsection

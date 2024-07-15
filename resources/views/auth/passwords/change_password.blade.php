@@ -18,26 +18,31 @@
 		<div class="box-header with-border">
 			<h3 class="box-title">Create</h3>
 			<div class="box-tools pull-right">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body">
 			<form method="POST" action="{{ route('change_password.store') }}">
 				{{ csrf_field() }}
 				<div class="row">
-					<div class="col-md-12 form-group">
+					<div class="col-md-6 form-group">
 						<label for="name">Enter old password<span>*</span></label>
-						{!! Form::text('old_password',null,['class'=>'form-control','autofocus'=>true,'placeholder'=>'old password']) !!}
-						@if($errors)      
-						<span class="text-danger"><i>{{$errors->first('old_password')}}</i></span> 
-						@endif 
+						<input id="password" type="password" class="form-control" name="old_password" placeholder="old password" autocomplete="false">
+						@if($errors)
+						<span class="text-danger"><i>{{$errors->first('old_password')}}</i></span>
+						@endif
 					</div>
+				</div>
+
+				<div class="row">
 					<div class="col-md-6 form-group">
 						<label for="name">New Password<span>*</span></label>
 						<input id="password" type="password" class="form-control" name="password" placeholder="new password" autocomplete="false">
-						<span class="text-success"> 
+						@if($errors)
+						<span class="text-danger"><i>{{$errors->first('password')}}</i></span>
+						@endif
+						<span class="text-success">
 							<ul class="nav-bar">
 								<li>Minimum eight characters</li>
 								<li>at least one uppercase letter</li>
@@ -45,18 +50,19 @@
 								<li>one number and one special character</li>
 							</ul>
 						</span>
-						@if($errors)      
-						<span class="text-danger"><i>{{$errors->first('password')}}</i></span> 
-						@endif 
+
 					</div>
+				</div>
+
+				<div class="row">
 					<div class="col-md-6 form-group">
 						<label for="name">Confirm Password<span>*</span></label>
 						<input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="confirm password" autocomplete="false">
-						<span id="confirm-message" class="text-success"> 
+						<span id="confirm-message" class="text-success">
 						</span>
-						@if($errors)      
-						<span class="text-danger"><i>{{$errors->first('password_confirmation')}}</i></span> 
-						@endif 
+						@if($errors)
+						<span class="text-danger"><i>{{$errors->first('password_confirmation')}}</i></span>
+						@endif
 					</div>
 				</div>
 				<div class="form-inline">
@@ -76,7 +82,7 @@
 
 
 <script type="text/javascript">
-	
+
 
 </script>
 @endsection

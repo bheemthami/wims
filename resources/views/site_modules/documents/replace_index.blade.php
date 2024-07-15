@@ -1,4 +1,4 @@
-<div id="table-wrapper" >
+<div id="table-wrapper">
 	<table class="table table-bordered table-striped">
 		<thead>
 			<th>S.No.</th>
@@ -24,7 +24,7 @@
 					<img src="{{asset('uploads/documents/'.$document->image)}}" width="80px">
 				</td>
 				<td>{{ $document->date }}</td>
-				
+
 				<td>
 					@if($document->status == 1)
 					<label class="label label-success">Publish</label>
@@ -33,10 +33,11 @@
 					@endif
 				</td>
 				<td>
-					<a class="btn btn-sm btn-primary" href="{{ route('documents.show',[$document->id])}}"><i class="fa fa-eye"></i></a>
-					<a class="btn btn-sm btn-success" href="{{ route('documents.edit',[$document->id])}}"><i class="fa fa-edit"></i></a>
-					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$document->id}}" data-route="{{route('documents.destroy', $document->id) }}"> <i class="fa fa-trash"></i></a>
-
+					<div class="action-button-list">
+						<a class="btn btn-sm btn-primary" href="{{ route('documents.show',[$document->id])}}"><i class="fa fa-eye"></i></a>
+						<a class="btn btn-sm btn-success" href="{{ route('documents.edit',[$document->id])}}"><i class="fa fa-edit"></i></a>
+						<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$document->id}}" data-route="{{route('documents.destroy', $document->id) }}"> <i class="fa fa-trash"></i></a>
+					</div>
 				</td>
 			</tr>
 			@empty

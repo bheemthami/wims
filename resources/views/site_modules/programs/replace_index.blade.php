@@ -1,4 +1,4 @@
-<div id="table-wrapper" >
+<div id="table-wrapper">
 	<table class="table table-bordered table-striped">
 		<thead>
 			<th>S.No.</th>
@@ -20,7 +20,7 @@
 				</td>
 				<td>{{ $program->order }}</td>
 				<td>{!! substr($program->summary,0,100) !!}</td>
-				
+
 				<td>
 					@if($program->status == 1)
 					<label class="label label-success">Publish</label>
@@ -29,10 +29,11 @@
 					@endif
 				</td>
 				<td>
-					<a class="btn btn-sm btn-primary" href="{{ route('programs.show',[$program->id])}}"><i class="fa fa-eye"></i></a>
-					<a class="btn btn-sm btn-success" href="{{ route('programs.edit',[$program->id])}}"><i class="fa fa-edit"></i></a>
-					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$program->id}}" data-route="{{route('programs.destroy', $program->id) }}"> <i class="fa fa-trash"></i></a>
-
+					<div class="action-button-list">
+						<a class="btn btn-sm btn-primary" href="{{ route('programs.show',[$program->id])}}"><i class="fa fa-eye"></i></a>
+						<a class="btn btn-sm btn-success" href="{{ route('programs.edit',[$program->id])}}"><i class="fa fa-edit"></i></a>
+						<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$program->id}}" data-route="{{route('programs.destroy', $program->id) }}"> <i class="fa fa-trash"></i></a>
+					</div>
 				</td>
 			</tr>
 			@empty

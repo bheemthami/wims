@@ -39,8 +39,10 @@
 							<td>{{ $sno++ }}</td>
 							<td>{{ $aca_year->year }}</td>
 							<td>
-								<a class="btn btn-sm btn-success" href="{{route('academic-years.edit',$aca_year->id)}}"><i class="fa fa-edit"></i></a>
-								<a class="btn btn-sm btn-danger disabled" data-toggle="modal" data-target="#deleteModal" data-id="{{$aca_year->id}}" data-route="{{route('academic-years.destroy', $aca_year->id) }}"><i class="fa fa-trash"></i></a>
+								<div class="action-button-list">
+									<a class="btn btn-sm btn-success" href="{{route('academic-years.edit',$aca_year->id)}}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-sm btn-danger disabled" data-toggle="modal" data-target="#deleteModal" data-id="{{$aca_year->id}}" data-route="{{route('academic-years.destroy', $aca_year->id) }}"><i class="fa fa-trash"></i></a>
+								</div>
 							</td>
 						</tr>
 						@empty

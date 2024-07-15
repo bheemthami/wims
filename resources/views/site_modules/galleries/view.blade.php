@@ -22,15 +22,14 @@
 
 				<a class="btn btn-sm btn-danger" href="{{ route('galleries.index')}}"><i class="fa fa-times"></i></a>
 
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
-		
+
 		<div class="box-body">
 			<fieldset class="fieldset-border">
-				<legend class="legend-border">details</legend>
+				<legend class="legend-border">Details</legend>
 
 				<div class="mb-3 col-md-12">
 					<label for="year" class="col-sm-2 col-form-label">Year</label>
@@ -53,6 +52,8 @@
 					</div>
 				</div>
 
+				@if($gallery->type === 'image')
+
 				<div class="mb-3 col-md-12">
 					<label for="title" class="col-sm-2 col-form-label">Is shown in slider</label>
 					<div class="col-sm-10">
@@ -60,8 +61,6 @@
 					</div>
 				</div>
 
-
-				@if($gallery->type === 'image')
 				<div class="mb-3 col-md-12">
 					<label for="title" class="col-sm-2 col-form-label">Image</label>
 					<div class="col-sm-10">
@@ -86,7 +85,7 @@
 									</td>
 									<td>
 										{{ $img->order }}
-									</td>							
+									</td>
 									<td>
 										<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$img->id}}" data-route="{{route('image-galleries.destroy', $img->id) }}"> <i class="fa fa-trash"></i></a>
 									</td>
@@ -103,7 +102,9 @@
 				</div>
 				@else
 				<div class="mb-3 col-md-12">
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/{{$gallery->link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+					<div class="iframe-container">
+						<iframe width="560" height="315" src="{{$gallery->link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+					</div>
 				</div>
 				@endif
 
@@ -116,7 +117,7 @@
 						<p><strong> Published date: </strong><label class="label label-info">{{$gallery->date}}</label></p>
 					</div>
 					<div class="col-md-6">
-						<p><strong>Publish status: </strong> <label for="" class="label label-{{$gallery->status?'success':'warning'}}"> {{ ($gallery->status == 1) ? 'Publish' : 'Draft' }} </label></p>	
+						<p><strong>Publish status: </strong> <label for="" class="label label-{{$gallery->status?'success':'warning'}}"> {{ ($gallery->status == 1) ? 'Publish' : 'Draft' }} </label></p>
 					</div>
 				</div>
 

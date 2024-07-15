@@ -19,34 +19,33 @@
 			<h3 class="box-title">Documents List</h3>
 			<div class="box-tools pull-right">
 				<a class="btn btn-sm btn-success" href="{{ route('documents.create')}}"> <i class="fa fa-plus"></i> Add New Document</a>
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body table-responsive no-padding">
 			<div class="filteration">
 				<div class="col-md-3">
-					<label for="title"> Title  </label>
+					<label for="title"> Title </label>
 					<div class="form-group">
 						<input id="title" name="title" class="form-control" placeholder="title">
 					</div>
 				</div>
 
 				<div class="col-md-2">
-					<label for="title"> Academic Year  </label>
+					<label for="title"> Academic Year </label>
 					<div class="form-group">
 						{!! Form::select('academic_year_id',$data['year_options'],null,['class'=>'form-control','id'=>'academic_year_id']) !!}
 					</div>
 				</div>
 
 				<div class="col-md-2">
-					<label for="title"> Document Type  </label>
+					<label for="title"> Document Type </label>
 					{!! Form::select('document_type_id',$data['document_type_options'],null,['class'=>'form-control','id'=>'document_type_id']) !!}
 				</div>
 
 				<div class="col-md-2">
-					<label for="title"> Status  </label>
+					<label for="title"> Status </label>
 					{!! Form::select('status',$data['publish_options'],null,['class'=>'form-control','id'=>'status']) !!}
 				</div>
 
@@ -58,7 +57,7 @@
 					</div>
 				</div>
 			</div>
-			<div id="table-wrapper" >
+			<div id="table-wrapper">
 				<table class="table table-bordered table-striped">
 					<thead>
 						<th>S.No.</th>
@@ -84,7 +83,7 @@
 								<img src="{{asset('uploads/documents/'.$document->image)}}" width="80px">
 							</td>
 							<td>{{ $document->date }}</td>
-							
+
 							<td>
 								@if($document->status == 1)
 								<label class="label label-success">Publish</label>
@@ -93,10 +92,11 @@
 								@endif
 							</td>
 							<td>
-								<a class="btn btn-sm btn-primary" href="{{ route('documents.show',[$document->id])}}"><i class="fa fa-eye"></i></a>
-								<a class="btn btn-sm btn-success" href="{{ route('documents.edit',[$document->id])}}"><i class="fa fa-edit"></i></a>
-								<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$document->id}}" data-route="{{route('documents.destroy', $document->id) }}"> <i class="fa fa-trash"></i></a>
-
+								<div class="action-button-list">
+									<a class="btn btn-sm btn-primary" href="{{ route('documents.show',[$document->id])}}"><i class="fa fa-eye"></i></a>
+									<a class="btn btn-sm btn-success" href="{{ route('documents.edit',[$document->id])}}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$document->id}}" data-route="{{route('documents.destroy', $document->id) }}"> <i class="fa fa-trash"></i></a>
+								</div>
 							</td>
 						</tr>
 						@empty
@@ -121,23 +121,28 @@
 	<!-- /.box -->
 </section>
 <script>
-	$(document).ready(function(){
-		$('#search-button').click(function(){
+	$(document).ready(function() {
+		$('#search-button').click(function() {
 			var title = $('#title').val();
 			var academic_year_id = $('#academic_year_id').val();
 			var document_type_id = $('#document_type_id').val();
 			var status = $('#status').val();
-			var baseUrl = "<?php echo url('admin/documents')?>";
+			var baseUrl = "<?php echo url('admin/documents') ?>";
 			$.ajax({
-				url : baseUrl,
-				data : {'title':title,'academic_year_id':academic_year_id,'document_type_id':document_type_id,'status':status},
-				success:function(response){
+				url: baseUrl,
+				data: {
+					'title': title,
+					'academic_year_id': academic_year_id,
+					'document_type_id': document_type_id,
+					'status': status
+				},
+				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
 				}
 			});
 		});
 
-		$('#clear-button').click(function(){
+		$('#clear-button').click(function() {
 			$('#title').val('');
 			$('#academic_year_id').val('');
 			$('#document_type_id').val('');

@@ -19,22 +19,25 @@
 		<div class="box-header with-border">
 			<h3 class="box-title">Edit</h3>
 			<div class="box-tools pull-right">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body">
 			{!! Form::model($profile,['route'=>['profile.update',$profile->id],'method'=>'PATCH']) !!}
 			{{ csrf_field() }}
 			@include('admin.profile.user.partial.edit_form')
-			<div class="form-inline">
-				<div class="pull pull-right">
-					<div class="form-group">
-						<button class="btn btn-success pull-right" type="submit">Submit</button>
-					</div>
-					<div class="form-group">
-						<a class="btn btn-danger pull-right" href="{{ route('profile.index') }}">Cancel</a>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-inline">
+						<div class="pull pull-right">
+							<div class="form-group">
+								<button class="btn btn-success pull-right" type="submit">Submit</button>
+							</div>
+							<div class="form-group">
+								<a class="btn btn-danger pull-right" href="{{ route('profile.index') }}">Cancel</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

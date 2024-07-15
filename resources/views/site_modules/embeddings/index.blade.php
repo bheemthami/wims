@@ -44,7 +44,7 @@
 							</td>
 							<td>{{ $embedding->title ? $embedding->title : '-'  }}</td>
 							<td>
-								<div class="embedding-item">
+								<div class="iframe-container">
 									{!! $embedding->iframe !!}
 								</div>
 							</td>
@@ -56,9 +56,10 @@
 								@endif
 							</td>
 							<td>
-								<a class="btn btn-sm btn-success" href="{{ route('embeddings.edit',[$embedding->id])}}"><i class="fa fa-edit"></i></a>
-								<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$embedding->id}}" data-route="{{route('embeddings.destroy', $embedding->id) }}"> <i class="fa fa-trash"></i></a>
-
+								<div class="action-button-list">
+									<a class="btn btn-sm btn-success" href="{{ route('embeddings.edit',[$embedding->id])}}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$embedding->id}}" data-route="{{route('embeddings.destroy', $embedding->id) }}"> <i class="fa fa-trash"></i></a>
+								</div>
 							</td>
 						</tr>
 						@empty

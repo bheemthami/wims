@@ -1,36 +1,46 @@
 <table class="table table-responsive table-bordered table-striped">
 	<thead>
 		<th>S.No.</th>
+		<th>Year</th>
+		<th>Qid</th>
 		<th>Name</th>
-		<th>Ward No.</th>
-		<th>Image</th>
+		<th>Subject</th>
+		<th>Message</th>
+		<th>status</th>
 		<th>Actions</th>
 	</thead>
 	<tbody>
-		@php $sno = 1; @endphp
-		@forelse($wards as $ward)
-		<tr>	
-			<td>{{ $sno++ }}</td>
-			<td>{{ ucfirst($ward->name) }}</td>
-			<td>{{ $ward->ward_no }}</td>
+		@php $sno = 1*$visitor_queries->currentPage(); @endphp
+		@forelse($visitor_queries as $visitor_query)
+		<tr>
+			<td>{{ $sno++ }} </td>
+			<td>{{ $visitor_query->academicYear->year }}</td>
+			<td>{{ $visitor_query->qid }}</td>
+			<td>{{ $visitor_query->name }}</td>
+			<td>{{ $visitor_query->subject }}</td>
 			<td>
-				<img src="{{ asset('uploads/ward').'/'.$ward->image }}" width="70" height="70" alt="Image Not Found">
+				{{ str_limit($visitor_query->message,50) }}
 			</td>
+
 			<td>
-				<button class="btn btn-primary"><i class="fa fa-eye"></i></button>
-				<button class="btn btn-success"><i class="fa fa-edit"></i></button>
-				<button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+				@if($visitor_query->status == 0)
+				<label class="btn btn-sm btn-warning">New Query</label>
+				@else
+				<label class="btn btn-sm btn-success">Replied</label>
+				@endif
+			</td>
+
+			<td>
+				<div class="action-button-list">
+					<a class="btn btn-sm btn-info" href="{{route('visitor_queries.show',$visitor_query->id)}}"><i class="fa fa-eye"></i></a>
+					<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$visitor_query->id}}" data-route="{{route('visitor_queries.destroy', $visitor_query->id) }}"><i class="fa fa-trash"></i></a>
+				</div>
 			</td>
 		</tr>
 		@empty
-		<tr>	
+		<tr>
 			<td colspan="5">Data not found!!!</td>
 		</tr>
 		@endforelse
 	</tbody>
 </table>
-<nav>
-	<ul class="pager">
-		<li>{{$wards->links('vendor.pagination.default')}}</li>
-	</ul>
-</nav>

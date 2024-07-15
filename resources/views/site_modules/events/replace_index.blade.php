@@ -1,4 +1,4 @@
-	<div id="table-wrapper" >
+	<div id="table-wrapper">
 		<table class="table table-bordered table-striped">
 			<thead>
 				<th>S.No.</th>
@@ -34,10 +34,11 @@
 						@endif
 					</td>
 					<td>
-						<a class="btn btn-sm btn-primary" href="{{ route('events.show',[$event->id])}}"><i class="fa fa-eye"></i></a>
-						<a class="btn btn-sm btn-success" href="{{ route('events.edit',[$event->id])}}"><i class="fa fa-edit"></i></a>
-						<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$event->id}}" data-route="{{route('events.destroy', $event->id) }}"> <i class="fa fa-trash"></i></a>
-
+						<div class="action-button-list">
+							<a class="btn btn-sm btn-primary" href="{{ route('events.show',[$event->id])}}"><i class="fa fa-eye"></i></a>
+							<a class="btn btn-sm btn-success" href="{{ route('events.edit',[$event->id])}}"><i class="fa fa-edit"></i></a>
+							<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$event->id}}" data-route="{{route('events.destroy', $event->id) }}"> <i class="fa fa-trash"></i></a>
+						</div>
 					</td>
 				</tr>
 				@empty

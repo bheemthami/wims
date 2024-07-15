@@ -20,16 +20,15 @@
 			<div class="box-tools pull-right">
 				<a class="btn btn-sm btn-success" href="{{ route('profile.edit',$profile->id)}}"><i class="fa fa-edit"></i>Edit Profile</a>
 
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
-		
-		<div class="box-body">
-			
 
-			<div class="col-md-12">
+		<div class="box-body">
+
+
+			<div class="row">
 				<div class="col-md-6">
 					<p><strong>Name: </strong> {{ $profile->first_name}} {{ $profile->last_name}}</p>
 				</div>
@@ -38,12 +37,21 @@
 				<div class="col-md-6">
 					<p><strong>Username/Email: </strong> {{ $profile->email}}</p>
 				</div>
+			</div>
+
+			<div class="row">
 				<div class="col-md-6">
-					<p><strong>Password: </strong> ******** </p>	
+					<p><strong>Password: </strong> ******** </p>
 				</div>
 
 				<div class="col-md-6">
-					<p><strong>Created at: </strong> {{ date('F j, Y h:i A',strtotime($profile->created_at)) }} </p>	
+					<p><strong>Created at: </strong> {{ date('F j, Y h:i A',strtotime($profile->created_at)) }} </p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<p><strong>Updated at: </strong> {{ date('F j, Y h:i A',strtotime($profile->updated_at)) }} </p>
 				</div>
 			</div>
 		</div>
