@@ -123,6 +123,7 @@
 <script>
 	$(document).ready(function() {
 		$('#search-button').click(function() {
+			$('#custom-loader').modal('show');
 			var title = $('#title').val();
 			var academic_year_id = $('#academic_year_id').val();
 			var document_type_id = $('#document_type_id').val();
@@ -138,6 +139,11 @@
 				},
 				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
+					$('#custom-loader').modal('hide');
+				},
+				error: function() {
+					$('#custom-loader').modal('hide');
+					toastr.error("Oops something sent wrong. Try again later!");
 				}
 			});
 		});
