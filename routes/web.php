@@ -35,6 +35,8 @@ Route::group(['namespace' => 'Frontend'], function () {
 	Route::get('/trainings', 'FrontendController@publishedTrainings')->name('trainings');
 	Route::get('/faculties', 'FrontendController@publishedFaculties')->name('faculties');
 	Route::get('/facilities', 'FrontendController@publishedFacilities')->name('facilities');
+	Route::get('/download/{file}', 'FrontendController@download')->name('downlaod');
+	Route::get('/download-posts/{file}', 'FrontendController@downloadPosts')->name('posts.downlaod');
 });
 
 /** website route  ---END--- **/

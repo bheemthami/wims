@@ -40,8 +40,7 @@ class OfficialController extends Controller
         SettingManager $settingManager,
         OfficialManager $officialManager,
         DepartmentManager $departmentManager
-    )
-    {
+    ) {
         $this->academicYearManager = $academicYearManager;
         $this->localLevelTypeManager = $localLevelTypeManager;
         $this->commonDataManager = $commonDataManager;
@@ -55,279 +54,269 @@ class OfficialController extends Controller
     {
         try {
             $setting = defaultSetting();
-            $data['department_options'] = $this->departmentManager->dropdown(); 
+            $data['department_options'] = $this->departmentManager->dropdown();
             $data['working_status_options'] = $this->commonDataManager->yesNoDropdown();
             $data['teaching_status_options'] = $this->commonDataManager->yesNoDropdown();
             $data['publish_options'] = $this->commonDataManager->publishStatusDropdown();
 
-            if(request()->ajax()){
-                $search_params = request()->only('first_name','last_name','department_id','working_status','is_teaching_official','status');
-                $officials = $this->officialManager->all($search_params,$setting->per_page);
-                return view('site_modules.officials.replace_index',compact('officials','data'));
+            if (request()->ajax()) {
+                $search_params = request()->only('first_name', 'last_name', 'department_id', 'working_status', 'is_teaching_official', 'status');
+                $officials = $this->officialManager->all($search_params, $setting->per_page);
+                return view('site_modules.officials.replace_index', compact('officials', 'data'));
             }
 
 
-            if(Sentinel::hasAccess('officials.index')){
+            if (Sentinel::hasAccess('officials.index')) {
                 $search_params['department_id'] = null;
                 $search_params['working_status'] = null;
                 $search_params['is_teaching_official'] = null;
                 $search_params['status'] = null;
                 $search_params['first_name'] = null;
-                $officials = $this->officialManager->all($search_params,$setting->per_page);
-                return view('site_modules.officials.index',compact('officials','data'));
+                $officials = $this->officialManager->all($search_params, $setting->per_page);
+                return view('site_modules.officials.index', compact('officials', 'data'));
             }
 
-            return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
-
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
         } catch (Exception $e) {
-            return redirect()->back()->with('error','Oops, Something went wrong!!!');
+            return redirect()->back()->with('error', 'Oops, Something went wrong!!!');
         }
     }
 
-/**
-* Show the form for creating a new resource.
-*
-* @return \Illuminate\Http\Response
-*/
-public function create()
-{
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
 
-    try {
+        try {
 
-        if(Sentinel::hasAccess('officials.create')){
+            if (Sentinel::hasAccess('officials.create')) {
 
-            $data['setting'] = defaultSetting();
-            $data['year_options'] =  $this->academicYearManager->dropdown();
-            $data['gender_options'] = $this->commonDataManager->genderDropdown(); 
-            $data['lltype_options'] = $this->localLevelTypeManager->dropdown(); 
-            $data['department_options'] = $this->departmentManager->dropdown(); 
-            $data['designation_options'] = $this->designationManager->dropdown();
-            $data['working_status_options'] = $this->commonDataManager->yesNoDropdown();
-            $data['teaching_status_options'] = $this->commonDataManager->yesNoDropdown();
-            $data['publish_options'] = $this->commonDataManager->publishStatusDropdown();  
-            return view('site_modules.officials.create',compact('data'));
-        } else{
-            return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
-        }
-
-
-    } catch (Exception $e) {
-        return redirect()->route('users.index')->with('error','Oops! Something went wrong.');
-    }
-}
-
-/**
-* Store a newly created resource in storage.
-*
-* @param  \Illuminate\Http\Request  $request
-* @return \Illuminate\Http\Response
-*/
-public function store(OfficialRequest $request)
-{
-
-    try {
-
-        if(Sentinel::hasAccess('officials.store')){
-            DB::beginTransaction();
-            $details = $request->except('_method','_token','image');
-            if($request->hasFile('image')){
-                $file = $request->image;
-                $folder = 'uploads/officials/';
-                $fileName = 'image-'.random_int(0, 9999999999).'.'.$file->getClientOriginalExtension();
-                $file->move($folder,$fileName);
-                $details['image'] = $fileName;
+                $data['setting'] = defaultSetting();
+                $data['year_options'] =  $this->academicYearManager->dropdown();
+                $data['gender_options'] = $this->commonDataManager->genderDropdown();
+                $data['lltype_options'] = $this->localLevelTypeManager->dropdown();
+                $data['department_options'] = $this->departmentManager->dropdown();
+                $data['designation_options'] = $this->designationManager->dropdown();
+                $data['working_status_options'] = $this->commonDataManager->yesNoDropdown();
+                $data['teaching_status_options'] = $this->commonDataManager->yesNoDropdown();
+                $data['publish_options'] = $this->commonDataManager->publishStatusDropdown();
+                return view('site_modules.officials.create', compact('data'));
+            } else {
+                return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
             }
-            $official = Official::create($details);
-            DB::commit();
-            return redirect()->route('officials.index')->with('success','Operation Successfull');
+        } catch (Exception $e) {
+            return redirect()->route('users.index')->with('error', 'Oops! Something went wrong.');
         }
-
-        return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
-    } catch (Exception $e) {
-        DB::rollBack();
-        return redirect()->route('users.index')->with('error','Oops! Something went wrong.');
-    }
-}
-/**
-* Display the specified resource.
-*
-* @param  int  $id
-* @return \Illuminate\Http\Response
-*/
-public function show($id)
-{
-
-    try {
-
-        if(Sentinel::hasAccess('officials.view')){
-
-            $official = Official::find($id);
-            $user = Sentinel::findByCredentials(['login'=>$official->email]);
-            return view('site_modules.officials.view',compact('official','user'));
-        }
-
-        return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
-    } catch (Exception $e) {
-        return redirect()->route('users.index')->with('error','Oops! Something went wrong.');
-    }
-}
-
-/**
-* Show the form for editing the specified resource.
-*
-* @param  int  $id
-* @return \Illuminate\Http\Response
-*/
-public function edit($id)
-{
-
-    try {
-
-        if(Sentinel::hasAccess('officials.edit')){
-
-            $data['setting'] = defaultSetting();
-            $data['year_options'] =  $this->academicYearManager->dropdown();
-            $data['gender_options'] = $this->commonDataManager->genderDropdown(); 
-            $data['lltype_options'] = $this->localLevelTypeManager->dropdown(); 
-            $data['department_options'] = $this->departmentManager->dropdown(); 
-            $data['designation_options'] = $this->designationManager->dropdown();
-            $data['working_status_options'] = $this->commonDataManager->yesNoDropdown();
-            $data['teaching_status_options'] = $this->commonDataManager->yesNoDropdown();
-            $data['publish_options'] = $this->commonDataManager->publishStatusDropdown();  
-            $official = Official::find($id);
-            return view('site_modules.officials.edit',compact('data','official'));
-        }else{
-            return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
-        }
-
-        
-    } catch (Exception $e) {
-        return redirect()->route('users.index')->with('error','Oops! Something went wrong.');
     }
 
-}
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(OfficialRequest $request)
+    {
 
-/**
-* Update the specified resource in storage.
-*
-* @param  \Illuminate\Http\Request  $request
-* @param  int  $id
-* @return \Illuminate\Http\Response
-*/
-public function update(OfficialRequest $request, $id)
-{
+        try {
 
-    try {
+            if (Sentinel::hasAccess('officials.store')) {
+                DB::beginTransaction();
+                $details = $request->except('_method', '_token', 'image');
+                if ($request->hasFile('image')) {
+                    $file = $request->image;
+                    $folder = 'uploads/officials/';
+                    $fileName = 'image-' . random_int(0, 9999999999) . '.' . $file->getClientOriginalExtension();
+                    $file->move($folder, $fileName);
+                    $details['image'] = $fileName;
+                }
+                Official::create($details);
+                DB::commit();
+                return redirect()->route('officials.index')->with('success', 'Operation Successfull');
+            }
 
-        if(Sentinel::hasAccess('officials.update')){
-            DB::beginTransaction();
-            $details = $request->except('image','_token','_method');
-            $official = Official::find($id);
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->route('users.index')->with('error', 'Oops! Something went wrong.');
+        }
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
 
-            $official->update($details);
+        try {
 
-            if($request->hasFile('image')){
-                $file = $request->image;
-                $folder = 'uploads/officials/';
-                $fileName = 'image-'.random_int(0, 9999999999).'.'.$file->getClientOriginalExtension();
-                $file->move($folder,$fileName);
+            if (Sentinel::hasAccess('officials.view')) {
 
-                $old_image = $official->image;
+                $official = Official::find($id);
+                $user = Sentinel::findByCredentials(['login' => $official->email]);
+                return view('site_modules.officials.view', compact('official', 'user'));
+            }
 
-                $official->update(['image'=>$fileName]);
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
+        } catch (Exception $e) {
+            return redirect()->route('users.index')->with('error', 'Oops! Something went wrong.');
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+
+        try {
+
+            if (Sentinel::hasAccess('officials.edit')) {
+
+                $data['setting'] = defaultSetting();
+                $data['year_options'] =  $this->academicYearManager->dropdown();
+                $data['gender_options'] = $this->commonDataManager->genderDropdown();
+                $data['lltype_options'] = $this->localLevelTypeManager->dropdown();
+                $data['department_options'] = $this->departmentManager->dropdown();
+                $data['designation_options'] = $this->designationManager->dropdown();
+                $data['working_status_options'] = $this->commonDataManager->yesNoDropdown();
+                $data['teaching_status_options'] = $this->commonDataManager->yesNoDropdown();
+                $data['publish_options'] = $this->commonDataManager->publishStatusDropdown();
+                $official = Official::find($id);
+                return view('site_modules.officials.edit', compact('data', 'official'));
+            } else {
+                return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
+            }
+        } catch (Exception $e) {
+            return redirect()->route('users.index')->with('error', 'Oops! Something went wrong.');
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(OfficialRequest $request, $id)
+    {
+
+        try {
+
+            if (Sentinel::hasAccess('officials.update')) {
+                DB::beginTransaction();
+                $details = $request->except('image', '_token', '_method');
+                $official = Official::find($id);
+
+                $official->update($details);
+
+                if ($request->hasFile('image')) {
+                    $file = $request->image;
+                    $folder = 'uploads/officials/';
+                    $fileName = 'image-' . random_int(0, 9999999999) . '.' . $file->getClientOriginalExtension();
+                    $file->move($folder, $fileName);
+
+                    $old_image = $official->image;
+
+                    $official->update(['image' => $fileName]);
+
+                    // Remove  old file
+                    $oldFilePath = public_path('uploads/officials/' . $old_image);
+                    if (File::exists($oldFilePath)) {
+                        File::delete($oldFilePath);
+                    }
+                }
+
+                DB::commit();
+
+                return redirect()->route('officials.index')->with('success', 'Operation Successfull');
+            }
+
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->route('users.index')->with('error', 'Oops! Something went wrong.');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+
+        try {
+
+            if (Sentinel::hasAccess('officials.delete')) {
+                $official = Official::find($id);
 
                 // Remove  old file
-                $oldFilePath = public_path('uploads/officials/'.$old_image);
-                if (File::exists($oldFilePath)) {
-                    File::delete($oldFilePath);
+                $oldPath = public_path('uploads/officials/' . $official->image);
+                if (File::exists($oldPath)) {
+                    File::delete($oldPath);
                 }
+
+                $official->delete();
+                return redirect()->route('officials.index')->with('success', 'Operation Successfull');
+            } else {
+                return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
             }
-
-            DB::commit();
-
-            return redirect()->route('officials.index')->with('success','Operation Successfull');
+        } catch (Exception $e) {
+            return redirect()->route('users.index')->with('error', 'Oops! Something went wrong.');
         }
-
-        return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
-    } catch (Exception $e) {
-        DB::rollBack();
-        return redirect()->route('users.index')->with('error','Oops! Something went wrong.');
     }
 
-}
+    public  function officialAssign($id)
+    {
+        dd($id);
+    }
 
-/**
-* Remove the specified resource from storage.
-*
-* @param  int  $id
-* @return \Illuminate\Http\Response
-*/
-public function destroy($id)
-{
 
-    try {
 
-        if(Sentinel::hasAccess('officials.delete')){
-            $official = Official::find($id);
+    public function createLoginAccount($id)
+    {
 
-            // Remove  old file
-            $oldPath = public_path('uploads/officials/'.$official->image);
-            if (File::exists($oldPath)) {
-                File::delete($oldPath);
+        try {
+
+            if (Sentinel::hasAccess('officials.create-login-account')) {
+
+                DB::beginTransaction();
+                $official = Official::find($id);
+
+                $userDetails['first_name'] = $official->first_name;
+                $userDetails['last_name'] = $official->last_name;
+
+                $user = Sentinel::findByCredentials(['login' => $official->email]);
+
+                if ($user) {
+                    return redirect()->route('officials.index')->with('warning', 'User account has been already created.');
+                }
+
+                $userDetails['email'] = $official->email;
+                $userDetails['password'] = 'password';
+                $user = Sentinel::registerAndActivate($userDetails);
+                $role = Sentinel::findRoleBySlug('official');
+                $role->users()->attach($user);
+                DB::commit();
+                return redirect()->route('users.index')->with('success', 'Successfully created.');
             }
 
-            $official->delete();            
-            return redirect()->route('officials.index')->with('success','Operation Successfull');
-
-        }else{
-            return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Oops! Something went wrong.');
         }
-
-    } catch (Exception $e) {
-        return redirect()->route('users.index')->with('error','Oops! Something went wrong.');
     }
-}
-
-public  function officialAssign($id){
-    dd($id);
-}
-
-
-
-public function createLoginAccount($id)
-{
-
-    try {
-
-        if(Sentinel::hasAccess('officials.create-login-account')){
-
-            DB::beginTransaction();
-            $official = Official::find($id);
-
-            $userDetails['first_name'] = $official->first_name;
-            $userDetails['last_name'] = $official->last_name;
-
-            $user = Sentinel::findByCredentials(['login'=>$official->email]);
-
-            if ($user) {
-                return redirect()->route('officials.index')->with('warning','User account has been already created.');
-            }
-
-            $userDetails['email'] = $official->email;
-            $userDetails['password'] = 'password';
-            $user = Sentinel::registerAndActivate($userDetails);
-            $role = Sentinel::findRoleBySlug('official');
-            $role->users()->attach($user);
-            DB::commit();
-            return redirect()->route('users.index')->with('success','Successfully created.');
-
-        }
-
-        return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
-
-    } catch (Exception $e) {
-        DB::rollBack();
-        return redirect()->back()->with('error','Oops! Something went wrong.');
-    }
-}
 }

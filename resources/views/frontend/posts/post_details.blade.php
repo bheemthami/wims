@@ -11,18 +11,18 @@
                 <div class="blog-wrapper blog-list blog-details blue-blog mb-50">
                     <div class="blog-thumb mb-35">
 
-                        @if($post->image)
+                        @if($post && $post->image)
                         <img src="{{ asset('uploads/posts/'.$post->image)}}" alt="">
                         <span class="blog-text-offer">{{ $post->postCategory->title }}</span>
                         @endif
                     </div>
                     <div class="blog-content news-content">
-                        <div class="blog-meta news-meta">
-                            <span>{{ date("M j, Y",strtotime($post->date)) }}</span>
+                        <div class="blog-meta news-meta post-wrapper mb-10">
+                            <span>{{ date("M j, Y",strtotime($post->date)) }} </span>
+                            <a class="text-link" href="{{url('/download-posts',($post->image ? $post->image : $post->attachment))}}">Download <i class="fa fa-download"></i></a>
                         </div>
                         <h5>{{ $post->title }}</h5>
                         <p>{!! $post->description !!}</p>
-
                         @if($post->summary)
                         <blockquote class="blockquote">
                             <p class="mb-0">{{ $post ? $post->summary : 'summary'}}</p>
@@ -42,9 +42,9 @@
                             <li>
                                 <div class="sidebar-rc-post-main-area d-flex mb-20">
                                     <div class="rc-post-content">
-                                        <h4>
+                                        <h5>
                                             <a href="{{ route('post-details',$not->slug.'?nid='.base64_encode($not->id))}}">{{ $not->title }}</a>
-                                        </h4>
+                                        </h5>
                                         <div class="widget-advisors-name">
                                             <span>Date : <span class="f-500">{{ date("M j, Y",strtotime($post->date)) }}</span></span>
                                         </div>
@@ -77,7 +77,6 @@
                 </div>
             </div>
         </div>
-        <!-- end news-details-->
     </div>
 
     @endsection

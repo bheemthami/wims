@@ -19,12 +19,12 @@
                     <ul class="list-group">
                         @forelse($posts as $key=>$post)
                         <li class="list-group-item mb-2">
-                            <div class="post-content-wrapper"> 
+                            <div class="post-content-wrapper">
                                 <div class="post-serial-number">
                                     <span class="float-right published-date"> <i class="fa fa-calendar"></i> {{ date('M j, Y', strtotime($post->date)) }}</span>
-                                </div> 
+                                </div>
                                 <div class="post-content">
-                                    <a href="{{route('post-details',$post->slug)}}"> {{ $post->title }} </a> 
+                                    <a href="{{route('post-details',$post->slug)}}"> {{ $post->title }} </a>
                                 </div>
                             </div>
                         </li>
@@ -35,11 +35,11 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <h3>Important Links</h3>
+                <h4>Important Links</h4>
                 <ul class="quick-link">
                     @forelse($links as $key=>$link)
                     <li class="quick-link-item">
-                        <a href="{{$link->link}}" target="_blank"><i class="fa fa-caret-right"></i> {{ $link->title }} </a> 
+                        <a href="{{$link->link}}" target="_blank"><i class="fa fa-caret-right"></i> {{ $link->title }} </a>
                     </li>
                     @empty
                     <li class="list-group-item">NO DATA ! </li>
@@ -50,35 +50,4 @@
     </div>
 </div>
 <!-- end news-details-->
-
-<!-- subscribe start -->
-<div class="subscribe-area">
-    <div class="container">
-        <div class="subscribe-box">
-            <div class="row">
-                <div class="col-xl-10 offset-xl-1 col-lg-10 offset-lg-1 col-md-12">
-                    <div class="row justify-content-between">
-                        <div class="col-xl-6 col-lg-7 col-md-8">
-                            <div class="subscribe-text">
-                                <h1>Subscribe</h1>
-                                <span>Enter your email and get latest updates and offers subscribe us</span>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-5 col-md-4 justify-content-end">
-                            <div class="email-submit-form">
-                                <div class="subscribe-form">
-                                    <form action="#">
-                                        <input placeholder="Enter your email" type="email">
-                                        <i class="fas fa-long-arrow-alt-right"></i>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- subscribe end -->
 @endsection
