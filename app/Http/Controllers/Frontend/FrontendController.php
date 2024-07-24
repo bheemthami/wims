@@ -339,6 +339,8 @@ class FrontendController extends Controller
                 $categories[$key]['downloads'] = $this->documentManager->publishedDocuments($category->id, $setting->perp_page);
             }
 
+            // dd($categories[0]['downloads'][0]->image, $categories[0]['downloads'][0]->attachment);
+
             return view('frontend.publications', compact('categories'));
         } catch (Exception $e) {
             return "Oops, something went wrong!";
@@ -403,6 +405,24 @@ class FrontendController extends Controller
             $facilities = $this->facilityManager->publishedFacilities();
 
             return view('frontend.facilities', compact('facilities'));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+    public function download($file)
+    {
+        try {
+            return response()->download(public_path('/uploads/documents/' . $file));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+    public function downloadPosts($file)
+    {
+        try {
+            return response()->download(public_path('/uploads/posts/' . $file));
         } catch (Exception $e) {
             return "Oops, something went wrong!";
         }

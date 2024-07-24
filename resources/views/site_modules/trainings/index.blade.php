@@ -118,6 +118,7 @@
 <script>
 	$(document).ready(function() {
 		$('#search-button').click(function() {
+			$('#custom-loader').modal('show');
 			var title = $('#title').val();
 			var training_category_id = $('#training_category_id').val();
 			var training_type_id = $('#training_type_id').val();
@@ -131,6 +132,11 @@
 				},
 				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
+					$('#custom-loader').modal('hide');
+				},
+				error: function() {
+					$('#custom-loader').modal('hide');
+					toastr.error("Oops something sent wrong. Try again later!");
 				}
 			});
 		});

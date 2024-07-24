@@ -19,6 +19,7 @@ class PostManager
 
 	public function all($params = null, $perPage)
 	{
+
 		$query = $this->post::select('*');
 
 		if ($params['title']) {

@@ -134,6 +134,7 @@
 <script>
 	$(document).ready(function() {
 		$('#search-button').click(function() {
+			$('#custom-loader').modal('show');
 			var first_name = $('#first_name').val();
 			var department_id = $('#department_id').val();
 			var working_status = $('#working_status').val();
@@ -151,6 +152,11 @@
 				},
 				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
+					$('#custom-loader').modal('hide');
+				},
+				error: function() {
+					$('#custom-loader').modal('hide');
+					toastr.error("Oops something sent wrong. Try again later!");
 				}
 			});
 		});

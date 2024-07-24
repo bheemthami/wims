@@ -130,8 +130,17 @@
             <div class="tab-pane fade {{ ($key== 0) ? 'show active':''}}" id="pills-{{$cat['slug']}}" role="tabpanel" aria-labelledby="pills-home-tab">
               <ul class="list-group">
                 @forelse($cat['posts'] as $post)
-                <li class="list-group-item posts-item"><a href="{{route('post-details',$post->slug)}}"> {{ $post->title }} </a>
-                  <span class="float-left published-text"><i class="fa fa-calendar me-2"></i>{{ date('M j, Y', strtotime($post->date)) }} </span>
+                <li class="list-group-item">
+                  <div class="post-wrapper">
+                    <a href="{{route('post-details',$post->slug)}}"> {{ $post->title }} </a>
+                    <div class="float-left post-download">
+                      <span class="post-published-date">
+                        <i class="fa fa-calendar me-2"></i>
+                        {{ date('M j, Y', strtotime($post->date)) }}
+                      </span>
+                      <span class="text-link"><a href="{{url('/download-posts',($post->image ? $post->image : $post->attachment))}}"> <i class="fa fa-download"></i></a></span>
+                    </div>
+                  </div>
                 </li>
                 @empty
                 <li class="list-group-item">NO DATA</li>

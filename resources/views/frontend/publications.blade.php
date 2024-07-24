@@ -37,11 +37,13 @@
                             <ul class="list-group">
                                 @forelse($cat['downloads'] as $download)
                                 <li class="list-group-item">
-                                    <a href="{{route('post-details',$download->slug)}}"> {{ $download->title }}</a> 
-                                    <strong>{{ date('M j, Y', strtotime($download->date)) }}</strong>
-                                    <span class="float-right"> 
-                                        <a href="#" class=" btn-sm btn-warning">Download <i class="fa fa-download"></i></a> 
+                                    {{ $download->title }}
+                                    <span class="text-secondary">{{ date('M j, Y', strtotime($download->date)) }}</span>
+                                    @if($download->image || $download->attachment)
+                                    <span class="float-right">
+                                        <a class=" btn-sm btn-warning" href="{{url('/download',($download->image ? $download->image : $download->attachment))}}">Download <i class="fa fa-download"></i></a>
                                     </span>
+                                    @endif
                                 </li>
                                 @empty
                                 <li class="list-group-item">NO DATA</li>
@@ -59,5 +61,4 @@
         </div>
     </div>
 </div>
-
 @endsection
