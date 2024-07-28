@@ -34,6 +34,10 @@ class PostManager
 			$query = $query->where(['post_category_id' => $params['post_category_id']]);
 		}
 
+		if ($params['status'] !== null) {
+			$query = $query->where(['status' => $params['status']]);
+		}
+
 		return  $posts = $query->orderBy('date', 'DESC')->paginate($perPage);
 	}
 

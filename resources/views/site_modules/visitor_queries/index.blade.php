@@ -18,10 +18,10 @@
 	<!-- Default box -->
 	<div class="box">
 		<div class="box-header with-border">
-			<a class="btn btn-sm btn-success disabled" href="{{ route('academic-years.create') }}"> <i class="fa fa-plus"></i> Add </a>
 			<div class="box-tools pull-right">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-					<i class="fa fa-minus"></i></button>
+					<i class="fa fa-minus"></i>
+				</button>
 			</div>
 		</div>
 		<div class="box-body">
@@ -34,6 +34,7 @@
 						<th>Name</th>
 						<th>Subject</th>
 						<th>Message</th>
+						<th>Date</th>
 						<th>status</th>
 						<th>Actions</th>
 					</thead>
@@ -49,12 +50,12 @@
 							<td>
 								{{ str_limit($visitor_query->message,50) }}
 							</td>
-
+							<td>{{ date('M j, Y H:m:s A', strtotime($visitor_query->created_at)) }}</td>
 							<td>
 								@if($visitor_query->status == 0)
 								<label class="btn btn-sm btn-warning">New Query</label>
 								@else
-								<label class="btn btn-sm btn-success">Replied</label>
+								<label class="btn btn-sm btn-info">Viewed</label>
 								@endif
 							</td>
 

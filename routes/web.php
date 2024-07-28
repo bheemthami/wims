@@ -9,7 +9,7 @@ Auth::routes();
 Route::group(['namespace' => 'Frontend'], function () {
 	Route::get('/', 'FrontendController@index')->name('index');
 	Route::get('/contact-us', 'FrontendController@contact_us')->name('contact-us');
-	Route::get('/collect-visitor_queries', 'VisitorQueryController@collectQueries')->name('visitor-queries.collect');
+	Route::post('/collect-visitor-queries', 'VisitorQueryController@collectQueries')->name('visitor-queries.collect');
 	Route::get('/about-us', 'FrontendController@about_us')->name('about-us');
 
 	Route::get('/page', 'FrontendController@pageBySlug')->name('frontend.page');

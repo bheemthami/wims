@@ -52,7 +52,7 @@
             </div>
             <div class="col-xl-7 col-lg-6 col-md-10 offset-md-1 ml-md-auto">
                 <div class="events-details-form faq-area-form mb-30 p-0">
-                    <form id="visitor_query_form">
+                    <form id="visitor_query_form" method="POST">
                         <div class="row">
                             <div class="col-xl-8">
                                 <div class="events-form-title mb-25">
@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-xl-12">
                                 <div class="faq-form-btn events-form-btn">
-                                    <button id="submit-now" class="btn m-0" type="button" >submit now</button>
+                                    <button id="submit-now" class="btn m-0" type="submit">submit now</button>
                                 </div>
                             </div>
                         </div>
@@ -91,55 +91,78 @@
 <div class="container">
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-           {!! $embedding->iframe !!}
+            {!! $embedding->iframe !!}
         </div>
     </div>
 </div>
 <!-- map end -->
 @endsection
 @section('js')
+
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('#submit-now').click(function(e){
+    $(document).ready(function() {
+        $('#visitor_query_form').on('submit', function(e) {
+            e.preventDefault();
+
             form_data = {
-                'name':$('#name').val(),
-                'email':$('#email').val(),
-                'phone':$('#phone').val(),
-                'subject':$('#subject').val(),
-                'message':$('#message').val(),
+                'name': $('#name').val(),
+                'email': $('#email').val(),
+                'phone': $('#phone').val(),
+                'subject': $('#subject').val(),
+                'message': $('#message').val(),
             }
 
-            if (form_data.name == "" | form_data.name == undefined ) {
-                $('#name').css('border-color','red')
+            if (form_data.name == "" | form_data.name == undefined) {
+                $('#name').css('border-color', 'red')
             }
 
-            if (form_data.email == "" | form_data.email == undefined ) {
-                $('#email').css('border-color','red')
+            if (form_data.email == "" | form_data.email == undefined) {
+                $('#email').css('border-color', 'red')
             }
 
-            if (form_data.phone == "" | form_data.phone == undefined ) {
-                $('#phone').css('border-color','red')
+            if (form_data.phone == "" | form_data.phone == undefined) {
+                $('#phone').css('border-color', 'red')
             }
 
-            if (form_data.subject == "" | form_data.subject == undefined ) {
-                $('#subject').css('border-color','red')
+            if (form_data.subject == "" | form_data.subject == undefined) {
+                $('#subject').css('border-color', 'red')
             }
 
-            if (form_data.message == "" | form_data.message == undefined ) {
-                $('#message').css('border-color','red')
+            if (form_data.message == "" | form_data.message == undefined) {
+                $('#message').css('border-color', 'red')
             }
 
 
             if (form_data.name != "" | form_data.email != "" | form_data.phone != "" | form_data.subject != "" | form_data.message != "") {
-                $(document).find('#submit-now').html('<i class="fa fa-circle-o">submitting...</i>')
+                $(document).find('#submit-now').html('submitting...')
 
-                var baseUrl = "<?php echo url('/collect_visitor_queries')?>";
+                var baseUrl = "<?php echo url('/collect-visitor-queries') ?>";
                 $.ajax({
-                    url : baseUrl,
-                    data :form_data ,
-                    success:function(response){
-                        $(document).find('#submit-now').html('<i class="fa fa-circle-o">Than you</i>')
-                    }
+                    url: baseUrl,
+                    type: 'POST',
+                    data: {
+                        ...form_data,
+                        '_token': "{{csrf_token()}}"
+                    },
+                    success: function(response) {
+                        if (response.status === 'ok') {
+                            $(document).find('#submit-now').html('Submitted! Please check your mail.')
+                            $(document).find('#name').val('');
+                            $(document).find('#email').val('');
+                            $(document).find('#phone').val('');
+                            $(document).find('#subject').val('');
+                            $(document).find('#message').val('');
+                        } else {
+                            if (response?.email.length > 0) {
+                                $(document).find('#submit-now').html('Resubmit')
+                                $('#email').css('border-color', 'red')
+                            }
+                        }
+                    },
+                    error: function() {
+                        $(document).find('#submit-now').html('Failed! Try again later.')
+                    },
+
                 });
             }
         })

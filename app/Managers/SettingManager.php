@@ -13,14 +13,14 @@ class SettingManager
 		$this->setting = $setting;
 	}
 
-	public function defaultSetting(){
-		return $this->settings = Setting::select('settings.*')->join('academic_years','settings.academic_year_id','=','academic_years.id')->first();
+	public function defaultSetting()
+	{
+		return $this->setting = Setting::select('settings.*')->join('academic_years', 'settings.academic_year_id', '=', 'academic_years.id')->first();
 	}
 
 
-	public function count(){
-		return $this->settings = Setting::count();
+	public function count()
+	{
+		return $this->setting = Setting::count();
 	}
-
-
 }

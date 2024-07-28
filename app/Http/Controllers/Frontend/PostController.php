@@ -50,23 +50,24 @@ class PostController extends Controller
             $setting = defaultSetting();
             $yearOptions = $this->academicYearManager->dropdown();
             $postCategoryOptions = $this->postCategoryManager->dropdown();
+            $statusOptions = $this->commonDataManager->publishStatusDropdown();
 
             if (request()->ajax()) {
 
-                $params = request()->only('title', 'academic_year_id', 'post_category_id');
+                $params = request()->only('title', 'academic_year_id', 'post_category_id', 'status');
                 $posts = $this->postManager->all($params, $setting->per_page);
 
-                return  view('site_modules.posts.replace_index', compact('posts', 'yearOptions', 'setting'));
+                return  view('site_modules.posts.replace_index', compact('posts', 'yearOptions', 'postCategoryOptions', 'setting', 'statusOptions'));
             }
-
 
             if (Sentinel::hasAccess('posts.index')) {
                 $filters['title'] = null;
                 $filters['academic_year_id'] = $setting->academic_year_id;
                 $filters['post_category_id'] = null;
+                $filters['status'] = null;
                 $posts = $this->postManager->all($filters, $setting->perp_page);
 
-                return view('site_modules.posts.index', compact('posts', 'yearOptions', 'postCategoryOptions', 'setting'));
+                return view('site_modules.posts.index', compact('posts', 'yearOptions', 'postCategoryOptions', 'setting', 'statusOptions'));
             }
 
             return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');

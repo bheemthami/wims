@@ -25,10 +25,24 @@
 		</div>
 		<div class="box-body table-responsive no-padding">
 			<div class="filteration">
+
 				<div class="col-md-3">
 					<label for="first_name"> Title </label>
 					<div class="form-group">
 						<input id="title" name="title" class="form-control" placeholder="title">
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<label for="academic_year_id"> Academic Year </label>
+					<div class="form-group">
+						{!! Form::select('academic_year_id',$yearOptions,$setting->academic_year_id,['class'=>'form-control','id'=>'academic_year_id']) !!}
+					</div>
+				</div>
+				<div class="col-md-3">
+					<label for="status"> Status </label>
+					<div class="form-group">
+						{!! Form::select('status',$statusOptions,$setting->status,['class'=>'form-control','id'=>'status']) !!}
 					</div>
 				</div>
 
@@ -115,11 +129,15 @@
 		$('#search-button').click(function() {
 			$('#custom-loader').modal('show');
 			var title = $('#title').val();
+			var academic_year_id = $('#academic_year_id').val();
+			var status = $('#status').val();
 			var baseUrl = "<?php echo url('admin/events') ?>";
 			$.ajax({
 				url: baseUrl,
 				data: {
-					'title': title
+					'title': title,
+					'academic_year_id': academic_year_id,
+					'status': status
 				},
 				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
@@ -134,6 +152,8 @@
 
 		$('#clear-button').click(function() {
 			$('#title').val('');
+			$('#academic_year_id').val('');
+			$('#status').val('');
 		});
 	});
 </script>

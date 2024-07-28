@@ -24,28 +24,35 @@
 		<div class="box-body table-responsive no-padding">
 			<div class="filteration">
 
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<label for="first_name"> Title </label>
 					<div class="form-group">
 						<input id="title" name="title" class="form-control" placeholder="title">
 					</div>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<label for="first_name"> Academic Year </label>
 					<div class="form-group">
 						{!! Form::select('academic_year_id',$yearOptions,$setting->academic_year_id,['class'=>'form-control','id'=>'academic_year_id']) !!}
 					</div>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<label for="first_name"> Post Category </label>
 					<div class="form-group">
 						{!! Form::select('post_category_id',$postCategoryOptions,null,['class'=>'form-control','id'=>'post_category_id']) !!}
 					</div>
 				</div>
 
-				<div class="col-md-3">
+				<div class="col-md-2">
+					<label for="status"> Status </label>
+					<div class="form-group">
+						{!! Form::select('status',$statusOptions,$setting->status,['class'=>'form-control','id'=>'status']) !!}
+					</div>
+				</div>
+
+				<div class="col-md-2">
 					<label for="dob"> Filter</label>
 					<div class="form-group">
 						<button id="search-button" class="btn btn-sm btn-success" type="button"> <i class="fa fa-search"></i> search</button>
@@ -123,13 +130,15 @@
 			var title = $('#title').val();
 			var academic_year_id = $('#academic_year_id').val();
 			var post_category_id = $('#post_category_id').val();
+			var status = $('#status').val();
 			var baseUrl = "<?php echo url('admin/posts') ?>";
 			$.ajax({
 				url: baseUrl,
 				data: {
-					'title': title,
-					'academic_year_id': academic_year_id,
-					'post_category_id': post_category_id
+					title,
+					academic_year_id,
+					post_category_id,
+					status
 				},
 				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
@@ -145,6 +154,8 @@
 		$('#clear-button').click(function() {
 			$('#title').val('');
 			$('#academic_year_id').val('');
+			$('#post_category_id').val('');
+			$('#status').val('');
 		});
 	});
 </script>

@@ -338,7 +338,6 @@ h5 a:hover {
 }*/
 
 .facility-images > img {
-    max-height: 200px;
     overflow: hidden;
 }
 
