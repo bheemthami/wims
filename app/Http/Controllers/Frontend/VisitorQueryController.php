@@ -9,9 +9,9 @@ use App\Managers\AcademicYearManager;
 use App\Managers\SettingManager;
 
 use App\Models\Frontend\VisitorQuery;
-
-use Sentinel;
-use Validator;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Exception;
+use Illuminate\Support\Facades\Validator;
 
 class VisitorQueryController extends Controller
 {
@@ -19,7 +19,7 @@ class VisitorQueryController extends Controller
     protected $academicYearManager;
     protected $settingManager;
 
-    function __construct(AcademicYearManager $academicYearManager,SettingManager $settingManager)
+    function __construct(AcademicYearManager $academicYearManager, SettingManager $settingManager)
     {
         $this->academicYearManager = $academicYearManager;
         $this->settingManager = $settingManager;
@@ -30,15 +30,15 @@ class VisitorQueryController extends Controller
     {
         try {
 
-            if(Sentinel::hasAccess('visitor-queries.index')){
+            if (Sentinel::hasAccess('visitor-queries.index')) {
                 $setting = defaultSetting();
-                $visitor_queries = VisitorQuery::orderBy('created_at','ASC')->paginate($setting->per_page);
-                return view('site_modules.visitor_queries.index',compact('visitor_queries'));
+                $visitor_queries = VisitorQuery::orderBy('created_at', 'DESC')->paginate($setting->per_page);
+                return view('site_modules.visitor_queries.index', compact('visitor_queries'));
             }
 
-            return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
         } catch (Exception $e) {
-            return redirect('admin/visitor-queries')->with('error','Oops! Something went wrong.');
+            return redirect('admin/visitor-queries')->with('error', 'Oops! Something went wrong.');
         }
     }
 
@@ -51,24 +51,11 @@ class VisitorQueryController extends Controller
     {
 
         try {
-
-            if (request()->ajax()) {
-               $details = request()->only('name','email','phone','subject','message');
-               dd($details);
-           }
-
-           if(Sentinel::hasAccess('visitor-queries.create')){
-
-            $gradingSystemOptions = $this->commonDataManager->gradingSystemDropdown();
-
-            return view('site_modules.visitor_queries.create',compact('gradingSystemOptions'));
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
+        } catch (Exception $e) {
+            return redirect('admin/visitor-queries')->with('error', 'Oops! Something went wrong.');
         }
-
-        return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
-    } catch (Exception $e) {
-        return redirect('admin/visitor-queries')->with('error','Oops! Something went wrong.');
     }
-}
 
     /**
      * Store a newly created resource in storage.
@@ -76,22 +63,22 @@ class VisitorQueryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AcademicYearRequest $request)
+    public function store(Request $request)
     {
-       try {
+        try {
 
-        if(Sentinel::hasAccess('visitor-queries.store')){
+            if (Sentinel::hasAccess('visitor-queries.store')) {
 
-            $requestDetails = $request->except('_token');
-            VisitorQuery::create($requestDetails);
-            return redirect('admin/visitor-queries')->with('success','Successfully Created!');
+                $requestDetails = $request->except('_token');
+                VisitorQuery::create($requestDetails);
+                return redirect('admin/visitor-queries')->with('success', 'Successfully Created!');
+            }
+
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
+        } catch (Exception $e) {
+            return redirect('admin/visitor-queries')->with('error', 'Oops! Something went wrong.');
         }
-
-        return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
-    } catch (Exception $e) {
-        return redirect('admin/visitor-queries')->with('error','Oops! Something went wrong.');
     }
-}
 
     /**
      * Display the specified resource.
@@ -103,16 +90,18 @@ class VisitorQueryController extends Controller
     {
         try {
 
-            if(Sentinel::hasAccess('visitor-queries.store')){
+            if (Sentinel::hasAccess('visitor-queries.store')) {
 
                 $visitor_query = VisitorQuery::find($id);
-
-                return view('site_modules.visitor_queries.view',compact('visitor_query'));
+                if ($visitor_query) {
+                    $visitor_query->update(['status' => 1]);
+                }
+                return view('site_modules.visitor_queries.view', compact('visitor_query'));
             }
 
-            return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
         } catch (Exception $e) {
-            return redirect('admin/visitor-queries')->with('error','Oops! Something went wrong.');
+            return redirect('admin/visitor-queries')->with('error', 'Oops! Something went wrong.');
         }
     }
 
@@ -126,15 +115,9 @@ class VisitorQueryController extends Controller
     {
         try {
 
-            if(Sentinel::hasAccess('visitor-queries.edit')){
-                $visitor_query = VisitorQuery::find($id);
-                $gradingSystemOptions = $this->commonDataManager->gradingSystemDropdown();
-                return view('site_modules.visitor_queries.edit',compact('academic_year','gradingSystemOptions'));
-            }
-
-            return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
         } catch (Exception $e) {
-            return redirect('admin/visitor-queries')->with('error','Oops! Something went wrong.');
+            return redirect('admin/visitor-queries')->with('error', 'Oops! Something went wrong.');
         }
     }
 
@@ -145,22 +128,14 @@ class VisitorQueryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AcademicYearRequest $request, $id)
+    public function update(Request $request, $id)
     {
 
         try {
-            if(Sentinel::hasAccess('visitor-queries.update')){
-                $visitor_query = VisitorQuery::find($id);
-                $updateData = $request->except('_token');
-                $visitor_query->update($updateData);
-                return redirect('admin/visitor-queries')->with('success','Successfully Updated!');
-            }
-
-            return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
         } catch (Exception $e) {
-            return redirect('admin/visitor-queries')->with('error','Oops! Something went wrong.');
+            return redirect('admin/visitor-queries')->with('error', 'Oops! Something went wrong.');
         }
-        
     }
 
     /**
@@ -172,76 +147,71 @@ class VisitorQueryController extends Controller
     public function destroy($id)
     {
         try {
-            if(Sentinel::hasAccess('visitor-queries.delete')){
-                $students_count = Student::where(['academic_year_id'=>$id])->get();
-                if(count($students_count) > 0){
-                    return redirect('admin/visitor-queries')->with('error','Deletion not allowed');
+            if (Sentinel::hasAccess('visitor-queries.delete')) {
+                $visitorQuery = VisitorQuery::find($id);
+                if (!$visitorQuery->status) {
+                    return redirect()->route('visitor_queries.index')->with('error', 'Deletion not allowed');
                 }
-                VisitorQuery::where(['id'=>$id])->delete();
-                return redirect('admin/visitor-queries')->with('success','Successfully Deleted!');
+                VisitorQuery::where(['id' => $id])->delete();
+                return redirect()->route('visitor_queries.index')->with('success', 'Successfully Deleted!');
             }
 
-            return redirect()->route('dashboard')->with('error','Oops! Permissions denied.');
-            
+            return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
         } catch (Exception $e) {
-            return redirect('admin/visitor-queries')->with('error','Oops! Something went wrong.');
+            return redirect('admin/visitor-queries')->with('error', 'Oops! Something went wrong.');
         }
-        
     }
 
     public function collectQueries(Request $request)
     {
-
         try {
-
-
             if ($request->ajax()) {
                 $settings = $this->settingManager->defaultSetting();
 
                 $validator = Validator::make($request->all(), [
-                   'name'=>'required',
-                   'email'=>'required|email',
-                   'phone'=>'required',
-                   'subject'=>'required',
-                   'message'=>'required'
-               ]);
+                    'name' => 'required',
+                    'email' => 'required|email',
+                    'phone' => 'required',
+                    'subject' => 'required',
+                    'message' => 'required'
+                ]);
 
                 if (!$validator->fails()) {
-                    $details = $request->only(['name','email','phone','subject','message']);
+                    $details = $request->only(['name', 'email', 'phone', 'subject', 'message']);
 
                     $details['academic_year_id'] = $settings->academic_year_id;
                     $details['qid'] = $this->nextID();
                     VisitorQuery::create($details);
-                    return response()->json(['status'=>'ok']);
+
+                    // send email to official email address
+                    return response()->json(['status' => 'ok']);
                 } else {
                     return response()->json($validator->errors());
                 }
-                
-            } 
-
+            }
         } catch (Exception $e) {
-            return redirect('index')->with('error','Oops! Something went wrong.');
+            return redirect('index')->with('error', 'Oops! Something went wrong.');
         }
     }
 
-    public function nextID(){
+    public function nextID()
+    {
 
-        do{
-            $qid = rand(1000000000,9999999999);
-        } while(!$this->isQidUnique($qid));
+        do {
+            $qid = rand(1000000000, 9999999999);
+        } while (!$this->isQidUnique($qid));
 
         return $qid;
-
     }
 
-    public function isQidUnique($qid){
+    public function isQidUnique($qid)
+    {
 
-        $qid = VisitorQuery::where(['qid'=>$qid])->get();
+        $qid = VisitorQuery::where(['qid' => $qid])->get();
 
         if ($qid) {
             return true;
         }
         return false;
     }
-
 }

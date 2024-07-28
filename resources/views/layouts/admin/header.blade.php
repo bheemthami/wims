@@ -17,8 +17,13 @@
 
     <div class="navbar-custom-menu">
 
-      <ul class="nav navbar-nav"> 
-        <!-- User Account: style can be found in dropdown.less -->
+      <ul class="nav navbar-nav">
+
+        <li class="dropdown user user-menu">
+          <a href="{{route('index')}}" target="_blank" class="btn btn-link">
+            Website
+          </a>
+        </li>
 
         <li class="dropdown user user-menu">
           <a href="#">
@@ -51,23 +56,22 @@
               <div class="pull-left">
                 <a href="{{route('profile.index') }}" class="btn btn-default btn-flat">Profile</a>
               </div>
-               <div class="pull-left">
+              <div class="pull-left">
                 <a href="{{route('change_password.create') }}" class="btn btn-default btn-flat">Change Password</a>
               </div>
               <div class="pull-right">
-                <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
+                <a class="btn btn-default btn-flat" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
-                <i class="fa fa-sign-out"></i>
-              </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-              </form>
-            </div>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</nav>
+                  <i class="fa fa-sign-out"></i>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+                </form>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </header>

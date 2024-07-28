@@ -13,7 +13,14 @@ class UserManager
 		$this->user = $user;
 	}
 
-	public function count($status = null){
-		return $this->user::count();
+	public function count($status = null)
+	{
+		$query = $this->user::select('*');
+
+		if ($status) {
+			$query->where(['status' => $status]);
+		}
+
+		return $query->count();
 	}
 }

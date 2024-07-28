@@ -21,15 +21,14 @@
 
 				<a class="btn btn-sm btn-danger" href="{{ route('visitor_queries.index')}}"><i class="fa fa-times"></i></a>
 
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
-		
+
 		<div class="box-body">
 			<fieldset class="fieldset-border">
-				<legend class="legend-border">details</legend>
+				<legend class="legend-border">Details</legend>
 				<div class="col-md-12">
 					<p> <strong> Qid:- </strong>{{$visitor_query->qid}} </p>
 				</div>
@@ -41,7 +40,11 @@
 				</div>
 
 				<div class="col-md-12">
-					<p> <strong> Subject:- </strong>{!! $visitor_query->subject !!} </p>
+					<p> <strong> Email:- </strong>{{$visitor_query->email}} </p>
+				</div>
+
+				<div class="col-md-12">
+					<p> <strong> Subject:- </strong>{{ $visitor_query->subject }} </p>
 				</div>
 				<div class="col-md-12">
 					<p> <strong> Message:- </strong>{!! $visitor_query->message !!} </p>
@@ -51,8 +54,10 @@
 					@if($visitor_query->status == 0)
 					<label class="btn btn-sm btn-warning">New Query</label>
 					@else
-					<label class="btn btn-sm btn-success">Replied</label>
+					<label class="btn btn-sm btn-success">Viewed</label>
 					@endif
+
+					<a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{$visitor_query->id}}" data-route="{{route('visitor_queries.destroy', $visitor_query->id) }}"><i class="fa fa-trash"></i> Delete</a>
 				</div>
 
 			</fieldset>
