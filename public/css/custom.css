@@ -116,3 +116,10 @@ tr td .faculty-img {
     height: 100%;
     border: 0;
 }
+
+.show-on-popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

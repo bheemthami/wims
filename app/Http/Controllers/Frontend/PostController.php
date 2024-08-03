@@ -18,8 +18,8 @@ use App\Models\Frontend\Post;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Str;
-use File;
 
 class PostController extends Controller
 {
@@ -54,7 +54,7 @@ class PostController extends Controller
 
             if (request()->ajax()) {
 
-                $params = request()->only('title', 'academic_year_id', 'post_category_id', 'status');
+                $params = request()->only('title', 'academic_year_id', 'post_category_id', 'status', 'show_on_modal');
                 $posts = $this->postManager->all($params, $setting->per_page);
 
                 return  view('site_modules.posts.replace_index', compact('posts', 'yearOptions', 'postCategoryOptions', 'setting', 'statusOptions'));
@@ -65,6 +65,7 @@ class PostController extends Controller
                 $filters['academic_year_id'] = $setting->academic_year_id;
                 $filters['post_category_id'] = null;
                 $filters['status'] = null;
+                $filters['show_on_modal'] = null;
                 $posts = $this->postManager->all($filters, $setting->perp_page);
 
                 return view('site_modules.posts.index', compact('posts', 'yearOptions', 'postCategoryOptions', 'setting', 'statusOptions'));
@@ -120,6 +121,8 @@ class PostController extends Controller
                 $postDetails['slug'] = Str::slug($request->title);
 
                 $postDetails['user_id'] = Sentinel::getUser()->id;
+
+                $postDetails['show_on_modal'] = $request->input('show_on_modal');
 
                 if ($request->hasFile('image')) {
                     $file = $request->image;

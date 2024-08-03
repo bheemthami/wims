@@ -1,12 +1,13 @@
-<div id="table-wrapper" >
+<div id="table-wrapper">
 	<table class="table table-bordered table-striped">
 		<thead>
 			<th>S.No.</th>
 			<th>Category</th>
 			<th>Title</th>
 			<th>Image</th>
-			<th>Published date</th>
+			<th>Published on</th>
 			<th>Status</th>
+			<th>Show on popup</th>
 			<th>Action</th>
 		</thead>
 		<tbody>
@@ -21,19 +22,27 @@
 				<td>
 					<img src="{{asset('uploads/posts/'.$post->image)}}" width="80px" alt="No image">
 				</td>
-				<td>{{ $post->date }}</td>							
+				<td>{{ $post->date }}</td>
 				<td>
-					@if($post->status == 1)
+					@if($post->status === 1)
 					<label class="label label-success">Published</label>
 					@else
 					<label class="label label-default">Draft</label>
 					@endif
 				</td>
 				<td>
-					<a class="btn btn-sm btn-primary" href="{{ route('posts.show',[$post->id])}}"><i class="fa fa-eye"></i></a>
-					<a class="btn btn-sm btn-success" href="{{ route('posts.edit',[$post->id])}}"><i class="fa fa-edit"></i></a>
-					<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$post->id}}" data-route="{{route('posts.destroy', $post->id) }}"> <i class="fa fa-trash"></i></a>
-
+					@if($post->show_on_modal === 1)
+					<label class="label label-success">Yes</label>
+					@else
+					<label class="label label-default">No</label>
+					@endif
+				</td>
+				<td>
+					<div class="action-button-list">
+						<a class="btn btn-sm btn-primary" href="{{ route('posts.show',[$post->id])}}"><i class="fa fa-eye"></i></a>
+						<a class="btn btn-sm btn-success" href="{{ route('posts.edit',[$post->id])}}"><i class="fa fa-edit"></i></a>
+						<a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="{{$post->id}}" data-route="{{route('posts.destroy', $post->id) }}"> <i class="fa fa-trash"></i></a>
+					</div>
 				</td>
 			</tr>
 			@empty
