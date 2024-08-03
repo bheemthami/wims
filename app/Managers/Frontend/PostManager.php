@@ -38,6 +38,10 @@ class PostManager
 			$query = $query->where(['status' => $params['status']]);
 		}
 
+		if ($params['show_on_modal'] !== null) {
+			$query = $query->where(['show_on_modal' => $params['show_on_modal']]);
+		}
+
 		return  $posts = $query->orderBy('date', 'DESC')->paginate($perPage);
 	}
 

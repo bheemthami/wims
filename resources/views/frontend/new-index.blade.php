@@ -359,9 +359,13 @@
           <div class="feature-wrapper mb-20 text-center d-flex flex-column justify-content-center">
             <div class="facility-images photo-animate">
               @if($facility->images)
-              <img src="{{ asset('uploads/media/'.$facility->images[0]->image)}}" alt="NO IMAGE" class="img img-responsive">
+              <a href="{{url('/facilities')}}">
+                <img src="{{ asset('uploads/media/'.$facility->images[0]->image)}}" alt="NO IMAGE" class="img img-responsive">
+              </a>
               @else
-              <img src="{{ asset('uploads/media/image-6828268854.jpg')}}" alt="NO IMAGE" class="img img-responsive">
+              <a href="{{url('/facilities')}}">
+                <img src="{{ asset('uploads/media/image-6828268854.jpg')}}" alt="NO IMAGE" class="img img-responsive">
+              </a>
               @endif
             </div>
             <div class="facility-hover-content">

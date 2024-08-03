@@ -53,10 +53,17 @@
 				</div>
 
 				<div class="col-md-2">
+					<label for="status"> Show on popup </label>
+					<div class="form-group">
+						{!! Form::select('show_on_modal',[null=>'--select--',1=>'YES', 0=>'NO'],$setting->show_on_modal,['class'=>'form-control','id'=>'show_on_modal']) !!}
+					</div>
+				</div>
+
+				<div class="col-md-2">
 					<label for="dob"> Filter</label>
 					<div class="form-group">
-						<button id="search-button" class="btn btn-sm btn-success" type="button"> <i class="fa fa-search"></i> search</button>
-						<button id="clear-button" class="btn btn-sm btn-danger" type="button"> <i class="fa fa-eraser"></i> clear</button>
+						<button id="search-button" class="btn btn-sm btn-success" type="button"> <i class="fa fa-search"></i></button>
+						<button id="clear-button" class="btn btn-sm btn-danger" type="button"> <i class="fa fa-eraser"></i></button>
 					</div>
 				</div>
 			</div>
@@ -67,8 +74,9 @@
 						<th>Category</th>
 						<th>Title</th>
 						<th>Image</th>
-						<th>Published date</th>
+						<th>Published on</th>
 						<th>Status</th>
+						<th>Show on popup</th>
 						<th>Action</th>
 					</thead>
 					<tbody>
@@ -85,10 +93,17 @@
 							</td>
 							<td>{{ $post->date }}</td>
 							<td>
-								@if($post->status == 1)
+								@if($post->status === 1)
 								<label class="label label-success">Published</label>
 								@else
 								<label class="label label-default">Draft</label>
+								@endif
+							</td>
+							<td>
+								@if($post->show_on_modal === 1)
+								<label class="label label-success">Yes</label>
+								@else
+								<label class="label label-default">No</label>
 								@endif
 							</td>
 							<td>
@@ -131,6 +146,7 @@
 			var academic_year_id = $('#academic_year_id').val();
 			var post_category_id = $('#post_category_id').val();
 			var status = $('#status').val();
+			var showOnModal = $('#show_on_modal').val();
 			var baseUrl = "<?php echo url('admin/posts') ?>";
 			$.ajax({
 				url: baseUrl,
@@ -138,7 +154,8 @@
 					title,
 					academic_year_id,
 					post_category_id,
-					status
+					status,
+					show_on_modal: showOnModal
 				},
 				success: function(response) {
 					$(document).find('#table-wrapper').html(response);
@@ -156,6 +173,7 @@
 			$('#academic_year_id').val('');
 			$('#post_category_id').val('');
 			$('#status').val('');
+			$('#show_on_modal').val('');
 		});
 	});
 </script>

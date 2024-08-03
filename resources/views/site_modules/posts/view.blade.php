@@ -22,12 +22,11 @@
 
 				<a class="btn btn-sm btn-danger" href="{{ route('posts.index')}}"><i class="fa fa-times"></i></a>
 
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+					<i class="fa fa-minus"></i></button>
 			</div>
 		</div>
-		
+
 		<div class="box-body">
 			<fieldset class="fieldset-border">
 				<legend class="legend-border">details</legend>
@@ -78,7 +77,7 @@
 
 					<div class="mb-3 col-md-12">
 						@if($post->attachment)
-						<a href ="{{ asset('uploads/posts/'.$post->attachment)}}" target="_blank"><i class="fa fa-eye"></i> view</a>
+						<a href="{{ asset('uploads/posts/'.$post->attachment)}}" target="_blank"><i class="fa fa-eye"></i> view</a>
 						@else
 						<strong>No attachment</strong>
 						@endif
@@ -90,11 +89,14 @@
 			<fieldset class="fieldset-border">
 				<legend class="legend-border">Website Options</legend>
 				<div class="mb-3 col-md-12">
-					<div class="col-md-6">
-						<p><strong> Published date: </strong><label class="label label-info">{{$post->date}}</label></p>
+					<div class="col-md-4">
+						<p><strong>Publish status: </strong> <label for="" class="label label-{{$post->status?'success':'warning'}}"> {{ ($post->status == 1) ? 'Publish' : 'Draft' }} </label></p>
 					</div>
-					<div class="col-md-6">
-						<p><strong>Publish status: </strong> <label for="" class="label label-{{$post->status?'success':'warning'}}"> {{ ($post->status == 1) ? 'Publish' : 'Draft' }} </label></p>	
+					<div class="col-md-4">
+						<p><strong>Show on popup: </strong> <label for="" class="label label-{{$post->status?'success':'warning'}}"> {{ ($post->status == 1) ? 'YES' : 'NO' }} </label></p>
+					</div>
+					<div class="col-md-4">
+						<p><strong> Published date: </strong><label class="label label-info">{{$post->date}}</label></p>
 					</div>
 				</div>
 
