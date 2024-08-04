@@ -93,14 +93,14 @@
 							</td>
 							<td>{{ $post->date }}</td>
 							<td>
-								@if($post->status === 1)
+								@if($post->status == 1)
 								<label class="label label-success">Published</label>
 								@else
 								<label class="label label-default">Draft</label>
 								@endif
 							</td>
 							<td>
-								@if($post->show_on_modal === 1)
+								@if($post->show_on_modal == 1)
 								<label class="label label-success">Yes</label>
 								@else
 								<label class="label label-default">No</label>
