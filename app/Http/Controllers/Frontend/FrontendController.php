@@ -102,7 +102,6 @@ class FrontendController extends Controller
     {
         try {
             $settings = defaultSetting();
-            // $page['about_us']  = null;
             $page['about_us']  = $this->pageManager->getPageBySlug(Str::slug('about us'));
             $page['welcome']  = $this->pageManager->getPageBySlug(Str::slug('Welcome'));
             $page['message']  = $this->pageManager->getPageBySlug(Str::slug('Message From Head Teacher'));
@@ -135,7 +134,6 @@ class FrontendController extends Controller
 
             $data['modal_img'] = $this->postManager->modalImages($settings->academic_year_id, PostConstants::SHOW_ON_MODAL_DEFAULT_NO);
 
-            // dd($data);
             return view('frontend.new-index', compact('settings', 'categories', 'data', 'page', 'embeddings'));
         } catch (Exception $e) {
             return "Oops, something went wrong!";
