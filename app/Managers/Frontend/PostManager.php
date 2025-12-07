@@ -5,7 +5,7 @@ namespace App\Managers\Frontend;
 use App\Constants\CommonConstants;
 use App\Constants\PostConstants;
 use App\Models\Frontend\Post;
-
+use Carbon\Carbon;
 use DB;
 
 class PostManager
@@ -115,16 +115,24 @@ class PostManager
 		return $this->post::where(['slug' => $slug, 'id' => $id])->first();
 	}
 
+	// Get modal images from last 7 days by default
 
-	public function modalImages($academic_year_id = null, $limit = null)
+	public function modalImages($academic_year_id = null, $limit = null, $days = 7)
 	{
+
+		$dateFrom = Carbon::now()->subDays($days)->toDateString();
+		$dateTo = Carbon::now()->toDateString();
 
 		$query = $this->post::where(['status' => CommonConstants::STATUS_1, 'show_on_modal' => CommonConstants::STATUS_1]);
 
-		$query->where('image', '!=', NULL)->orderBy('updated_at', 'DESC');
+		$query->where('image', '!=', NULL)->orderBy('updated_at', CommonConstants::ORDER_BY_DESC);
 
 		if ($academic_year_id) {
 			$query = $query->where(['academic_year_id' => $academic_year_id]);
+		}
+
+		if ($days && $dateFrom && $dateTo) {
+			$query = $query->where('date', '>', $dateFrom)->where('date', '<=', $dateTo);
 		}
 
 		if ($limit) {
