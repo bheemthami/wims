@@ -152,10 +152,10 @@
             <p class="mt-1 mb-0 official-item-name">{{$official->first_name}} {{$official->last_name}}</p>
 
             @if($official->mobile)
-            <p class="m-0 official-item-phone"> <i class="fa fa-phone me-1"></i>{{$official->mobile}}</p>
+            <p class="m-0 official-item-phone">{{$official->mobile}}</p>
             @endif
             @if($official->email)
-            <p class="m-0 official-item-email"> <i class="fa fa-envelope me-1"></i> {{$official->email}}</p>
+            <p class="m-0 official-item-email">{{$official->email}}</p>
             @endif
           </div>
           @empty
@@ -176,89 +176,6 @@
   </div>
 </div>
 <!-- about end -->
-
-
-<!-- posts and facebook page start -->
-<!-- <div id="posts-and-facebook-page" class="about-area pb-50">
-  <div class="container">
-    <div class="row">
-      <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-        <div class="section-title mb-50 text-center">
-          <div class="section-title-heading mb-20">
-            <h1 class="section-header-color">Our Notice Board </h1>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xl-7 col-lg-7 mb-20">
-        <div class="nav-tabs-wrapper">
-          <ul class="nav nav-pills post-tabs" id="pills-tab" role="tablist">
-            @forelse($categories as $key=>$category)
-            <li class="nav-item">
-              <a class="nav-link {{ ($key==0) ? 'active' :''}}" id="pills-home-tab" data-toggle="pill" href="#pills-{{$category['slug']}}" role="tab" aria-controls="pills-home" aria-selected="true">{{ucfirst($category['slug'])}} </a>
-            </li>
-
-            @empty
-            <li class="nav-item">
-              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-tabs" role="tab" aria-controls="pills-home" aria-selected="true">tabs </a>
-            </li>
-            @endforelse
-          </ul>
-          <div class="tab-content" id="pills-tabContent">
-
-            @forelse($categories as $key=>$cat)
-            <div class="tab-pane fade {{ ($key== 0) ? 'show active':''}}" id="pills-{{$cat['slug']}}" role="tabpanel" aria-labelledby="pills-home-tab">
-              <ul class="list-group">
-                @forelse($cat['posts'] as $post)
-                <li class="list-group-item">
-                  <div class="post-wrapper">
-                    <a href="{{route('post-details',$post->slug)}}"> {{ $post->title }} </a>
-                    <div class="float-left post-download">
-                      <span class="post-published-date">
-                        <i class="fa fa-calendar me-2"></i>
-                        {{ date('M j, Y', strtotime($post->date)) }}
-                      </span>
-                      <span class="text-link"><a href="{{url('/download-posts',($post->image ? $post->image : $post->attachment))}}"> <i class="fa fa-download"></i></a></span>
-                    </div>
-                  </div>
-                </li>
-                @empty
-                <li class="list-group-item">NO DATA</li>
-                @endforelse
-                <li class="list-group-item">
-                  <div class="view-all">
-                    <a href="{{ route('all-posts', ['slug'=>$cat['slug']]) }}">View All &rarr;</a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            @empty
-            <div class="tab-pane fade show active" id="pills-tabs" role="tabpanel" aria-labelledby="pills-home-tab">
-              <p class="course-details-overview-para">tabs</p>
-            </div>
-            @endforelse
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xl-5 col-lg-5">
-        @if($embeddings['facebook'])
-        <div class="facebook-page-block">
-          {!! $embeddings['facebook']->iframe !!}
-        </div>
-        @else
-        <div class="facebook-page-block text-center">
-          <p>Not available</p>
-        </div>
-        @endif
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- posts and facebook page start -->
-
-
 
 <!-- events start -->
 <div id="events" class="events-area events-bg-heigh mb-50">
