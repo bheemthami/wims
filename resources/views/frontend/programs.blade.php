@@ -1,10 +1,10 @@
 @extends('layouts.frontend.app')
 
-@section('title', 'Faculties')
+@section('title', 'Our Programs')
 
 @section('content')
 
-<div class="pt-70 pb-70">
+<div class="pt-50 pb-50">
     <div class="container">
         <div class="row">
             <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        
+
         <div class="row">
             @forelse($programs as $program)
             <div class="col-xl- col-lg-4 col-md-6">
@@ -43,9 +43,9 @@
                     </div>
                 </div>
             </div>
-             <div class="col-xl-8 col-lg-8 col-md-6">
+            <div class="col-xl-8 col-lg-8 col-md-6">
                 {!! $program->description !!}
-             </div>
+            </div>
             @empty
             <div class="col-xl-3 col-lg-3 col-md-6">
                 <div class="courses-wrapper mb-30 text-center">

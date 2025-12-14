@@ -1,6 +1,6 @@
 @extends('layouts.frontend.app')
 
-@section('title', 'Facilities')
+@section('title', 'Facilities We Offer')
 
 @section('content')
 
@@ -10,14 +10,14 @@
             <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <div class="section-title mb-50 text-center">
                     <div class="section-title-heading mb-20">
-                        <h1 class="primary-color">Facilities we provide</h1>
+                        <h1 class="primary-color">Facilities We Offer</h1>
                     </div>
                 </div>
             </div>
         </div>
 
         @forelse($facilities as $key =>$facility)
-        <div class="row mt-50 mb-50">
+        <div class="row mb-50">
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                 <div class="custom-wrapper mb-30">
                     <div class="custom-thumb mb-25 photo-animate">
