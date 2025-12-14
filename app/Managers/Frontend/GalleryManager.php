@@ -3,7 +3,7 @@
 namespace App\Managers\Frontend;
 
 use App\Models\Frontend\Gallery;
-
+use App\Models\Frontend\Image;
 use DB;
 
 class GalleryManager
@@ -15,90 +15,94 @@ class GalleryManager
 		$this->gallery = $gallery;
 	}
 
-	public function all($params = null,$perPage,$status = null){
-		$query = $this->gallery::with(['images'=>function($query){
-			$query->orderBy('order','ASC');
+	public function all($params = null, $perPage, $status = null)
+	{
+		$query = $this->gallery::with(['images' => function ($query) {
+			$query->orderBy('order', 'ASC');
 		}])->select('*');
 
 		if ($params['title']) {
-			$query->where('title','like', $params['title'].'%');
+			$query->where('title', 'like', $params['title'] . '%');
 		}
 
 		if ($params['academic_year_id']) {
-			$query->where('academic_year_id','=', $params['academic_year_id']);
+			$query->where('academic_year_id', '=', $params['academic_year_id']);
 		}
 
 		if ($params['type']) {
-			$query->where('type','=', $params['type']);
+			$query->where('type', '=', $params['type']);
 		}
 
 		if ($status) {
-			$query->where(['status'=>$status]);
+			$query->where(['status' => $status]);
 		}
 
-		return $query->orderBy('date','ASC')->paginate($perPage);
+		return $query->orderBy('date', 'ASC')->paginate($perPage);
 	}
 
-	public function count($academic_year_id = null,$type = null,$status = null){
+	public function count($academic_year_id = null, $type = null, $status = null)
+	{
 		$query = $this->gallery;
 
 		if ($academic_year_id) {
-			$query->where('academic_year_id','=', $academic_year_id);
+			$query->where('academic_year_id', '=', $academic_year_id);
 		}
 
 		if ($type) {
-			$query->where('type','=', $type);
+			$query->where('type', '=', $type);
 		}
 
 		if ($status) {
-			$query->where(['status'=>$status]);
+			$query->where(['status' => $status]);
 		}
 
 		return $query->count();
 	}
 
 
-	public function find($id){
+	public function find($id)
+	{
 		return $this->gallery::find($id);
 	}
 
-	public function publishedGallery($params = null,$perPage,$status = 1,$limit =null)
+	public function publishedGallery($params = null, $perPage, $status = 1, $limit = null)
 	{
-		$query = $this->gallery::with(['images'=>function($query){
-			$query->orderBy('order','ASC');
+		$query = $this->gallery::with(['images' => function ($query) {
+			$query->orderBy('order', 'ASC');
 		}])->select('*');
 
 		if ($params['title']) {
-			$query->where('title','like', $params['title'].'%');
+			$query->where('title', 'like', $params['title'] . '%');
 		}
 
 		if ($params['academic_year_id']) {
-			$query->where('academic_year_id','=', $params['academic_year_id']);
+			$query->where('academic_year_id', '=', $params['academic_year_id']);
 		}
 
 		if ($params['type']) {
-			$query->where('type','=', $params['type']);
+			$query->where('type', '=', $params['type']);
 		}
 
 		if ($status) {
-			$query->where(['status'=>$status]);
+			$query->where(['status' => $status]);
 		}
 
 		if ($limit) {
 			$query->limit($limit);
 		}
 
-		return $query->orderBy('date','ASC')->paginate($perPage);
+		return $query->orderBy('date', 'ASC')->paginate($perPage);
 	}
+
 
 	public function publishedGalleryBySlug($slug)
 	{
-		$query = $this->gallery::with(['images'=>function($query){
-			$query->orderBy('order','ASC');
+		$query = $this->gallery::with(['images' => function ($query) {
+			$query->orderBy('order', 'ASC');
 		}])->select('*');
 
 		if ($slug) {
-			$query->where('slug','=', $slug);
+			$query->where('slug', '=', $slug);
 		}
 
 		return $query->first();
@@ -107,9 +111,31 @@ class GalleryManager
 
 	public function topOneVideo()
 	{
-		$query = $this->gallery::where(['type'=>'video'])->orderBy('date','DESC');
+		$query = $this->gallery::where(['type' => 'video'])->orderBy('date', 'DESC');
 
 		return $query->first();
 	}
 
+	public function publishedGalleryImages($type = 'image', $status = 1, $limit = 16)
+	{
+
+		$query = $this->gallery::with(['images' => function ($query) {
+			$query->orderBy('order', 'ASC');
+		}])->select('*');
+
+
+		if ($type) {
+			$query->where('type', '=', $type);
+		}
+
+		if ($status) {
+			$query->where(['status' => $status]);
+		}
+
+		if ($limit) {
+			$query->limit($limit);
+		}
+
+		return $query->orderBy('date', 'ASC')->get();
+	}
 }

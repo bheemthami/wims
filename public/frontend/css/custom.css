@@ -856,6 +856,29 @@ h6 {
         }
     }
 }
+/* gallery slider */
+.swiper {
+    .swiper-wrapper {
+        .swiper-slide {
+            .content-img {
+                overflow: hidden;
+                img {
+                    width: 280px;
+                    height: 200px;
+                    object-fit: cover;
+                    transition: transform 0.4s ease-out;
+                    &:hover {
+                        transform: scale(1.2);
+                    }
+                }
+            }
+        }
+    }
+    .swiper-pagination {
+        position: absolute;
+        bottom: 0px !important;
+    }
+}
 
 /* Medium devices (landscape tablets, 768px to 1024px) */
 @media only screen and (min-width: 768px) and (max-width: 968px) {

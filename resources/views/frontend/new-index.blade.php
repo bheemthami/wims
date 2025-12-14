@@ -230,6 +230,47 @@
 </div>
 <!-- events end -->
 
+<!-- Photo Gallery  start -->
+<div class="mb-50">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+        <div class="section-title mb-50 text-center">
+          <div class="section-title-heading mb-20">
+            <h1 class="section-header-color">Photo Gallery</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    @if(count($data['gallery_images']) > 0)
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        @foreach($data['gallery_images'] as $photo)
+        <div class="swiper-slide">
+          <div class="swiper-slide-content">
+            <a href="{{url('/photo-gallery/'.$photo['gallery_slug'])}}">
+              <div class="content-img">
+                <img src="{{asset('/uploads/galleries/'.$photo['image'])}}" alt="{{$photo['title'] ?? ''}}" title="{{$photo['title'] ?? ''}}"></img>
+              </div>
+              <p class="py-2">{{$photo['title'] ?? ''}}</p>
+            </a>
+          </div>
+        </div>
+        @endforeach
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    @else
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 text-center">
+        <p>No images available</p>
+      </div>
+    </div>
+    @endif
+  </div>
+</div>
+<!-- Photo Gallery  end -->
+
 <!-- facilities end -->
 <div id="facilities" class="row pb-50">
   <div class="container">
@@ -393,6 +434,19 @@
       show: true
     });
   })
+</script>
+
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 4,
+    slidesPerGroup: 4,
+    loop: true,
+    spaceBetween: 10,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
 </script>
 @endsection
 @stop
