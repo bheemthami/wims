@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 use App\Http\Requests\Frontend\OfficialRequest;
-
 use App\Models\Frontend\Official;
 
 use App\Managers\LocalLevelTypeManager;
@@ -17,10 +14,10 @@ use App\Managers\SettingManager;
 use App\Managers\Frontend\DepartmentManager;
 use App\Managers\Frontend\OfficialManager;
 
-use Sentinel;
-use Str;
-use DB;
-use File;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class OfficialController extends Controller
 {
@@ -190,6 +187,7 @@ class OfficialController extends Controller
                 $data['working_status_options'] = $this->commonDataManager->yesNoDropdown();
                 $data['teaching_status_options'] = $this->commonDataManager->yesNoDropdown();
                 $data['publish_options'] = $this->commonDataManager->publishStatusDropdown();
+                $data['yes_no_options'] = $this->commonDataManager->yesNoDropdown();
                 $official = Official::find($id);
                 return view('site_modules.officials.edit', compact('data', 'official'));
             } else {

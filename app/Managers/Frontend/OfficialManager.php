@@ -85,4 +85,11 @@ class OfficialManager
 	{
 		return $this->official::find($id);
 	}
+
+	public function publishedOfficialsOnFrontPage()
+	{
+		$query = $this->official::where(['status' => 1, 'working_status' => 1, 'show_on_front_page' => 1]);
+		$query->orderBy('order', 'ASC');
+		return $query->get();
+	}
 }
