@@ -31,7 +31,8 @@ class Official extends Model
       'working_status',
       'is_teaching_official',
       'status',
-      'order'
+      'order',
+      'show_on_front_page',
    ];
 
    protected $table = 'officials';

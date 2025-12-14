@@ -45,7 +45,7 @@
       </div>
     </div>
     @empty
-    <div class="single-slider slider-height d-flex align-items-center justify-content-center" style="background-image: url('frontend/img/slider/slider_bg_1.jpg');">
+    <div class="single-slider slider-height d-flex align-items-center justify-content-center">
       <div class="container">
         <div class="row">
           <div class="col-xl-9 col-md-12">
@@ -58,7 +58,7 @@
         </div>
       </div>
     </div>
-    <div class="single-slider slider-height d-flex align-items-center justify-content-center" style="background-image: url(frontend/img/slider/2.jpg);">
+    <div class="single-slider slider-height d-flex align-items-center justify-content-center">
       <div class="container">
         <div class="row">
           <div class="col-xl-8 col-md-12 offset-xl-2">
@@ -80,16 +80,96 @@
 <div id="about" class="about-area pb-50">
   <div class="container">
     <div class="row">
-      <div class="col-xl-7 col-lg-7">
+      <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
         <div class="about-title-section">
           <h1 class="section-header-color">{{$page['about_us'] ? $page['about_us']->title : 'About Us'}}</h1>
           {!! $page['about_us'] ? substr($page['about_us']->description,0,1000) : 'About Us - Description' !!}
           <a href="{{ route('frontend.page',['slug'=>'about-us']) }}" class="read-more-btn btn btn-primary btn-sm text-capitalize">Read more...</a>
         </div>
+        <div class="nav-tabs-wrapper mt-50">
+          <ul class="nav nav-pills post-tabs" id="pills-tab" role="tablist">
+            @forelse($categories as $key=>$category)
+            <li class="nav-item">
+              <a class="nav-link {{ ($key==0) ? 'active' :''}}" id="pills-home-tab" data-toggle="pill" href="#pills-{{$category['slug']}}" role="tab" aria-controls="pills-home" aria-selected="true">{{ucfirst($category['slug'])}} </a>
+            </li>
+
+            @empty
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-tabs" role="tab" aria-controls="pills-home" aria-selected="true">tabs </a>
+            </li>
+            @endforelse
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+
+            @forelse($categories as $key=>$cat)
+            <div class="tab-pane fade {{ ($key== 0) ? 'show active':''}}" id="pills-{{$cat['slug']}}" role="tabpanel" aria-labelledby="pills-home-tab">
+              <ul class="list-group">
+                @forelse($cat['posts'] as $post)
+                <li class="list-group-item">
+                  <div class="post-wrapper">
+                    <a href="{{route('post-details',$post->slug)}}"> {{ $post->title }} </a>
+                    <div class="float-left post-download">
+                      <span class="post-published-date">
+                        <i class="fa fa-calendar me-2"></i>
+                        {{ date('M j, Y', strtotime($post->date)) }}
+                      </span>
+                      <span class="text-link"><a href="{{url('/download-posts',($post->image ? $post->image : $post->attachment))}}"> <i class="fa fa-download"></i></a></span>
+                    </div>
+                  </div>
+                </li>
+                @empty
+                <li class="list-group-item">NO DATA</li>
+                @endforelse
+                <li class="list-group-item">
+                  <div class="view-all">
+                    <a href="{{ route('all-posts', ['slug'=>$cat['slug']]) }}">View All &rarr;</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            @empty
+            <div class="tab-pane fade show active" id="pills-tabs" role="tabpanel" aria-labelledby="pills-home-tab">
+              <p class="course-details-overview-para">tabs</p>
+            </div>
+            @endforelse
+          </div>
+        </div>
       </div>
-      <div class="col-xl-5 col-lg-5">
-        <div class="about-right-img align-items-center">
-          <img class="img-fluid img-diagonal-border-radius" src="{{ asset('uploads/pages/'.$page['about_us']->image)}}" alt="About Us" loading="lazy">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="officials">
+          @forelse($data['officials'] as $key=>$official)
+          <div class="official-item">
+            <div class="official-item-designation-wrapper">
+              <h5 class="official-item-designation m-0">{{$official->designation->name}}</h5>
+            </div>
+            <div class="official-item-img">
+              @if(file_exists(public_path('uploads/officials/'.$official->image)) && $official->image)
+              <img src="{{ asset('uploads/officials/'.$official->image) }}" alt="Image" class="img img-responsive img-fluid" width="200">
+              @else
+              <img src="{{ asset('uploads/officials/official-default.jpeg') }}" alt="Image" class="img img-responsive img-fluid" width="200">
+              @endif
+            </div>
+            <p class="mt-1 mb-0 official-item-name">{{$official->first_name}} {{$official->last_name}}</p>
+
+            @if($official->mobile)
+            <p class="m-0 official-item-phone"> <i class="fa fa-phone me-1"></i>{{$official->mobile}}</p>
+            @endif
+            @if($official->email)
+            <p class="m-0 official-item-email"> <i class="fa fa-envelope me-1"></i> {{$official->email}}</p>
+            @endif
+          </div>
+          @empty
+          <div class="official-item">
+            <div>
+              <img src="{{ asset('uploads/officials/official-default.jpeg') }}" alt="Advertisement" class="img img-responsive img-fluid" width="200">
+            </div>
+            <h5 class="m-0">Name</h5>
+            <h4 class="m-0">Designation</h4>
+            <p class="m-0"> <i class="fa fa-phone me-1"></i>contact</p>
+            <p class="m-0"> <i class="fa fa-envelope me-1"></i> email/p>
+          </div>
+          @endforelse
+
         </div>
       </div>
     </div>
@@ -97,8 +177,9 @@
 </div>
 <!-- about end -->
 
+
 <!-- posts and facebook page start -->
-<div id="posts-and-facebook-page" class="about-area pb-50">
+<!-- <div id="posts-and-facebook-page" class="about-area pb-50">
   <div class="container">
     <div class="row">
       <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
@@ -174,117 +255,9 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- posts and facebook page start -->
 
-<!-- program start -->
-<div id="programs" class="about-area pb-50">
-  @if(count($data['programs']) <= 1) <div class="container">
-    <div class="row">
-      <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-        <div class="section-title mb-50 text-center">
-          <div class="section-title-heading mb-20">
-            <h1 class="section-header-color">Our Programs</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    @forelse($data['programs'] as $program)
-    @if(($program->order % 2) != 0)
-    <div class="row">
-      <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
-        <div class="d-flex justify-content-center">
-          <img class="img img-responsive img-fluid img-diagonal-border-radius" src="{{ asset('uploads/programs/'.$data['programs'][0]->image)}}" alt="NO IMAGE" width="500px">
-        </div>
-      </div>
-      <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12">
-        <div class="about-title-section mb-30 mt-30">
-          <h1 class="section-header-color">{{$data['programs'][0]->title}}</h1>
-          <p>{!! substr($data['programs'][0]->description,0,420) !!}...</p>
-          <a href="{{ route('program-details',$data['programs'][0]->slug)}}" class="read-more-btn btn btn-primary text-capitalize">Read more...</a>
-        </div>
-      </div>
-    </div>
-
-    @else
-    <div class="row">
-      <div class="col-xl-7 col-lg-7">
-        <div class="about-title-section mb-30">
-          <h1 class="section-header-color">{{$data['programs'][0]->title}}</h1>
-          <p>{!! substr($data['programs'][0]->description,0,350) !!}...</p>
-          <a href="{{ route('program-details',$data['programs'][0]->title)}}" class="theme-btn blue-bg-border mt-20"><span class="btn-text">more...</span></a>
-        </div>
-      </div>
-      <div class="col-xl-5 col-lg-5">
-        <div class="about-right-img mb-30">
-          <img src="{{ asset('uploads/programs/'.$data['programs'][0]->image)}}" alt="NO IMAGE" width="420">
-        </div>
-      </div>
-    </div>
-    @endif
-    @empty
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <p>NO DATA</p>
-      </div>
-    </div>
-    @endforelse
-</div>
-@else
-<div id="programs" class="courses-area courses-bg-height pb-50">
-  <div class="container">
-    <div class="row">
-      <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-        <div class="section-title mb-50 text-center">
-          <div class="section-title-heading mb-20">
-            <h1 class="primary-color">Our Programs</h1>
-          </div>
-          <div class="section-title-para">
-            <p class="gray-color">We offer excellent skill based programs</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="courses-list">
-      <div class="row">
-        @forelse($data['programs'] as $program)
-        <div class="col-xl-4 col-lg-4 col-md-6">
-          <div class="courses-wrapper mb-30">
-            <div class="courses-thumb">
-              <a href="{{ route('program-details',$program->slug)}}"><img src="{{ asset('uploads/programs/'.$program->image)}}" alt=" NO IMAGE "></a>
-            </div>
-            <div class="courses-content courses-content-2 text-center">
-              <div class="courses-heading text-center">
-                <h1><a href="{{ route('program-details',$program->slug)}}">{{$program->title}}</a></h1>
-              </div>
-              <div class="courses-icon text-center">
-                <div class="courses-single-icon courses-single-icon-2">
-                  <span class="ti-user"></span>
-                  <span class="seat">Quota</span>
-                  <span class="user-number">{{$program->quota}}</span>
-                </div>
-                <div class="courses-single-icon courses-single-icon-2">
-                  <i class="fa fa-clock"></i>
-                  <span class="price">Duration</span>
-                  <span class="user-number">{{$program->duration}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        @empty
-        <div class="col-xl-12 col-lg-12 col-md-12">
-          <p>NO DATA</p>
-        </div>
-        @endforelse
-      </div>
-    </div>
-  </div>
-</div>
-@endif
-</div>
-<!-- program end -->
 
 
 <!-- events start -->
@@ -435,16 +408,29 @@
       <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
         <div class="section-title mb-50 text-center">
           <div class="section-title-heading mb-20">
-            <h1 class="section-header-color">Our Location on Google Map </h1>
+            <h1 class="section-header-color">Our Location</h1>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-xl-12 col-lg-12 col-md-12  col-sm-12  col-sm-12  col-xs-12">
-        <div class="google-map">
-          {!! $embeddings['google_map']->iframe !!}
+      <div class="col-xl-8 col-lg-8 col-md-8  col-sm-12  col-sm-12  col-xs-12">
+        <div>
+          <div class="google-map">
+            {!! $embeddings['google_map']->iframe !!}
+          </div>
         </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-4  col-sm-12  col-sm-12  col-xs-12">
+        @if($embeddings['facebook'])
+        <div class="facebook-page-block">
+          {!! $embeddings['facebook']->iframe !!}
+        </div>
+        @else
+        <div class="facebook-page-block text-center">
+          <p>Not available</p>
+        </div>
+        @endif
       </div>
     </div>
   </div>
