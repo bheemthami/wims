@@ -860,15 +860,30 @@ h6 {
 .swiper {
     .swiper-wrapper {
         .swiper-slide {
-            .content-img {
-                overflow: hidden;
-                img {
-                    width: 280px;
-                    height: 200px;
-                    object-fit: cover;
-                    transition: transform 0.4s ease-out;
+            .swiper-slide-content {
+                .content-img {
+                    overflow: hidden;
+                    img {
+                        width: 280px;
+                        height: 200px;
+                        object-fit: cover;
+                        transition: transform 0.4s ease-out;
+                        &:hover {
+                            transform: scale(1.2);
+                        }
+                    }
+                }
+                a {
+                    p {
+                        color: #111f49;
+                        font-size: 15px;
+                    }
+
                     &:hover {
-                        transform: scale(1.2);
+                        p {
+                            color: #f5c900;
+                            text-decoration: underline;
+                        }
                     }
                 }
             }
