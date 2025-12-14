@@ -281,13 +281,12 @@ a:hover {
 .photo-animate {
     overflow: hidden;
     border: 1px solid #00000020;
-    /*	padding: 10px;*/
     border-radius: 5px;
 }
 
 .photo-animate img {
     height: 250px;
-    width: 350px;
+    width: 400px;
     object-fit: cover;
     transition: all ease 1s;
 }
@@ -856,7 +855,9 @@ h6 {
         }
     }
 }
+
 /* gallery slider */
+
 .swiper {
     .swiper-wrapper {
         .swiper-slide {
@@ -864,7 +865,7 @@ h6 {
                 .content-img {
                     overflow: hidden;
                     img {
-                        width: 280px;
+                        width: 300px;
                         height: 200px;
                         object-fit: cover;
                         transition: transform 0.4s ease-out;
@@ -877,10 +878,8 @@ h6 {
                     p {
                         color: #111f49;
                         font-size: 15px;
-                    }
 
-                    &:hover {
-                        p {
+                        &:hover {
                             color: #f5c900;
                             text-decoration: underline;
                         }
@@ -892,6 +891,18 @@ h6 {
     .swiper-pagination {
         position: absolute;
         bottom: 0px !important;
+    }
+}
+
+.faculty-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    .officials {
+        flex-direction: row !important;
+        justify-content: start !important;
     }
 }
 

@@ -3,8 +3,7 @@
 @section('title','Contact Us')
 
 @section('content')
-<!-- courses start -->
-<div class="advisors-area gray-bg pt-70 pb-70">
+<div class="pt-50 pb-50">
     <div class="container">
         <div class="row">
             <div class="col-xl-5 col-lg-6 col-md-10 offset-md-1 ml-md-auto">
@@ -86,16 +85,32 @@
         </div>
     </div>
 </div>
-<!-- courses end -->
-<!-- map start -->
-<div class="container">
+<div class="container pb-50">
     <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-            {!! $embedding->iframe !!}
+        <div class="col-xl-8 col-lg-8 col-md-8  col-sm-12  col-sm-12  col-xs-12">
+            <div>
+                @if($embeddings['google_map'])
+                <div class="google-map">
+                    {!! $embeddings['google_map']->iframe !!}
+                </div>
+                @else
+                <p class="text-center">Not available</p>
+                @endif
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4  col-sm-12  col-sm-12  col-xs-12">
+            @if($embeddings['facebook'])
+            <div class="facebook-page-block">
+                {!! $embeddings['facebook']->iframe !!}
+            </div>
+            @else
+            <div class="facebook-page-block text-center">
+                <p>Not available</p>
+            </div>
+            @endif
         </div>
     </div>
 </div>
-<!-- map end -->
 @endsection
 @section('js')
 

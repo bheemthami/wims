@@ -374,9 +374,13 @@
     <div class="row">
       <div class="col-xl-8 col-lg-8 col-md-8  col-sm-12  col-sm-12  col-xs-12">
         <div>
+          @if($embeddings['google_map'])
           <div class="google-map">
             {!! $embeddings['google_map']->iframe !!}
           </div>
+          @else
+          <p class="text-center">Not available</p>
+          @endif
         </div>
       </div>
       <div class="col-xl-4 col-lg-4 col-md-4  col-sm-12  col-sm-12  col-xs-12">

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="course-details-area pt-100">
+<div class="pt-50 pb-50">
     <div class="container">
         <div class="row">
             <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">

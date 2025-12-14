@@ -149,8 +149,9 @@ class FrontendController extends Controller
         try {
 
             $settings = $this->settingManager->defaultSetting();
-            $embedding = $this->embedManager->getEmbeddingByType('google-map');
-            return view('frontend.contact_us', compact('settings', 'embedding'));
+            $embeddings['facebook'] = $this->embedManager->getEmbeddingByType('facebook-page');
+            $embeddings['google_map'] = $this->embedManager->getEmbeddingByType('google-map');
+            return view('frontend.contact_us', compact('settings', 'embeddings'));
         } catch (Exception $e) {
             return "Oops, something went wrong!";
         }
