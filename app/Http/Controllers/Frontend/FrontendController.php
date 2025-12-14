@@ -73,7 +73,7 @@ class FrontendController extends Controller
         DepartmentManager $departmentManager,
         OfficialManager $officialManager,
         TrainingCategoryManager $trainingCategoryManager,
-        EmbedManager $embedManager
+        EmbedManager $embedManager,
     ) {
 
         $this->commonManager = $commonManager;
@@ -114,7 +114,7 @@ class FrontendController extends Controller
             foreach ($post_categories as $key => $category) {
                 $categories[$key]['title'] = $category->title;
                 $categories[$key]['slug'] = $category->slug;
-                $categories[$key]['posts'] = $this->postManager->topPublishedPosts($settings->academic_year_id, $category->id, 6);
+                $categories[$key]['posts'] = $this->postManager->topPublishedPosts(null, $category->id, 6);
             }
 
             $data['marquee_recents']  = $this->postManager->publishedPosts(null, null, 10);
@@ -133,6 +133,7 @@ class FrontendController extends Controller
             $data['video'] = $this->galleryManager->topOneVideo();
 
             $data['modal_img'] = $this->postManager->modalImages($settings->academic_year_id, PostConstants::SHOW_ON_MODAL_DEFAULT_NO);
+            $data['officials'] = $this->officialManager->publishedOfficialsOnFrontPage();
 
             return view('frontend.new-index', compact('settings', 'categories', 'data', 'page', 'embeddings'));
         } catch (Exception $e) {
