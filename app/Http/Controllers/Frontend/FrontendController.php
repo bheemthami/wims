@@ -135,6 +135,7 @@ class FrontendController extends Controller
             $data['modal_img'] = $this->postManager->modalImages($settings->academic_year_id, PostConstants::SHOW_ON_MODAL_DEFAULT_NO);
             $data['officials'] = $this->officialManager->publishedOfficialsOnFrontPage();
 
+            $data['gallery_images'] = $this->listPublishedImages();
             return view('frontend.new-index', compact('settings', 'categories', 'data', 'page', 'embeddings'));
         } catch (Exception $e) {
             return "Oops, something went wrong!";
@@ -148,8 +149,9 @@ class FrontendController extends Controller
         try {
 
             $settings = $this->settingManager->defaultSetting();
-            $embedding = $this->embedManager->getEmbeddingByType('google-map');
-            return view('frontend.contact_us', compact('settings', 'embedding'));
+            $embeddings['facebook'] = $this->embedManager->getEmbeddingByType('facebook-page');
+            $embeddings['google_map'] = $this->embedManager->getEmbeddingByType('google-map');
+            return view('frontend.contact_us', compact('settings', 'embeddings'));
         } catch (Exception $e) {
             return "Oops, something went wrong!";
         }
@@ -422,6 +424,23 @@ class FrontendController extends Controller
     {
         try {
             return response()->download(public_path('/uploads/posts/' . $file));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+    public function listPublishedImages()
+    {
+        try {
+            $galleries = $this->galleryManager->publishedGalleryImages();
+            $images = [];
+            foreach ($galleries as $gallery) {
+                $images = array_merge($images, array_map(function ($image) use ($gallery) {
+                    return array_merge($image, ['gallery_slug' => $gallery->slug]);
+                }, $gallery->images->toArray()));
+            }
+
+            return array_slice($images, 0, 16);
         } catch (Exception $e) {
             return "Oops, something went wrong!";
         }

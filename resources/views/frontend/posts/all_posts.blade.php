@@ -1,10 +1,10 @@
 @extends('layouts.frontend.app')
 
-@section('title', 'Notices')
+@section('title', 'All Posts')
 
 @section('content')
 
-<div class="course-details-area gray-bg pt-100 pb-70">
+<div class="course-details-area gray-bg pt-50 pb-50">
     <div class="container">
         <div class="row">
             <div class="col-md-8">

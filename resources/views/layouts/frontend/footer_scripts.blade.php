@@ -18,4 +18,7 @@
     <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('frontend/js/plugins.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+
+    <script src="{{ asset('plugins/swiper/js/swiper-bundle.min.js') }}">
+    </script>
     @yield('js')

@@ -1,16 +1,16 @@
 @extends('layouts.frontend.app')
 
-@section('title', 'Faculties')
+@section('title', 'Training We Offer')
 
 @section('content')
 
-<div class="pt-70 pb-70">
+<div class="pt-50 pb-50">
     <div class="container">
         <div class="row">
             <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <div class="section-title mb-50 text-center">
                     <div class="section-title-heading mb-20">
-                        <h1 class="primary-color">Trainings we offer</h1>
+                        <h1 class="primary-color">Trainings We Offer</h1>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                             <td colspan="6">NO DATA</td>
                         </tr>
                         @endforelse
-                        
+
                     </tbody>
                 </table>
             </div>
