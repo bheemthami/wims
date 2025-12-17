@@ -906,7 +906,25 @@ h6 {
     }
 }
 
+.our-officials-heading,
+.follow-us-heading {
+    display: none;
+}
+
 /* Medium devices (landscape tablets, 768px to 1024px) */
+
+@media only screen and (max-width: 768px) {
+    .our-officials-heading,
+    .follow-us-heading {
+        display: block;
+    }
+
+    .facebook-page-block {
+        justify-content: center;
+        margin-top: 50px;
+    }
+}
+
 @media only screen and (min-width: 768px) and (max-width: 968px) {
     .top-menu-wrapper {
         padding-left: 3rem;
