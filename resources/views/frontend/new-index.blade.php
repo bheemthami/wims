@@ -136,6 +136,11 @@
         </div>
       </div>
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="section-title mb-50 text-center our-officials-heading mt-50">
+          <div class="section-title-heading mb-20">
+            <h1 class="section-header-color">Our Officials</h1>
+          </div>
+        </div>
         <div class="officials">
           @forelse($data['officials'] as $key=>$official)
           <div class="official-item">
@@ -384,6 +389,11 @@
         </div>
       </div>
       <div class="col-xl-4 col-lg-4 col-md-4  col-sm-12  col-sm-12  col-xs-12">
+        <div class="section-title mb-50 text-center follow-us-heading mt-50">
+          <div class="section-title-heading mb-20">
+            <h1 class="section-header-color">Follow Us</h1>
+          </div>
+        </div>
         @if($embeddings['facebook'])
         <div class="facebook-page-block">
           {!! $embeddings['facebook']->iframe !!}
@@ -441,16 +451,36 @@
 </script>
 
 <script>
-  var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 4,
-    slidesPerGroup: 4,
-    loop: true,
-    spaceBetween: 10,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
+  let swiper;
+
+  function initSwiper() {
+    const width = $(window).width();
+
+    // Destroy existing swiper before re-init
+    if (swiper) {
+      swiper.destroy(true, true);
+    }
+
+    swiper = new Swiper(".mySwiper", {
+      slidesPerView: width < 600 ? 1 : width < 900 ? 2 : 4,
+      slidesPerGroup: width < 600 ? 1 : width < 900 ? 2 : 4,
+      loop: true,
+      spaceBetween: 10,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  }
+
+  $(document).ready(function() {
+    initSwiper();
+  });
+
+  $(window).on("resize", function() {
+    initSwiper();
   });
 </script>
+
 @endsection
 @stop
