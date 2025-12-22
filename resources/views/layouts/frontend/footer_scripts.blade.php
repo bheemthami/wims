@@ -1,4 +1,3 @@
-    <!-- JS here -->
     <script src="{{ asset('frontend/js/vendor/modernizr-3.5.0.min.js') }}"></script>
     <script src="{{ asset('frontend/js/vendor/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('frontend/js/popper.min.js') }}"></script>

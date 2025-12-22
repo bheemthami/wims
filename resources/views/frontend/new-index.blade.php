@@ -3,7 +3,6 @@
 @section('title', $settings ? $settings->office : 'Welcome')
 
 @section('content')
-<!-- highlights-start -->
 <div id="highlight-row">
   <div class="row highlight d-flex flex-nowrap align-items-center">
     <div class="col-md-2">
@@ -25,9 +24,6 @@
   </div>
 </div>
 
-<!-- highlights-end -->
-
-<!-- slider-start -->
 <div class="slider-area pos-relative pb-50">
   <div class="slider-active">
     @forelse($data['banners'] as $banner)
@@ -74,9 +70,7 @@
     @endforelse
   </div>
 </div>
-<!-- slider-end -->
 
-<!-- about start -->
 <div id="about" class="about-area pb-50">
   <div class="container">
     <div class="row">
@@ -180,9 +174,7 @@
     </div>
   </div>
 </div>
-<!-- about end -->
 
-<!-- events start -->
 <div id="events" class="events-area events-bg-heigh mb-50">
   <div class="container">
     <div class="row">
@@ -233,9 +225,7 @@
     </div>
   </div>
 </div>
-<!-- events end -->
 
-<!-- Photo Gallery  start -->
 <div class="mb-50">
   <div class="container">
     <div class="row">
@@ -274,9 +264,7 @@
     @endif
   </div>
 </div>
-<!-- Photo Gallery  end -->
 
-<!-- facilities end -->
 <div id="facilities" class="row pb-50">
   <div class="container">
     <div class="row">
@@ -318,9 +306,7 @@
     </div>
   </div>
 </div>
-<!-- facilities end -->
 
-<!-- testimonials start -->
 @if(count($data['testimonials']) > 0)
 <div class="testimonilas-area pt-70 pb-70">
   <div class="container">
@@ -362,9 +348,7 @@
   </div>
 </div>
 @endif
-<!-- testimonials end -->
 
-<!-- map start -->
 <div class="pb-50">
   <div class="container">
     <div class="row">
@@ -407,9 +391,7 @@
     </div>
   </div>
 </div>
-<!-- map end -->
 
-<!-- Modal start-->
 @if($data['modal_img'])
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -427,8 +409,7 @@
   </div>
 </div>
 @endif
-<!-- Modal end-->
-
+@endsection
 
 @section('js')
 <script>
@@ -483,4 +464,3 @@
 </script>
 
 @endsection
-@stop

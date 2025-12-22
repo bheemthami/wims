@@ -1,7 +1,5 @@
-<!-- header-start -->
 <header id="home">
     <div class="header-area">
-        <!-- header-top -->
         <div class="header-top primary-bg">
             <div class="container">
                 <div class="row">
@@ -60,8 +58,7 @@
                 </div>
             </div>
         </div>
-        <!-- /end header-top -->
-        <!-- header-bottom -->
+
         <div class="header-bottom-area header-sticky" style="transition: .6s;">
             <div class="row top-menu-wrapper">
                 <a href="{{ route('index')}}">
@@ -122,7 +119,5 @@
                 </div>
             </div>
         </div>
-        <!-- /end header-bottom -->
     </div>
 </header>
-<!-- header-end -->

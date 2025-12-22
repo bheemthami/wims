@@ -1,4 +1,3 @@
-<!-- footer start -->
 <footer id="Contact">
     <div class="footer-area primary-bg pt-50">
         <div class="container">
@@ -101,4 +100,3 @@
         </div>
     </div>
 </footer>
-<!-- footer end -->
