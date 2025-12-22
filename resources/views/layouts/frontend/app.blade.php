@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 @include('layouts.frontend.head')
+
 <body>
   @include('layouts.frontend.header')
 
@@ -10,4 +11,5 @@
 
   @include('layouts.frontend.footer_scripts')
 </body>
+
 </html>
