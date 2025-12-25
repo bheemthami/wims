@@ -4,20 +4,16 @@
 @include('layouts.admin.header_scripts')
 
 <body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper">
-		@include('layouts.admin.header')
-		@include('layouts.admin.sidebar')
-		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
-			<!-- Main content -->
-			@yield('content')
-		</div>
-		@include('layouts.admin.footer')
-	</div>
-	@include('include.deleteModal')
-	@include('include.customLoader');
-	<!-- ./wrapper -->
-	@include('layouts.admin.footer_scripts')
+    <div class="wrapper">
+        @include('layouts.admin.header')
+        @include('layouts.admin.sidebar')
+        <div class="content-wrapper">
+            @yield('content')
+        </div>
+    </div>
+    @include('include.deleteModal')
+    @include('include.customLoader');
+    @include('layouts.admin.footer_scripts')
 </body>
 
 </html>
