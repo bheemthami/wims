@@ -111,7 +111,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['sauth'], 'namespace' => 'Adm
 Route::group(['prefix' => 'user', 'middleware' => ['sauth'], 'namespace' => 'Auth'], function () {
 	Route::get('/change-password', 'ChangePasswordController@changePasswordForm')->name('change_password.create');
 	Route::post('/change-password', 'ChangePasswordController@changePassword')->name('change_password.store');
-	Route::get('users/{user}/restore-default-password', 'UserController@restoreDefaultPassword')->name('users.restore-default-password');
+	// Route::get('users/{user}/restore-default-password', 'UserController@restoreDefaultPassword')->name('users.restore-default-password');
 });
 /*User's profile route ---- END ------*/
 

@@ -23,8 +23,8 @@ class UsersTableSeeder extends Seeder
         $userDetails = [
             'first_name' => 'Admin',
             'last_name' => 'Last',
-            'email' => 'admin@gmail.com',
-            'password' => 'password'
+            'email' => 'demo@gmail.com',
+            'password' => 'demo@123'
         ];
 
         // sentinel user register and activation
