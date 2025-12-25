@@ -1,7 +1,7 @@
 <div class="header-bottom-area header-sticky" style="transition: .6s;">
     <div class="row top-menu-wrapper">
         <a href="{{ route('index') }}">
-            <img src="{{ asset('uploads/setting/' . $settings['setting']->local_logo) }}" alt="LOGO" width="250px">
+            <img src="{{ asset('uploads/setting/' . $settings['setting']->local_logo) }}" alt="LOGO" class="app-logo">
         </a>
         <div class="main-menu f-right">
             <nav id="mobile-menu" style="display: block;">
