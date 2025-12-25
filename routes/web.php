@@ -17,6 +17,18 @@ Route::group(['namespace' => 'Frontend'], function () {
 	Route::get('/post-details/{post}', 'FrontendController@publishedPostBySlug')->name('post-details');
 	Route::get('/all-published-post', 'FrontendController@allPublishedPosts')->name('all-posts');
 
+	Route::get('/news-and-events', 'FrontendController@allPublishedNewsAndEvents')->name('news-and-events');
+	Route::get('/news-and-events/{slug}', 'FrontendController@getNewsAndEventBySlug')->name('news-and-events.details');
+
+	Route::get('/notices', 'FrontendController@allPublishedNoticePost')->name('notices');
+	Route::get('/notices/{slug}', 'FrontendController@getNoticePostBySlug')->name('notices.details');
+
+	Route::get('/career', 'FrontendController@allPublishedCareerPost')->name('career');
+	Route::get('/career/{slug}', 'FrontendController@getCareerPostBySlug')->name('career.details');
+
+	Route::get('/resources/{slug}', 'FrontendController@allPublishedResourcesPost')->name('resources.details');
+
+
 	Route::get('/event-details/{event}', 'FrontendController@publishedEventBySlug')->name('event-details');
 	Route::get('/all-published-events', 'FrontendController@allPublishedEvents')->name('all-events');
 
@@ -25,12 +37,12 @@ Route::group(['namespace' => 'Frontend'], function () {
 	Route::get('/training/{training}', 'FrontendController@publishedTrainingBySlug')->name('training-details');
 
 	Route::get('/photo-gallery', 'FrontendController@publishedPhotos')->name('photo-gallery');
-
 	Route::get('/photo-gallery/{slug}', 'FrontendController@publishedGalleryBySlug')->name('photo-gallery-details');
-
 	Route::get('/video-gallery', 'FrontendController@publishedVideos')->name('video-gallery');
 
 	Route::get('/publications', 'FrontendController@publishedPublications')->name('publications');
+	Route::get('/publications/{slug}', 'FrontendController@getPublishedDocumentBySlug')->name('publications.details');
+
 	Route::get('/programs', 'FrontendController@publishedPrograms')->name('programs');
 	Route::get('/trainings', 'FrontendController@publishedTrainings')->name('trainings');
 	Route::get('/faculties', 'FrontendController@publishedFaculties')->name('faculties');
@@ -132,7 +144,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['sauth'], 'namespace' => 'Fr
 /*Frontend module route ---- END ------*/
 
 /*Developer route ---- START ------*/
-Route::get('/migrate-9843191193', 'Dev\DevController@migrate');
-Route::get('/clear-9843191193', 'Dev\DevController@clear');
-Route::get('/seed-9843191193', 'Dev\DevController@seed');
+// Route::get('/migrate-9843191193', 'Dev\DevController@migrate');
+// Route::get('/clear-9843191193', 'Dev\DevController@clear');
+// Route::get('/seed-9843191193', 'Dev\DevController@seed');
 /*Developer route ---- END ------*/
+
+Route::get('/{slug}', 'Frontend\FrontendController@getPageBySlug')->name('frontend.get-page.slug');

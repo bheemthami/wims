@@ -9,7 +9,7 @@ class Document extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','slug','image','attachment','order','status','sumamry','academic_year_id','document_type_id','user_id','date'];
+    protected $fillable = ['title', 'slug', 'image', 'attachment', 'order', 'status', 'summary', 'academic_year_id', 'document_type_id', 'user_id', 'date'];
 
     protected $table = 'documents';
 
@@ -22,5 +22,4 @@ class Document extends Model
     {
         return $this->belongsTo('App\Models\Frontend\DocumentType');
     }
-
 }
