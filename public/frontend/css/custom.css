@@ -1020,6 +1020,11 @@ h6 {
     }
 }
 
+.app-logo {
+    max-height: 80px;
+    max-width: 80px;
+}
+
 /* Medium devices (landscape tablets, 768px to 1024px) */
 @media only screen and (min-width: 968px) and (max-width: 1024px) {
     .top-menu-wrapper {
