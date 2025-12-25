@@ -118,13 +118,15 @@ class FrontendController extends Controller
             }
 
             $data['marquee_recents']  = $this->postManager->publishedPosts(null, null, 10);
-            $data['events'] = $this->eventManager->publishedEvents(3);
+
+            $newsCategory = $this->postCategoryManager->getPostCategorysBySlug('news-and-events');
+            $data['events'] = $this->postManager->topPublishedPosts(null, $newsCategory->id, 6);
+
+
             $data['programs'] = $this->programManager->publishedPrograms(3);
             $data['banners'] = $this->bannerManager->publishedBanners();
             $data['facilities'] = $this->facilityManager->publishedFacilities();
             $data['testimonials'] = $this->testimonialManager->publishedTestimonials();
-
-            $data['principal'] = $this->designationManager->findBySlug('principal');
 
             $embeddings['facebook'] = $this->embedManager->getEmbeddingByType('facebook-page');
             $embeddings['twitter'] = $this->embedManager->getEmbeddingByType('twitter-handle');
@@ -136,6 +138,7 @@ class FrontendController extends Controller
             $data['officials'] = $this->officialManager->publishedOfficialsOnFrontPage();
 
             $data['gallery_images'] = $this->listPublishedImages();
+
             return view('frontend.new-index', compact('settings', 'categories', 'data', 'page', 'embeddings'));
         } catch (Exception $e) {
             return "Oops, something went wrong!";
@@ -162,13 +165,12 @@ class FrontendController extends Controller
 
         try {
             $about =  $this->pageManager->getPageBySlug(Str::slug('about us'));
-            if ($about) {
-
-                $settings = $this->settingManager->defaultSetting();
-                return view('frontend.about_us', compact('settings', 'about'));
+            if (!$about) {
+                return $this->redirectTo404();
             }
 
-            return redirect()->route('index');
+            $settings = $this->settingManager->defaultSetting();
+            return view('frontend.about_us', compact('settings', 'about'));
         } catch (Exception $e) {
             return "Oops, something went wrong!";
         }
@@ -176,11 +178,26 @@ class FrontendController extends Controller
 
     public function pageBySlug(Request $request)
     {
-
         try {
             $page =  $this->pageManager->getPageBySlug(Str::slug($request->slug));
             if (!$page) {
-                return redirect()->route('index');
+                return $this->redirectTo404();
+            }
+            return view('frontend.page', compact('page'));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+
+    public function getPageBySlug($slug = null)
+    {
+
+        try {
+            $page =  $this->pageManager->getPageBySlug(Str::slug($slug));
+
+            if (!$page) {
+                return $this->redirectTo404();
             }
             return view('frontend.page', compact('page'));
         } catch (Exception $e) {
@@ -197,6 +214,10 @@ class FrontendController extends Controller
         try {
 
             $post =  $this->postManager->getPostBySlug($slug);
+
+            if (!$post) {
+                return $this->redirectTo404();
+            }
             $posts = $this->postManager->publishedPosts();
             return view('frontend.posts.post_details', compact('post', 'posts'));
         } catch (Exception $e) {
@@ -211,9 +232,13 @@ class FrontendController extends Controller
             $category_id = null;
             if ($catSlug) {
                 $category = $this->postCategoryManager->getPostCategorysBySlug($catSlug);
-                $category_id = $category->id;
+                $category_id = $category ? $category->id : null;
             }
-            $setting = defaultSetting();
+
+            if (!$category_id) {
+                return $this->redirectTo404();
+            }
+
             $posts = $this->postManager->publishedPosts(null, $category_id);
             $topPosts = $this->postManager->topPublishedPosts(null, $category_id, 1);
             $links = $this->quickLinkManager->publishedQuickLinks(['body' => 'body', 'footer' => 'footer']);
@@ -223,6 +248,165 @@ class FrontendController extends Controller
         }
     }
 
+    public function allPublishedResourcesPost($catSlug = null)
+    {
+        try {
+            $category = $this->postCategoryManager->getPostCategorysBySlug(Str::slug($catSlug));
+            if (!$category) {
+                return $this->redirectTo404();
+            }
+
+            $posts = $this->postManager->publishedPosts(null, $category->id);
+            $topPosts = $this->postManager->topPublishedPosts(null, $category->id, 1);
+            $links = $this->quickLinkManager->publishedQuickLinks(['body' => 'body', 'footer' => 'footer']);
+            return view('frontend.posts.resources', compact('category', 'posts', 'topPosts', 'links'));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+    public function allPublishedNewsAndEvents()
+    {
+        try {
+            $catSlug = 'news-and-events';
+            $category_id = null;
+            if ($catSlug) {
+                $category = $this->postCategoryManager->getPostCategorysBySlug($catSlug);
+                $category_id = $category ? $category->id : null;
+            }
+
+            if (!$category_id) {
+                return $this->redirectTo404();
+            }
+
+            $posts = $this->postManager->publishedPosts(null, $category_id);
+            $topPosts = $this->postManager->topPublishedPosts(null, $category_id, 1);
+            $links = $this->quickLinkManager->publishedQuickLinks(['body' => 'body', 'footer' => 'footer']);
+            return view('frontend.posts.news-and-events', compact('posts', 'topPosts', 'links'));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+    public function getNewsAndEventBySlug($slug = null)
+    {
+        try {
+            $post =  $this->postManager->getPostBySlug($slug);
+            if (!$post) {
+                return $this->redirectTo404();
+            }
+            $posts = $this->postManager->publishedPosts();
+            return view('frontend.posts.post_details', compact('post', 'posts'));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+    public function allPublishedCareerPost()
+    {
+        try {
+            $catSlug = 'career';
+            $category = $this->postCategoryManager->getPostCategorysBySlug($catSlug);
+
+            if (!$category) {
+                return $this->redirectTo404();
+            }
+
+            $posts = $this->postManager->publishedPosts(null, $category->id);
+            $topPosts = $this->postManager->topPublishedPosts(null, $category->id, 1);
+            $links = $this->quickLinkManager->publishedQuickLinks(['body' => 'body', 'footer' => 'footer']);
+            return view('frontend.posts.career', compact('category', 'posts', 'topPosts', 'links'));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+    public function getCareerPostBySlug($slug = null)
+    {
+        try {
+            $post =  $this->postManager->getPostBySlug($slug);
+            if (!$post) {
+                return $this->redirectTo404();
+            }
+            $posts = $this->postManager->publishedPosts();
+            return view('frontend.posts.post_details', compact('post', 'posts'));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+
+    // Notices and details
+
+    public function allPublishedNoticePost()
+    {
+        try {
+            $catSlug = 'notices';
+
+            $category = $this->postCategoryManager->getPostCategorysBySlug($catSlug);
+
+            if (!$category) {
+                return $this->redirectTo404();
+            }
+
+            $posts = $this->postManager->publishedPosts(null, $category->id);
+            $topPosts = $this->postManager->topPublishedPosts(null, $category->id, 1);
+            $links = $this->quickLinkManager->publishedQuickLinks(['body' => 'body', 'footer' => 'footer']);
+            return view('frontend.posts.notices', compact('category', 'posts', 'topPosts', 'links'));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+    public function getNoticePostBySlug($slug = null)
+    {
+        try {
+            $post =  $this->postManager->getPostBySlug($slug);
+            if (!$post) {
+                return $this->redirectTo404();
+            }
+            $posts = $this->postManager->publishedPosts();
+            return view('frontend.posts.post_details', compact('post', 'posts'));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+
+    public function getPublishedDocumentsByTypeSlug($typeSlug = null)
+    {
+
+        try {
+            $document_type_id = null;
+            if ($typeSlug) {
+                $documentType = $this->documentTypeManager->getDocumentTypesBySlug(Str::slug($typeSlug));
+                $document_type_id = $documentType ? $documentType->id : null;
+            }
+
+            if (!$document_type_id) {
+                return $this->redirectTo404();
+            }
+            $documents = $this->documentManager->getPublishedDocuments($document_type_id);
+
+            return view('frontend.publications.list', compact('documents', 'documentType'));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
+
+    public function getPublishedDocumentBySlug($slug = null)
+    {
+        try {
+            $document =  $this->documentManager->getDocumentBySlug($slug);
+            if (!$document) {
+                return $this->redirectTo404();
+            }
+            $documents = $this->documentManager->getPublishedDocuments($document->document_type_id);
+            return view('frontend.publications.details', compact('document', 'documents'));
+        } catch (Exception $e) {
+            return "Oops, something went wrong!";
+        }
+    }
 
     /*
     Notices front end
@@ -258,7 +442,7 @@ class FrontendController extends Controller
         try {
             $program =  $this->programManager->getProgramBySlug($slug);
             if (!$program) {
-                return redirect()->route('index')->with('error', 'Oops! Something went wrong.');
+                return $this->redirectTo404();
             }
             $programs = $this->programManager->publishedPrograms();
             $trainings = $this->trainingManager->publishedTrainings();
@@ -273,7 +457,7 @@ class FrontendController extends Controller
         try {
             $training =  $this->trainingManager->getTrainingBySlug($slug);
             if (!$training) {
-                return redirect()->route('index')->with('error', 'Oops! Something went wrong.');
+                return $this->redirectTo404();
             }
             $trainings = $this->trainingManager->publishedTrainings();
             $programs = $this->programManager->publishedPrograms();
@@ -303,7 +487,7 @@ class FrontendController extends Controller
         try {
             $photo = $this->galleryManager->publishedGalleryBySlug($request->slug);
             if (!$photo) {
-                return redirect()->route('index')->with('error', 'Oops! Something went wrong.');
+                return $this->redirectTo404();
             }
             return view('frontend.gallery.image-details', compact('photo'));
         } catch (Exception $e) {
@@ -339,10 +523,7 @@ class FrontendController extends Controller
                 $categories[$key]['slug'] = $category->slug;
                 $categories[$key]['downloads'] = $this->documentManager->publishedDocuments($category->id, $setting->perp_page);
             }
-
-            // dd($categories[0]['downloads'][0]->image, $categories[0]['downloads'][0]->attachment);
-
-            return view('frontend.publications', compact('categories'));
+            return view('frontend.publications.publications', compact('categories'));
         } catch (Exception $e) {
             return "Oops, something went wrong!";
         }
@@ -444,5 +625,10 @@ class FrontendController extends Controller
         } catch (Exception $e) {
             return "Oops, something went wrong!";
         }
+    }
+
+    public function redirectTo404()
+    {
+        return redirect()->route('index')->with('error', 'Oops! Something went wrong.');
     }
 }
