@@ -134,7 +134,7 @@
                                         @endforelse
                                         <li class="list-group-item">
                                             <div class="view-all">
-                                                <a href="{{ url('resources.details', $cat['slug']) }}">View
+                                                <a href="{{ route('resources.details', $cat['slug']) }}">View
                                                     All
                                                     &rarr;</a>
                                             </div>
