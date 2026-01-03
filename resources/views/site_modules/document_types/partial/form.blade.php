@@ -1,51 +1,68 @@
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Document Type Details</legend>
+    <legend class="legend-border">Banner Details</legend>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Title <span>* </span></label>
-		{!! Form::text('title',null,['class'=>'form-control','placeholder'=>'Title']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('title')}}</i></span> 
-		@endif 
-	</div>
+    <div class="col-md-12 form-group">
+        {{ html()->label('Title')->for('title') }} <span>*</span>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Image</label>
-		{!! Form::file('image',null,['id'=>'image','class'=>'form-control']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('image')}} </i></span> 
-		@endif 
-		<span class="text-default">
-			<p>
-				<i>Files must be less than <strong>5 MB.</strong></i> <br>
-				<i>Allowed file types: <strong>png gif jpg jpeg.</strong></i> <br>
-			</p>
-		</span>		
-	</div>
+        {{ html()->text('title')->class('form-control')->placeholder('Title') }}
 
+        @error('title')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
+
+    <div class="col-md-12 form-group">
+        {{-- Existing image (edit only) --}}
+        @isset($document_type)
+            @if ($document_type->image)
+                <img src="{{ asset('uploads/document_types/' . $document_type->image) }}" width="100">
+            @else
+                <span class="text-danger">No Image</span>
+            @endif
+            <br>
+        @endisset
+
+        {{ html()->label('Image')->for('image') }} <span>*</span>
+
+        {{ html()->file('image')->id('image')->class('form-control') }}
+
+        @error('image')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+
+        <span class="text-default">
+            <p>
+                <i>Files must be less than <strong>5 MB.</strong></i><br>
+                <i>Allowed file types: <strong>png gif jpg jpeg.</strong></i>
+            </p>
+        </span>
+    </div>
 </fieldset>
 
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Website Display Options</legend>
-	<div class="row col-md-12">
-		<div class="col-md-4 form-group">
-			<label for="name">Display Order <span>*</span></label>
-			{!! Form::number('order',0,['class'=>'form-control']) !!}
-			@if($errors)      
-			<span class="text-danger"><i>{{$errors->first('order')}}</i></span> 
-			@endif 
-		</div>
-	</div>
-	<div class="row col-md-12">
-		<div class="col-md-4 form-group">
-			<label for="name">Publish on website ? <span>*</span></label>
-			{!! Form::select('status',$data['publish_options'],0,['class'=>'form-control']) !!}
-			@if($errors)      
-			<span class="text-danger"><i>{{$errors->first('status')}}</i></span> 
-			@endif 
-		</div>
-	</div>
+    <legend class="legend-border">Website Display Options</legend>
+
+    <div class="row col-md-12">
+        <div class="col-md-4 form-group">
+            {{ html()->label('Display Order')->for('order') }} <span>*</span>
+
+            {{ html()->number('order')->class('form-control') }}
+
+            @error('order')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="row col-md-12">
+        <div class="col-md-4 form-group">
+            {{ html()->label('Publish on website ?')->for('status') }} <span>*</span>
+
+            {{ html()->select('status', $data['publish_options'])->class('form-control') }}
+
+            @error('status')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+    </div>
 </fieldset>
-
-
-

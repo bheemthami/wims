@@ -4,8 +4,6 @@ namespace App\Managers\Frontend;
 
 use App\Models\Frontend\Document;
 
-use DB;
-
 class DocumentManager
 {
 	protected $document;
@@ -32,11 +30,11 @@ class DocumentManager
 			$query = $query->where(['document_type_id' => $params['document_type_id']]);
 		}
 
-		if ($params['status']) {
+		if ($params['status'] !== null) {
 			$query = $query->where(['status' => $params['status']]);
 		}
 
-		return $documents = $query->orderBy('order', 'DESC')->paginate($perPage);
+		return $query->orderBy('order', 'DESC')->paginate($perPage);
 	}
 
 	public function count($academic_year_id = null, $document_type_id = null, $status = null)
@@ -56,7 +54,7 @@ class DocumentManager
 			$query = $query->where(['status' => $status]);
 		}
 
-		return $documents = $query->count();
+		return  $query->count();
 	}
 
 
@@ -69,7 +67,7 @@ class DocumentManager
 			$query = $query->where(['document_type_id' => $document_type_id]);
 		}
 
-		return $documents = $query->orderBy('created_at', 'DESC')->paginate($perPage);
+		return  $query->orderBy('created_at', 'DESC')->paginate($perPage);
 	}
 
 
