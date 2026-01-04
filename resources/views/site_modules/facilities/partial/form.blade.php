@@ -1,77 +1,91 @@
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Details</legend>
-	<div class="col-md-12 form-group">
-		<label for="name">Title <span>* </span></label>
-		{!! Form::text('title',null,['class'=>'form-control','placeholder'=>'Title']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('title')}}</i></span>
-		@endif
-	</div>
+    <legend class="legend-border">Details</legend>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Summary (Max 400 characters) <span>*</span></label>
+    <div class="col-md-12 form-group">
+        {{ html()->label('Title')->for('title') }} <span>*</span>
 
-		<textarea id="summary" name="summary" class="form-control" rows="2" placeholder="summary goes here..."></textarea>
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('summary')}} </i></span>
-		@endif
-	</div>
+        {{ html()->text('title')->class('form-control')->placeholder('Title') }}
 
-	<div class="col-md-12 form-group">
-		<label for="name">Description (Max 10000 characters)<span>*</span></label>
-		<textarea id="editor" name="description" class="form-control" placeholder="description goes here..."></textarea>
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('description')}} </i></span>
-		@endif
-	</div>
+        @error('title')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
 
+    <div class="col-md-12 form-group">
+        {{ html()->label('Summary (Max 400 characters)')->for('summary') }} <span>*</span>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Images <span>*</span> </label>
-		{!! Form::file('image[]',['id'=>'image','multiple'=>'true']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('image.*')}} </i></span>
-		@endif
-		<span class="text-default">
-			<p class="mt-10">
-				<i>Files must be less than <strong>10 MB.</strong></i> <br>
-				<i>Allowed file types: <strong>png gif jpg jpeg.</strong></i> <br>
-			</p>
-		</span>
-	</div>
+        {{ html()->textarea('summary')->id('summary')->class('form-control')->rows(2)->placeholder('summary goes here...') }}
 
-	<div class="col-md-12 form-group">
-		<label for="name">Attachment <span></span></label>
-		{!! Form::file('attachment',null,['id'=>'attachment','class'=>'form-control']) !!}
+        @error('summary')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
 
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('attachment')}}</i></span>
-		@endif
-		<span class="text-default">
-			<p>
-				<i>Files must be less than <strong>5 MB.</strong></i> <br>
-				<i>Allowed file types: <strong>doc,docx,xls,xlsx,pdf.</strong></i> <br>
-			</p>
-		</span>
-	</div>
+    <div class="col-md-12 form-group">
+        {{ html()->label('Description (Max 10000 characters)')->for('description') }} <span>*</span>
 
+        {{ html()->textarea('description')->id('editor')->class('form-control')->placeholder('description goes here...') }}
+
+        @error('description')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
+
+    <div class="col-md-12 form-group">
+        {{ html()->label('Images')->for('image') }} <span>*</span>
+
+        {{ html()->file('image[]')->id('image')->multiple() }}
+
+        @error('image.*')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+
+        <span class="text-default">
+            <p class="mt-10">
+                <i>Files must be less than <strong>10 MB.</strong></i><br>
+                <i>Allowed file types: <strong>png gif jpg jpeg.</strong></i>
+            </p>
+        </span>
+    </div>
+
+    <div class="col-md-12 form-group">
+        {{ html()->label('Attachment')->for('attachment') }}
+
+        {{ html()->file('attachment')->id('attachment')->class('form-control') }}
+
+        @error('attachment')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+
+        <span class="text-default">
+            <p>
+                <i>Files must be less than <strong>5 MB.</strong></i><br>
+                <i>Allowed file types: <strong>doc, docx, xls, xlsx, pdf.</strong></i>
+            </p>
+        </span>
+    </div>
 </fieldset>
 
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Website Display Options</legend>
-	<div class="col-md-6 form-group">
-		<label for="name">Display Order <span>*</span></label>
-		{!! Form::number('order',null,['class'=>'form-control']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('order')}}</i></span>
-		@endif
-	</div>
+    <legend class="legend-border">Website Display Options</legend>
 
-	<div class="col-md-6 form-group">
-		<label for="name">Publish on website ? <span>*</span></label>
-		{!! Form::select('status',$data['publish_options'],1,['class'=>'form-control']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('status')}}</i></span>
-		@endif
-	</div>
+    <div class="col-md-6 form-group">
+        {{ html()->label('Display Order')->for('order') }} <span>*</span>
+
+        {{ html()->number('order')->class('form-control') }}
+
+        @error('order')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
+
+    <div class="col-md-6 form-group">
+        {{ html()->label('Publish on website ?')->for('status') }} <span>*</span>
+
+        {{ html()->select('status', $data['publish_options'], 1)->class('form-control') }}
+
+        @error('status')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
 </fieldset>

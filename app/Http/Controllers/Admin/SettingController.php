@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingRequest;
 use App\Models\Setting;
@@ -142,58 +141,5 @@ class SettingController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    // Fucntion Signature
-    public function resultSettingEdit($terminal_id)
-    {
-        try {
-
-            if (Sentinel::hasAccess('settings.update')) {
-                $terminal = $this->terminalManager->find($terminal_id);
-                $resultStatusOptions = $this->commonDataManager->resultStatusDropdown();
-
-                return view('admin.setting.results.edit', compact('terminal', 'resultStatusOptions'));
-            } else {
-                return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
-            }
-        } catch (Exception $e) {
-            return redirect()->route('users.index')->with('error', 'Oops! Something went wrong.');
-        }
-    }
-
-    public function resultSettingUpdate(ResultSettingRequest $request, $terminal_id)
-    {
-
-        try {
-
-            if (Sentinel::hasAccess('result-settings.update')) {
-                $terminal = $this->terminalManager->find($terminal_id);
-                $details = $request->only('school_open_days', 'date_of_issue', 'result_date', 'result_status');
-
-                $terminal->update($details);
-
-                return redirect()->route('settings.index')->with('success', 'Successfully updated!');
-            } else {
-                return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
-            }
-        } catch (Exception $e) {
-            return redirect()->route('users.index')->with('error', 'Oops! Something went wrong.');
-        }
-    }
-
-
-    // Fucntion Signature
-    public function resultSettingCreate($terminal_id)
-    {
-        try {
-
-            if (Sentinel::hasAccess('settings.update')) {
-            } else {
-                return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
-            }
-        } catch (Exception $e) {
-            return redirect()->route('users.index')->with('error', 'Oops! Something went wrong.');
-        }
     }
 }

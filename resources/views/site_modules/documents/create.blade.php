@@ -42,12 +42,14 @@
             </div>
         </div>
     </section>
+@endsection
 
+@section('js')
     <script type="text/javascript">
         $(document).ready(function() {
             $('#date').datepicker({
                 "format": 'yyyy-mm-dd'
-            }).datepicker("setDate", 'now');;
+            }).datepicker("setDate", 'now');
 
         });
     </script>

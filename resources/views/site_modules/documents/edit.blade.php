@@ -27,7 +27,7 @@
             </div>
             <div class="box-body">
                 {{ html()->modelForm($document, 'PATCH', route('documents.update', $document->id))->attribute('enctype', 'multipart/form-data')->open() }}
-                @include('site_modules.documents.partial.edit_form')
+                @include('site_modules.documents.partial.form')
                 <div class="form-inline">
                     <div class="pull pull-right">
                         <div class="form-group">
@@ -43,26 +43,13 @@
         </div>
     </section>
 @endsection
-
 @section('js')
-    <script src="{{ asset('plugins/ckeditor5/ckeditor.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#date').datepicker({
+                "format": 'yyyy-mm-dd'
+            }).datepicker("setDate", 'now');
 
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'), {
-                ckfinder: {
-                    uploadUrl: "{{ route('ckeditor.upload') . '?_token=' . csrf_token() }}"
-                }
-            }, {
-                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
-            })
-            .then(editor => {
-                window.editor = editor;
-            })
-            .catch(err => {
-                console.error(err.stack);
-            });
-
-        console.log(editor.getData())
+        });
     </script>
 @endsection

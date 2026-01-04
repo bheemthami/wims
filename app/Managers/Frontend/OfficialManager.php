@@ -3,8 +3,7 @@
 namespace App\Managers\Frontend;
 
 use App\Models\Frontend\Official;
-
-use DB;
+use Illuminate\Support\Str;
 
 class OfficialManager
 {
@@ -20,18 +19,18 @@ class OfficialManager
 		$query = $this->official::select('*');
 
 		if ($params['first_name']) {
-			$query = $query->where('first_name', 'like', '%' . $params['first_name'] . '%');
+			$query = $query->where('first_name', 'like', '%' . Str::lower($params['first_name']) . '%')->orWhere('last_name', 'like', '%' . Str::lower($params['first_name']) . '%');
 		}
 
-		if ($params['working_status']) {
+		if ($params['working_status'] !== null) {
 			$query = $query->where(['working_status' => $params['working_status']]);
 		}
 
-		if ($params['is_teaching_official']) {
+		if ($params['is_teaching_official'] !== null) {
 			$query = $query->where(['is_teaching_official' => $params['is_teaching_official']]);
 		}
 
-		if ($params['status']) {
+		if ($params['status'] !== null) {
 			$query = $query->where(['status' => $params['status']]);
 		}
 
@@ -39,7 +38,7 @@ class OfficialManager
 			$query = $query->where(['department_id' => $params['department_id']]);
 		}
 
-		return  $officials = $query->orderBy('order', 'ASC')->paginate($perPage);
+		return  $query->orderBy('order', 'ASC')->paginate($perPage);
 	}
 
 
@@ -48,15 +47,15 @@ class OfficialManager
 	{
 		$query = $this->official;
 
-		if ($working_status) {
+		if ($working_status != null) {
 			$query = $query->where(['working_status' => $working_status]);
 		}
 
-		if ($is_teaching_official) {
+		if ($is_teaching_official != null) {
 			$query = $query->where(['is_teaching_official' => $is_teaching_official]);
 		}
 
-		if ($status) {
+		if ($status != null) {
 			$query = $query->where(['status' => $status]);
 		}
 
@@ -64,7 +63,7 @@ class OfficialManager
 			$query = $query->where(['department_id' => $department_id]);
 		}
 
-		return  $officials = $query->count();
+		return $query->count();
 	}
 
 	public function publishedOfficials($department_id = null,)
@@ -76,7 +75,6 @@ class OfficialManager
 		}
 
 		$query->orderBy('order', 'ASC');
-
 
 		return $query->get();
 	}

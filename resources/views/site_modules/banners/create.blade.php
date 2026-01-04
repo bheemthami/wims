@@ -20,9 +20,6 @@
                 <h3 class="box-title">Create</h3>
                 <div class="box-tools pull-right">
                     <label class="labellabel-danger">Fields with * are compulsory.</label>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fa fa-minus"></i></button>
                 </div>
             </div>
             <div class="box-body">

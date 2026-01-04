@@ -25,8 +25,8 @@
                         <i class="fa fa-minus"></i></button>
                 </div>
             </div>
-            <div class="box-body table-responsive no-padding">
-                <div class="filteration">
+            <div class="box-body">
+                <div class="row filteration">
                     <div class="col-md-3">
                         {{ html()->label('Title')->for('title') }}
                         <div class="form-group">
@@ -65,7 +65,7 @@
                     </div>
                 </div>
 
-                <div id="table-wrapper">
+                <div id="table-wrapper" class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <thead>
                             <th>S.No.</th>

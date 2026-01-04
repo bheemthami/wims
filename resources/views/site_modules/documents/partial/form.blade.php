@@ -51,22 +51,10 @@
         @enderror
     </div>
 
-    <div class="col-md-12 form-group">
-        @isset($document)
-            @if ($document->image)
-                <a class="btn btn-sm btn-success" href="{{ asset('uploads/documents/' . $document->image) }}"
-                    target="_blank">
-                    <i class="fa fa-file"></i> view
-                </a>
-            @else
-                <span class="text-danger">No Image</span>
-            @endif
-            <br>
-        @endisset
-
+    <div class="col-md-6 form-group">
         {{ html()->label('Image')->for('image') }}
 
-        {{ html()->file('image')->id('image')->class('form-control') }}
+        {{ html()->file('image')->id('image') }}
 
         @error('image')
             <span class="text-danger"><i>{{ $message }}</i></span>
@@ -78,24 +66,19 @@
                 <i>Allowed file types: <strong>png gif jpg jpeg.</strong></i>
             </p>
         </span>
+
+        @if (isset($document) && $document->image)
+            <div class="img img-wrapper">
+                <img class="img img-responsive" src ="{{ asset('uploads/documents/' . $document->image) }}"
+                    target="_blank" alt="No Image" />
+            </div>
+        @endif
     </div>
 
-    <div class="col-md-12 form-group">
-        @isset($document)
-            @if ($document->attachment)
-                <a class="btn btn-sm btn-success" href="{{ asset('uploads/documents/' . $document->attachment) }}"
-                    target="_blank">
-                    <i class="fa fa-file"></i> view
-                </a>
-            @else
-                <span class="text-danger">No Attachment</span>
-            @endif
-            <br>
-        @endisset
-
+    <div class="col-md-6 form-group">
         {{ html()->label('Attachment')->for('attachment') }}
 
-        {{ html()->file('attachment')->id('attachment')->class('form-control') }}
+        {{ html()->file('attachment')->id('attachment') }}
 
         @error('attachment')
             <span class="text-danger"><i>{{ $message }}</i></span>
@@ -107,13 +90,19 @@
                 <i>Allowed file types: <strong>doc, docx, xls, xlsx, pdf.</strong></i>
             </p>
         </span>
+        @if (isset($document) && $document->attachment)
+            <a class="btn btn-sm btn-success" href="{{ asset('uploads/documents/' . $document->attachment) }}"
+                target="_blank">
+                <i class="fa fa-file"></i> view
+            </a>
+        @endif
     </div>
 </fieldset>
 
 <fieldset class="fieldset-border">
     <legend class="legend-border">Website Display Options</legend>
 
-    <div class="row col-md-12">
+    <div class="row-auto">
         <div class="col-md-6 form-group">
             {{ html()->label('Display Order')->for('order') }} <span>*</span>
 
@@ -123,9 +112,7 @@
                 <span class="text-danger"><i>{{ $message }}</i></span>
             @enderror
         </div>
-    </div>
 
-    <div class="row col-md-12">
         <div class="col-md-6 form-group">
             {{ html()->label('Publish on website ?')->for('status') }} <span>*</span>
 

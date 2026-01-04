@@ -1,159 +1,200 @@
+<fieldset class="fieldset-border">
+    <legend class="legend-border">Event Details</legend>
+    <div class="fieldset-body">
+        <div class="row">
+            <div class="col-md-12 form-group">
+                {{ html()->label('Title')->for('title') }} <span>*</span>
 
-<div class="row">
-	<div class="col-md-12 form-group">
-		<label for="name">Title <span>* </span></label>
-		{!! Form::text('title',null,['class'=>'form-control','placeholder'=>'Title of the event']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('title')}}</i></span> 
-		@endif 
-	</div>
-</div>
+                {{ html()->text('title')->class('form-control')->placeholder('Title of the event') }}
 
-<div class="row">
-	<div class='col-md-6'>
-		<label for="name">Start Date<span>*</span></label>
-		<div class="form-group">
-			<div class='input-group date' id='start_date'>
-				{!! Form::dateTime('start_date',null,['class'=>'form-control','id'=>'start_date']) !!}
-				<span class="input-group-addon">
-					<span class="glyphicon glyphicon-calendar"></span>
-				</span>
-			</div>
-			@if($errors)      
-			<span class="text-danger"><i>{{$errors->first('start_date')}} </i></span> 
-			@endif 
-		</div>
-	</div>
+                @error('title')
+                    <span class="text-danger"><i>{{ $message }}</i></span>
+                @enderror
+            </div>
+        </div>
 
-	<div class='col-md-6'>
-		<!-- time Picker -->
-		<div class="bootstrap-timepicker">
-			<div class="form-group">
-				<label>Start Time <span>*</span></label>
+        <div class="row">
+            <div class="col-md-6">
+                {{ html()->label('Start Date')->for('start_date') }} <span>*</span>
 
-				<div class="input-group">
-					<input type="text" class="form-control timepicker" name="start_time" id="start_time">
+                <div class="form-group">
+                    <div class="input-group date" id="start_date">
+                        {{ html()->text('start_date')->id('start_date')->class('form-control') }}
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
 
-					<div class="input-group-addon">
-						<i class="fa fa-clock-o"></i>
-					</div>
-					
-				</div>
-				<!-- /.input group -->
-			</div>
-			<!-- /.form group -->
-		</div>
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('start_time')}} </i></span> 
-		@endif
-	</div>
-</div>
+                    @error('start_date')
+                        <span class="text-danger"><i>{{ $message }}</i></span>
+                    @enderror
+                </div>
+            </div>
 
-<div class="row">
-	<div class='col-md-6'>
-		<label for="name">End Date<span>*</span></label>
-		<div class="form-group">
-			<div class='input-group date' id='end_date'>
-				{!! Form::dateTime('end_date',null,['class'=>'form-control','id'=>'end_date']) !!}
-				<span class="input-group-addon">
-					<span class="glyphicon glyphicon-calendar"></span>
-				</span>
-			</div>
-			@if($errors)      
-			<span class="text-danger"><i>{{$errors->first('end_date')}} </i></span> 
-			@endif 
-		</div>
-	</div>
+            <div class="col-md-6">
+                <div class="bootstrap-timepicker">
+                    <div class="form-group">
+                        {{ html()->label('Start Time')->for('start_time') }} <span>*</span>
 
-	<div class='col-md-6'>
-		<!-- time Picker -->
-		<div class="bootstrap-timepicker">
-			<div class="form-group">
-				<label>End Time <span>*</span></label>
+                        <div class="input-group">
+                            {{ html()->text('start_time')->id('start_time')->class('form-control timepicker') }}
+                            <div class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-				<div class="input-group">
-					<input type="text" class="form-control timepicker" name="end_time" id="end_time">
+                @error('start_time')
+                    <span class="text-danger"><i>{{ $message }}</i></span>
+                @enderror
+            </div>
+        </div>
 
-					<div class="input-group-addon">
-						<i class="fa fa-clock-o"></i>
-					</div>
-				</div>
-				<!-- /.input group -->
-			</div>
-			<!-- /.form group -->
-		</div>
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('end_time')}} </i></span> 
-		@endif 
-	</div>
-</div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ html()->label('End Date')->for('end_date') }} <span>*</span>
 
-<div class="row">
-	<div class="col-md-12 form-group">
-		<label for="name">Description <span>*</span></label>
+                <div class="form-group">
+                    <div class="input-group date" id="end_date">
+                        {{ html()->text('end_date')->id('end_date')->class('form-control') }}
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
 
-		<textarea id="editor" name="description" class="form-control" placeholder="description goes here..."></textarea>
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('description')}} </i></span> 
-		@endif 
-	</div>
-</div>
+                    @error('end_date')
+                        <span class="text-danger"><i>{{ $message }}</i></span>
+                    @enderror
+                </div>
+            </div>
 
-<div class="row">
-	<div class="col-md-12 form-group">
-		<label for="name">Image </label>
-		{!! Form::file('image',null,['id'=>'image','class'=>'form-control']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('image')}} </i></span> 
-		@endif 
-		<span class="text-default">
-			<p>
-				<i>Files must be less than <strong>5 MB.</strong></i> <br>
-				<i>Allowed file types: <strong>png gif jpg jpeg.</strong></i> <br>
-			</p>
-		</span>		
-	</div>
-</div>
+            <div class="col-md-6">
+                <div class="bootstrap-timepicker">
+                    <div class="form-group">
+                        {{ html()->label('End Time')->for('end_time') }} <span>*</span>
 
-<div class="row">
-	<div class="col-md-12 form-group">
-		<label for="name">Attachment <span></span></label>
-		{!! Form::file('attachment',null,['id'=>'attachment','class'=>'form-control']) !!}
+                        <div class="input-group">
+                            {{ html()->text('end_time')->id('end_time')->class('form-control timepicker') }}
+                            <div class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('attachment')}}</i></span> 
-		@endif
-		<span class="text-default">
-			<p>
-				<i>Files must be less than <strong>5 MB.</strong></i> <br>
-				<i>Allowed file types: <strong>doc,docx,xls,xlsx,pdf.</strong></i> <br>
-			</p>
-		</span> 
-	</div>
-</div>
+                @error('end_time')
+                    <span class="text-danger"><i>{{ $message }}</i></span>
+                @enderror
+            </div>
+        </div>
 
-<div class="row">
-	<div class="col-md-2 form-group">
-		<label for="name">Publish on website ? <span>*</span></label>
-		{!! Form::select('status',$data['publish_options'],0,['class'=>'form-control']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('status')}}</i></span> 
-		@endif 
-	</div>
-	<div class="col-md-5 form-group">
-		<label for="name">Remarks <span>(Optional)</span></label>
-		{!! Form::text('remarks',null,['class'=>'form-control','placeholder'=>'any other details']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('remarks')}}</i></span> 
-		@endif 
-	</div>
-	<div class="col-md-5 form-group">
-		<label for="name">Speacker of the event<span>(Optional)</span></label>
-		{!! Form::text('speaker',null,['class'=>'form-control','placeholder'=>'Speaker of the event']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('speaker')}}</i></span> 
-		@endif 
-	</div>
-</div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+                {{ html()->label('Description')->for('description') }} <span>*</span>
 
+                {{ html()->textarea('description')->id('editor')->class('form-control')->placeholder('description goes here...') }}
 
+                @error('description')
+                    <span class="text-danger"><i>{{ $message }}</i></span>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 form-group">
+                @isset($event)
+                    @if ($event->image)
+                        <img src="{{ asset('uploads/events/' . $event->image) }}" width="100">
+                    @else
+                        <span class="text-danger">No Image</span>
+                    @endif
+                    <br>
+                @endisset
+
+                {{ html()->label('Image')->for('image') }}
+
+                {{ html()->file('image')->id('image')->class('form-control') }}
+
+                @error('image')
+                    <span class="text-danger"><i>{{ $message }}</i></span>
+                @enderror
+
+                <span class="text-default">
+                    <p>
+                        <i>Files must be less than <strong>5 MB.</strong></i><br>
+                        <i>Allowed file types: <strong>png gif jpg jpeg.</strong></i>
+                    </p>
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 form-group">
+                @isset($event)
+                    @if ($event->attachment)
+                        <a href="{{ asset('uploads/events/' . $event->attachment) }}" target="_blank">
+                            <i class="fa fa-file"></i> view
+                        </a>
+                    @else
+                        <span class="text-danger">No Attachment</span>
+                    @endif
+                    <br>
+                @endisset
+
+                {{ html()->label('Attachment')->for('attachment') }}
+
+                {{ html()->file('attachment')->id('attachment')->class('form-control') }}
+
+                @error('attachment')
+                    <span class="text-danger"><i>{{ $message }}</i></span>
+                @enderror
+
+                <span class="text-default">
+                    <p>
+                        <i>Files must be less than <strong>5 MB.</strong></i><br>
+                        <i>Allowed file types: <strong>doc, docx, xls, xlsx, pdf.</strong></i>
+                    </p>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ html()->label('Remarks')->for('remarks') }}
+
+                {{ html()->text('remarks')->class('form-control')->placeholder('any other details') }}
+
+                @error('remarks')
+                    <span class="text-danger"><i>{{ $message }}</i></span>
+                @enderror
+            </div>
+
+            <div class="col-md-6 form-group">
+                {{ html()->label('Speaker of the event')->for('speaker') }}
+
+                {{ html()->text('speaker')->class('form-control')->placeholder('Speaker of the event') }}
+
+                @error('speaker')
+                    <span class="text-danger"><i>{{ $message }}</i></span>
+                @enderror
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="fieldset-border">
+    <legend class="legend-border">Document Details</legend>
+    <div class="fieldset-body">
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ html()->label('Publish on website ?')->for('status') }} <span>*</span>
+
+                {{ html()->select('status', $data['publish_options'])->class('form-control') }}
+
+                @error('status')
+                    <span class="text-danger"><i>{{ $message }}</i></span>
+                @enderror
+            </div>
+        </div>
+    </div>
+</fieldset>
