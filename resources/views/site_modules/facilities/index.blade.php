@@ -20,13 +20,10 @@
                 <div class="box-tools pull-right">
                     <a class="btn btn-sm btn-success" href="{{ route('facilities.create') }}"> <i class="fa fa-plus"></i>
                         Add New Facility</a>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fa fa-minus"></i></button>
                 </div>
             </div>
-            <div class="box-body table-responsive">
-                <div class="filteration">
+            <div class="box-body">
+                <div class="row filteration">
                     <div class="col-md-3">
                         <label for="first_name"> Title </label>
                         <div class="form-group">
@@ -44,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="table-wrapper">
+                <div id="table-wrapper" class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <thead>
                             <th>S.No.</th>

@@ -27,7 +27,7 @@
             </div>
             <div class="box-body">
                 {{ html()->modelForm($facility, 'PATCH', route('facilities.update', $facility->id))->id('facility-form')->attribute('enctype', 'multipart/form-data')->open() }}
-                @include('site_modules.facilities.partial.edit_form')
+                @include('site_modules.facilities.partial.form')
                 <div class="form-inline">
                     <div class="pull pull-right">
                         <div class="form-group">

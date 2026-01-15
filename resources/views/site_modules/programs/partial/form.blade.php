@@ -1,106 +1,117 @@
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Page Details</legend>
+    <legend class="legend-border">Details</legend>
+    <div>
+        <div class="col-md-12 form-group">
+            {{ html()->label('Title')->for('title') }} <span>*</span>
+            {{ html()->text('title')->class('form-control')->placeholder('Title') }}
+            @error('title')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Title <span>* </span></label>
-		{!! Form::text('title',null,['class'=>'form-control','placeholder'=>'Page Title']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('title')}}</i></span> 
-		@endif 
-	</div>
+        <div class="col-md-4 form-group">
+            {{ html()->label('Quota')->for('quota') }} <span>*</span>
+            {{ html()->text('quota')->class('form-control')->placeholder('quota') }}
+            @error('quota')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-	<div class="col-md-4 form-group">
-		<label for="name">Quota <span>* </span></label>
-		{!! Form::text('quota',null,['class'=>'form-control','placeholder'=>' quota']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('quota')}}</i></span> 
-		@endif 
-	</div>
+        <div class="col-md-4 form-group">
+            {{ html()->label('Duration')->for('duration') }} <span>*</span>
+            {{ html()->text('duration')->class('form-control')->placeholder('duration') }}
+            @error('duration')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-	<div class="col-md-4 form-group">
-		<label for="name">Duration <span>* </span></label>
-		{!! Form::text('duration',null,['class'=>'form-control','placeholder'=>'Page duration']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('duration')}}</i></span> 
-		@endif 
-	</div>
+        <div class="col-md-4 form-group">
+            {{ html()->label('Eligibility')->for('eligibility') }} <span>*</span>
+            {{ html()->text('eligibility')->class('form-control')->placeholder('eligibility') }}
+            @error('eligibility')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-	<div class="col-md-4 form-group">
-		<label for="name">Eligibility <span>* </span></label>
-		{!! Form::text('eligibility',null,['class'=>'form-control','placeholder'=>'Page eligibility']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('eligibility')}}</i></span> 
-		@endif 
-	</div>
+        <div class="col-md-12 form-group">
+            {{ html()->label('Summary')->for('summary') }} <span>*</span>
+            {{ html()->textarea('summary')->class('form-control')->rows(2)->placeholder('summary goes here...') }}
+            @error('summary')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Summary <span>*</span></label>
+        <div class="col-md-12 form-group">
+            {{ html()->label('Description')->for('description') }} <span>*</span>
+            {{ html()->textarea('description')->id('editor')->class('form-control')->placeholder('description goes here...') }}
+            @error('description')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-		<textarea id="summary" name="summary" class="form-control" rows="2" placeholder="summary goes here..."></textarea>
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('summary')}} </i></span> 
-		@endif 
-	</div>
+        <div class="col-md-12 form-group">
 
-	<div class="col-md-12 form-group">
-		<label for="name">Description <span>*</span></label>
 
-		<textarea id="editor" name="description" class="form-control" placeholder="description goes here..."></textarea>
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('description')}} </i></span> 
-		@endif 
-	</div>
-	
+            {{ html()->label('Image')->for('image') }}
+            {{ html()->file('image')->id('image') }}
+            @error('image')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
 
-	<div class="col-md-12 form-group">
-		<label for="name">Image </label>
-		{!! Form::file('image',null,['id'=>'image','class'=>'form-control']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('image')}} </i></span> 
-		@endif 
-		<span class="text-default">
-			<p>
-				<i>Files must be less than <strong>5 MB.</strong></i> <br>
-				<i>Allowed file types: <strong>png gif jpg jpeg.</strong></i> <br>
-			</p>
-		</span>		
-	</div>
+            <span class="text-default">
+                <p>
+                    <i>Files must be less than <strong>5 MB.</strong></i><br>
+                    <i>Allowed file types: <strong>png gif jpg jpeg.</strong></i>
+                </p>
+            </span>
+            @if (isset($program) && $program->image)
+                <div class="img-wrapper">
+                    <img src="{{ asset('uploads/programs/' . $program->image) }}" width="100">
+                </div>
+            @endif
+        </div>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Attachment <span></span></label>
-		{!! Form::file('attachment',null,['id'=>'attachment','class'=>'form-control']) !!}
-		
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('attachment')}}</i></span> 
-		@endif
-		<span class="text-default">
-			<p>
-				<i>Files must be less than <strong>5 MB.</strong></i> <br>
-				<i>Allowed file types: <strong>doc,docx,xls,xlsx,pdf.</strong></i> <br>
-			</p>
-		</span> 
-	</div>
+        <div class="col-md-12 form-group">
+            {{ html()->label('Attachment')->for('attachment') }}
+            {{ html()->file('attachment')->id('attachment') }}
+            @error('attachment')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
 
+            <span class="text-default">
+                <p>
+                    <i>Files must be less than <strong>5 MB.</strong></i><br>
+                    <i>Allowed file types: <strong>doc, docx, xls, xlsx, pdf.</strong></i>
+                </p>
+            </span>
+
+            @if (isset($program) && $program->attachment)
+                <a href="{{ asset('uploads/programs/' . $program->attachment) }}" target="_blank">
+                    <i class="fa fa-file"></i> view
+                </a>
+            @endif
+
+        </div>
+    </div>
 </fieldset>
 
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Website Display Options</legend>
-	<div class="col-md-6 form-group">
-		<label for="name">Display Order <span>*</span></label>
-		{!! Form::number('order',null,['class'=>'form-control']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('order')}}</i></span> 
-		@endif 
-	</div>
+    <legend class="legend-border">Website Display Options</legend>
+    <div class="row-auto">
+        <div class="col-md-6 form-group">
+            {{ html()->label('Display Order')->for('order') }} <span>*</span>
+            {{ html()->number('order')->class('form-control') }}
+            @error('order')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-	<div class="col-md-6 form-group">
-		<label for="name">Publish on website ? <span>*</span></label>
-		{!! Form::select('status',$data['publish_options'],0,['class'=>'form-control']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('status')}}</i></span> 
-		@endif 
-	</div>
+        <div class="col-md-6 form-group">
+            {{ html()->label('Publish on website ?')->for('status') }} <span>*</span>
+            {{ html()->select('status', $data['publish_options'])->class('form-control') }}
+            @error('status')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+    </div>
 </fieldset>
-
-
-
