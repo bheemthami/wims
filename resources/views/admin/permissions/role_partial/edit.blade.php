@@ -1,4 +1,5 @@
 @extends('layouts.admin.app')
+@section('title', 'Role Permissions> Edit')
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -9,29 +10,25 @@
             <li class="active">Edit</li>
         </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Edit permissions of <span class="badge">{{ $role->name }}</span></h3>
+                <h3 class="box-title">Edit <span class="fw-bold">{{ $role->name }}</span> Role Permissions</h3>
             </div>
             <div class="box-body">
-                {!! Form::model($role, ['route' => ['update.role.permissions', $role->id], 'method' => 'patch']) !!}
-                {{ csrf_field() }}
-                @include('admin.permissions.role_partial.form_edit')
+                {{ html()->modelForm($role, 'PATCH', route('update.role.permissions', $role->id))->id('role-permissions-form')->open() }}
+                @include('admin.permissions.role_partial.partial.form')
                 <div class="form-inline">
                     <div class="pull pull-right">
-                        <div class="form-group">
+                        <div class="action-button-list">
                             <button class="btn btn-success pull-right" type="submit">Submit</button>
-                        </div>
-                        <div class="form-group">
                             <a class="btn btn-danger pull-right" href="{{ route('roles.index') }}">Cancel</a>
                         </div>
                     </div>
                 </div>
-                {!! Form::close() !!}
+                {{ html()->form()->close() }}
             </div>
         </div>
     </section>
