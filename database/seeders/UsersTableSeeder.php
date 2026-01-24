@@ -1,13 +1,10 @@
 <?php
 
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\User;
-
-use DB;
-use Sentinel;
+use Illuminate\Support\Facades\DB;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 class UsersTableSeeder extends Seeder
 {

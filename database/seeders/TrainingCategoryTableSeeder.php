@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
-use DB;
-use Str;
 
 class TrainingCategoryTableSeeder extends Seeder
 {
@@ -18,19 +18,21 @@ class TrainingCategoryTableSeeder extends Seeder
     {
         $categories = [
             [
-                'title'=>'Electrical',
+                'title' => 'Electrical',
                 'order' => 1,
-                'slug'=>Str::slug('electrical'),
+                'slug' => Str::slug('electrical'),
                 'status' => 1
-            ],[
-                'title'=>'Mechanical',
+            ],
+            [
+                'title' => 'Mechanical',
                 'order' => 2,
-                'slug'=>Str::slug('mechanical'),
+                'slug' => Str::slug('mechanical'),
                 'status' => 1
-            ],[
-                'title'=>'Sanitation',
+            ],
+            [
+                'title' => 'Sanitation',
                 'order' => 3,
-                'slug'=>Str::slug('sanitation'),
+                'slug' => Str::slug('sanitation'),
                 'status' => 1
             ]
         ];
@@ -41,7 +43,7 @@ class TrainingCategoryTableSeeder extends Seeder
         foreach ($categories as $category) {
             DB::table('training_categories')->insert($category);
         }
-        
+
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

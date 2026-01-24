@@ -2,9 +2,11 @@
 
 
 namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Str;
 
 class RoleTableSeeder extends Seeder
 {
@@ -35,15 +37,16 @@ class RoleTableSeeder extends Seeder
 
         $roles = [
             [
-                'name'=>'Admin',
-                'slug'=>str_slug('Admin'),
-                'permissions'=> json_encode($adminPermissions)
-                
-            ],[
-                'name'=>'User',
-                'slug'=>str_slug('User'),
+                'name' => 'Admin',
+                'slug' => Str::slug('Admin'),
+                'permissions' => json_encode($adminPermissions)
+
+            ],
+            [
+                'name' => 'User',
+                'slug' => Str::slug('User'),
                 'permissions' => json_encode($userPermissions)
-                
+
             ]
         ];
 

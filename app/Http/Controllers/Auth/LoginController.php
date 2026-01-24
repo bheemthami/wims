@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Sentinel;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 class LoginController extends Controller
 {
@@ -43,19 +43,16 @@ class LoginController extends Controller
     public function login(Request $request)
     {
 
-        
-        $credentials = $request->only('email','password');
+
+        $credentials = $request->only('email', 'password');
 
         $user  = Sentinel::authenticate($credentials);
 
-        // dd($user);
-
-        if($user){
+        if ($user) {
             return redirect()->route('dashboard');
-        }else{
-            return redirect()->to('/login')->with('error','Oops something went wrong!!');
+        } else {
+            return redirect()->to('/login')->with('error', 'Oops something went wrong!!');
         }
-
     }
 
     public function logout(Request $request)
