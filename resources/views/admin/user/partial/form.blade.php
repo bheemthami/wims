@@ -1,52 +1,63 @@
-<div class="col-md-12">
+<div class="row-auto">
+    <div class="form-group col-md-4">
+        {{ html()->label('First Name')->for('first_name') }} <span>*</span>
 
-	<div class="form-group col-md-4">
-		<label for="name">First Name <span>*</span></label>
-		{!! Form::text('first_name',null,['class'=>'form-control','autofocus'=>true,'placeholder'=>'first name']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('first_name')}}</i></span> 
-		@endif 
-	</div>
+        {{ html()->text('first_name')->class('form-control')->attribute('autofocus', true)->placeholder('first name') }}
 
-	<div class="form-group col-md-4">
-		<label for="name">Last Name <span>*</span></label>
-		{!! Form::text('last_name',null,['class'=>'form-control','placeholder'=>'last name']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('last_name')}}</i></span> 
-		@endif 
-	</div>
+        @error('first_name')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
 
-	<div class="form-group col-md-4">
-		<label for="name">Email<span>*</span></label>
-		{!! Form::email('email',null,['class'=>'form-control','placeholder'=>'Email']) !!}
-		@if($errors->has('email'))      
-		<span class="text-danger"><i>{{$errors->first('email')}}</i></span> 
-		@endif 
-	</div>
+    <div class="form-group col-md-4">
+        {{ html()->label('Last Name')->for('last_name') }} <span>*</span>
+
+        {{ html()->text('last_name')->class('form-control')->placeholder('last name') }}
+
+        @error('last_name')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
+
+    <div class="form-group col-md-4">
+        {{ html()->label('Email')->for('email') }} <span>*</span>
+
+        {{ html()->email('email')->class('form-control')->placeholder('Email')->disabled(isset($user)) }}
+
+        @error('email')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
+    @if (!isset($user))
+        <div class="form-group col-md-4">
+            {{ html()->label('Role')->for('role_id') }} <span>*</span>
+
+            {{ html()->select('role_id', $roleOptions)->class('form-control') }}
+
+            @error('role_id')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="form-group col-md-4">
+            {{ html()->label('Password')->for('password') }} <span>*</span>
+
+            {{ html()->password('password')->class('form-control') }}
+
+            @error('password')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="form-group col-md-4">
+            {{ html()->label('Confirm Password')->for('password_confirmation') }} <span>*</span>
+
+            {{ html()->password('password_confirmation')->class('form-control') }}
+
+            @error('password_confirmation')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+    @endif
 </div>
-
-<div class="col-md-12">
-	<div class="form-group col-md-4">
-		<label for="name">Role <span>*</span></label>
-		{!! Form::select('role_id',$roleOptions,null,['class'=>'form-control']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('role_id')}}</i></span> 
-		@endif 
-	</div> 
-	
-	<div class="form-group col-md-4">
-		<label for="name">Password <span>*</span></label>
-		{!! Form::password('password',['class'=>'form-control']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('password')}}</i></span> 
-		@endif 
-	</div>
-	<div class="form-group col-md-4">
-		<label for="name">Confirm password<span>*</span></label>
-		{!! Form::password('password_confirmation',['class'=>'form-control']) !!}
-		@if($errors->has('email'))      
-		<span class="text-danger"><i>{{$errors->first('password_confirmation')}}</i></span> 
-		@endif 
-	</div>
-</div>
-
+<div class="clearfix"></div>
