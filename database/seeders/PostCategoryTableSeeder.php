@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
-use Str;
-use DB;
 
 class PostCategoryTableSeeder extends Seeder
 {
@@ -18,19 +18,21 @@ class PostCategoryTableSeeder extends Seeder
     {
         $categories = [
             [
-                'title'=>'Notices',
+                'title' => 'Notices',
                 'order' => 1,
-                'slug'=>Str::slug('notices'),
+                'slug' => Str::slug('notices'),
                 'status' => 1
-            ],[
-                'title'=>'News',
+            ],
+            [
+                'title' => 'News',
                 'order' => 2,
-                'slug'=>Str::slug('news'),
+                'slug' => Str::slug('news'),
                 'status' => 1
-            ],[
-                'title'=>'Results',
+            ],
+            [
+                'title' => 'Results',
                 'order' => 3,
-                'slug'=>Str::slug('results'),
+                'slug' => Str::slug('results'),
                 'status' => 1
             ]
         ];

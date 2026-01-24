@@ -2,10 +2,12 @@
 
 
 namespace Database\Seeders;
+
+use App\Models\AcademicYear;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Setting;
 
-use DB;
 
 class SettingTableSeeder extends Seeder
 {
@@ -18,27 +20,29 @@ class SettingTableSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-    	DB::table('settings')->truncate();
+        DB::table('settings')->truncate();
 
-    	$setting = Setting::create([
-    		'municipality' => 'Local Level Name',
+        $year = AcademicYear::first();
+
+        Setting::create([
+            'municipality' => 'Local Level Name',
             'district_name' => 'Dolakha',
-            'office'=>'Office  Name',
-            'office_address' =>'Office Address',
-            'province_name' =>'Province Name',
-            'province_no' =>3,
-            'phone' =>'office Phone No.',
+            'office' => 'Office  Name',
+            'office_address' => 'Office Address',
+            'province_name' => 'Province Name',
+            'province_no' => 3,
+            'phone' => 'office Phone No.',
             'email' => 'example@gmail.om',
-            'system_name'   =>'Website Information Management System',
-            'system_short_name'=>'WIMS',
-            'tag_line'=> 'Move Digitally',
-            'logo'=>'logo.png',
-            'local_logo'=>'local_logo.png',
-            'favicon'=>'favicon.png',
+            'system_name'   => 'Website Information Management System',
+            'system_short_name' => 'WIMS',
+            'tag_line' => 'Move Digitally',
+            'logo' => 'logo.png',
+            'local_logo' => 'local_logo.png',
+            'favicon' => 'favicon.png',
             'per_page' => 20,
-            'academic_year_id' => 1
+            'academic_year_id' => $year->id
 
-    	]);
+        ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

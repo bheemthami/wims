@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class FacilityTableSeeder extends Seeder
 {
@@ -15,25 +15,27 @@ class FacilityTableSeeder extends Seeder
      */
     public function run()
     {
-       $facilities = [
+        $facilities = [
             [
                 'title' => 'Physics Lab',
                 'slug'  => 'physics-lab',
                 'order' => 1,
                 'description' => '...please update',
-                'status'=> 1
-            ],[
+                'status' => 1
+            ],
+            [
                 'title' => 'Computer Lab',
                 'slug'  => 'computer-lab',
                 'order' => 2,
                 'description' => '...please update',
-                'status'=> 1
-            ],[
+                'status' => 1
+            ],
+            [
                 'title' => 'Modern Library',
                 'slug'  => 'modern-library',
                 'order' => 3,
                 'description' => '...please update',
-                'status'=> 1
+                'status' => 1
             ]
 
         ];
@@ -43,6 +45,5 @@ class FacilityTableSeeder extends Seeder
         foreach ($facilities as $facility) {
             DB::table('facilities')->insert($facility);
         }
-
     }
 }

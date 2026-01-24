@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
-use DB;
-use Str;
 
 class TrainingTypeTableSeeder extends Seeder
 {
@@ -18,14 +18,15 @@ class TrainingTypeTableSeeder extends Seeder
     {
         $types = [
             [
-                'title'=>'Short Course Level 1',
+                'title' => 'Short Course Level 1',
                 'order' => 1,
-                'slug'=>Str::slug('Short Course Level 1'),
+                'slug' => Str::slug('Short Course Level 1'),
                 'status' => 1
-            ],[
-                'title'=>'Short Course Level 2',
+            ],
+            [
+                'title' => 'Short Course Level 2',
                 'order' => 2,
-                'slug'=>Str::slug('Short Course Level 2'),
+                'slug' => Str::slug('Short Course Level 2'),
                 'status' => 1
             ]
         ];

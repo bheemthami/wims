@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class ProgramTableSeeder extends Seeder
 {
@@ -24,8 +23,9 @@ class ProgramTableSeeder extends Seeder
                 'eligibility' => 'SLC/SEC with C Grading in Science & Math, D+ Grading in English.',
                 'description' => 'diploma-in-computer-engineering',
                 'order' => 1,
-                'status'=> 1
-            ],[
+                'status' => 1
+            ],
+            [
                 'title' => 'Diploma in Computer Engineering',
                 'slug'  => 'diploma-in-computer-engineering',
                 'quota' => '48 seats',
@@ -33,7 +33,7 @@ class ProgramTableSeeder extends Seeder
                 'eligibility' => 'SLC/SEC with C Grading in Science & Math, D+ Grading in English.',
                 'description' => 'diploma-in-computer-engineering',
                 'order' => 2,
-                'status'=> 1
+                'status' => 1
             ]
 
         ];
