@@ -3,13 +3,13 @@
 @include('layouts.frontend.head')
 
 <body>
-  @include('layouts.frontend.header')
+    @include('layouts.frontend.header')
 
-  @yield('content')
+    @yield('content')
 
-  @include('layouts.frontend.footer')
+    @include('layouts.frontend.footer')
 
-  @include('layouts.frontend.footer_scripts')
+    @include('layouts.frontend.footer_scripts')
 </body>
 
 </html>

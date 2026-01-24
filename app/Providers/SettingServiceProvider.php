@@ -19,6 +19,7 @@ class SettingServiceProvider extends ServiceProvider
             'layouts.admin.head',
             'admin.home',
             'auth.login',
+            'auth.register',
             'admin.school.individual.index',
             'layouts.admin.sidebar',
             'layouts.frontend.head',
