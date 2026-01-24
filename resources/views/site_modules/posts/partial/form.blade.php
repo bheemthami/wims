@@ -1,103 +1,135 @@
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Details</legend>
-	<div class="col-md-12 form-group">
-		<label for="name">Title <span>* </span></label>
-		{!! Form::text('title',null,['class'=>'form-control','placeholder'=>'Title']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('title')}}</i></span>
-		@endif
-	</div>
+    <legend class="legend-border">Details</legend>
+    <div class="row-auto">
+        <div class="col-md-12 form-group">
+            {{ html()->label('Title')->for('title') }} <span>*</span>
 
+            {{ html()->text('title')->class('form-control')->placeholder('Title') }}
 
-	<div class="col-md-6 form-group">
-		<label for="name">Academic Year <span>* </span></label>
-		{!! Form::select('academic_year_id',$data['year_options'],$data['setting']->academic_year_id,['class'=>'form-control']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('academic_year_id')}}</i></span>
-		@endif
-	</div>
+            @error('title')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-	<div class="col-md-6 form-group">
-		<label for="name">Post Category <span>* </span></label>
-		{!! Form::select('post_category_id',$data['post_category_options'],null,['class'=>'form-control']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('post_category_id')}}</i></span>
-		@endif
-	</div>
+        <div class="col-md-6 form-group">
+            {{ html()->label('Academic Year')->for('academic_year_id') }} <span>*</span>
 
+            {{ html()->select('academic_year_id', $data['year_options'], $data['setting']->academic_year_id)->class('form-control') }}
 
-	<div class="col-md-12 form-group">
-		<label for="name">Summary <span></span></label>
+            @error('academic_year_id')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-		<textarea id="summary" name="summary" class="form-control" rows="2" placeholder="summary goes here..."></textarea>
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('summary')}} </i></span>
-		@endif
-	</div>
+        <div class="col-md-6 form-group">
+            {{ html()->label('Post Category')->for('post_category_id') }} <span>*</span>
+            {{ html()->select('post_category_id', $data['post_category_options'], optional($post)->post_category_id)->class('form-control') }}
+            @error('post_category_id')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Description <span></span></label>
+        <div class="col-md-12 form-group">
+            {{ html()->label('Summary')->for('summary') }}
 
-		<textarea id="editor" name="description" class="form-control" placeholder="description goes here..."></textarea>
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('description')}} </i></span>
-		@endif
-	</div>
+            {{ html()->textarea('summary')->id('summary')->rows(2)->class('form-control')->placeholder('summary goes here...') }}
 
+            @error('summary')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Image </label>
-		{!! Form::file('image',null,['id'=>'image','class'=>'form-control']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('image')}} </i></span>
-		@endif
-		<span class="text-default">
-			<p>
-				<i>Files must be less than <strong>5 MB.</strong></i> <br>
-				<i>Allowed file types: <strong>png gif jpg jpeg.</strong></i> <br>
-			</p>
-		</span>
-	</div>
+        <div class="col-md-12 form-group">
+            {{ html()->label('Description')->for('description') }}
 
-	<div class="col-md-12 form-group">
-		<label for="name">Attachment <span></span></label>
-		{!! Form::file('attachment',null,['id'=>'attachment','class'=>'form-control']) !!}
+            {{ html()->textarea('description')->id('editor')->class('form-control')->placeholder('description goes here...') }}
 
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('attachment')}}</i></span>
-		@endif
-		<span class="text-default">
-			<p>
-				<i>Files must be less than <strong>5 MB.</strong></i> <br>
-				<i>Allowed file types: <strong>doc,docx,xls,xlsx,pdf.</strong></i> <br>
-			</p>
-		</span>
-	</div>
+            @error('description')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 form-group">
+            {{ html()->label('Image')->for('image') }}
+            {{ html()->file('image')->id('image') }}
+            @error('image')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+            <span class="text-default">
+                <p>
+                    <i>Files must be less than <strong>5 MB.</strong></i><br>
+                    <i>Allowed file types: <strong>png gif jpg jpeg.</strong></i>
+                </p>
+            </span>
+            @if (isset($post) && $post->image)
+                <a href="{{ asset('uploads/posts/' . $post->image) }}" target="_blank">
+                    <div class="img-wrapper">
+                        <img class="img img-responsive" src="{{ asset('uploads/posts/' . $post->image) }}"
+                            alt="No Image">
+                    </div>
+                </a>
+            @else
+                <span class="text-danger">No Attachment</span>
+            @endif
+        </div>
+
+        <div class="col-md-6 form-group">
+            {{ html()->label('Attachment')->for('attachment') }}
+
+            {{ html()->file('attachment')->id('attachment') }}
+
+            @error('attachment')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+
+            <span class="text-default">
+                <p>
+                    <i>Files must be less than <strong>5 MB.</strong></i><br>
+                    <i>Allowed file types: <strong>doc, docx, xls, xlsx, pdf.</strong></i>
+                </p>
+            </span>
+
+            @if (isset($post) && $post->attachment)
+                <a class="btn btn-sm btn-success" href="{{ asset('uploads/posts/' . $post->attachment) }}">
+                    <i class="fa fa-file"></i> view
+                </a>
+            @else
+                <span class="text-danger">No Attachment</span>
+            @endif
+        </div>
+    </div>
 </fieldset>
+
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Published on website</legend>
+    <legend class="legend-border">Published on website</legend>
 
-	<div class="col-md-4 form-group">
-		<label for="name">Publish on website ? <span>*</span></label>
-		{!! Form::select('status',$data['publish_options'],1,['class'=>'form-control']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('status')}}</i></span>
-		@endif
-	</div>
+    <div class="col-md-4 form-group">
+        {{ html()->label('Publish on website ?')->for('status') }} <span>*</span>
 
-	<div class="col-md-4 form-group">
-		<label for="name">Show on modal ? <span>*</span></label>
-		{!! Form::select('show_on_modal',[1=>'YES', 0=>'NO'],0,['class'=>'form-control']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('show_on_modal')}}</i></span>
-		@endif
-	</div>
+        {{ html()->select('status', $data['publish_options'], optional($post)->status)->class('form-control') }}
 
-	<div class="col-md-4 form-group">
-		<label for="name">Publish date ? <span>*</span></label>
-		{!! Form::text('date',null,['class'=>'form-control','id'=>'published_date']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('date')}}</i></span>
-		@endif
-	</div>
+        @error('status')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
+
+    <div class="col-md-4 form-group">
+        {{ html()->label('Show on modal ?')->for('show_on_modal') }} <span>*</span>
+
+        {{ html()->select('show_on_modal', [1 => 'YES', 0 => 'NO'], optional($post)->show_on_modal)->class('form-control') }}
+
+        @error('show_on_modal')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
+
+    <div class="col-md-4 form-group">
+        {{ html()->label('Publish Date')->for('date') }} <span>*</span>
+
+        {{ html()->text('date')->id('published_date')->class('form-control') }}
+
+        @error('date')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
 </fieldset>

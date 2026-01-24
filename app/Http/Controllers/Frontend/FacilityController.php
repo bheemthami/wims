@@ -168,7 +168,7 @@ class FacilityController extends Controller
 
                 $data['setting'] = defaultSetting();
                 $data['publish_options'] = $this->commonDataManager->publishStatusDropdown();
-                $facility = Facility::find($id);
+                $facility = Facility::with('images')->find($id);
                 return view('site_modules.facilities.edit', compact('data', 'facility'));
             } else {
                 return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
@@ -214,18 +214,19 @@ class FacilityController extends Controller
 
                         $facility->images()->save($image);
                     }
-                }
-                // remove old image file
-                if ($old_images) {
+                    // remove old image file
+                    if ($old_images) {
 
-                    foreach ($old_images as $img) {
-                        $oldFilePath = public_path('uploads/media/' . $img->image);
-                        if (File::exists($oldFilePath)) {
-                            File::delete($oldFilePath);
+                        foreach ($old_images as $img) {
+                            $oldFilePath = public_path('uploads/media/' . $img->image);
+                            if (File::exists($oldFilePath)) {
+                                File::delete($oldFilePath);
+                            }
+                            $img->delete();
                         }
-                        $img->delete();
                     }
                 }
+
 
                 if ($request->hasFile('attachment')) {
                     $file = $request->attachment;

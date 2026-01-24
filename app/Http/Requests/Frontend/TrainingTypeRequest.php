@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TrainingTypeRequest extends FormRequest
 {
@@ -26,12 +27,8 @@ class TrainingTypeRequest extends FormRequest
 
         $errors = [];
 
-        if(request()->method() == 'POST'){
-            $errors['title'] = 'required|unique:training_types,title|max:255';
-        }else{
-            $errors['title'] = 'required|max:255|unique:training_types,title,'.$this->training_type;
-        }
-
+        $errors['title'] = ['required', 'max:255', Rule::unique('training_types', 'title')
+            ->ignore($this->training_type),];
         $errors['status'] = 'required';
         $errors['order'] = 'required';
 

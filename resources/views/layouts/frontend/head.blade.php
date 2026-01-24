@@ -3,13 +3,11 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title> @yield('title')</title>
 
-    <meta name="description" content="{{$settings['setting']->office}}">
+    <meta name="description" content="{{ $settings['setting']->office }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('uploads/setting/'.$settings['setting']->favicon)}}">
-    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('uploads/setting/' . $settings['setting']->favicon) }}">
 
-    <!-- CSS here -->
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.min.css') }}">
@@ -25,6 +23,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
 
     <link rel="stylesheet" href="{{ asset('plugins/swiper/css/swiper-bundle.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/ui-utilities.css') }}">
 
     @yield('css')
 </head>

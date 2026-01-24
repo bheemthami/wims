@@ -9,7 +9,7 @@ use App\Models\Role;
 
 use App\Http\Requests\RoleRequest;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class RoleController extends Controller

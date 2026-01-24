@@ -1,68 +1,68 @@
 @extends('layouts.admin.app')
 
-@section('title','Facility > Create')
+@section('title', 'Facility > Create')
 
 @section('content')
-<!-- Content Header (Facility header) -->
-<section class="content-header">
-	<h1> Facilities</h1>
-	<ol class="breadcrumb">
-		<li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-		<li><a href="{{ route('facilities.index') }}"> Facilities</a></li>
-		<li class="active">Create</li>
-	</ol>
-</section>
-<!-- Main content -->
-<section class="content">
-	<!-- Default box -->
-	<div class="box">
-		<div class="box-header with-border">
-			<h3 class="box-title">Create</h3>
-			<div class="box-tools pull-right">
-				<label class="labellabel-danger">Fields with * are compulsory.</label>
-				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-				title="Collapse">
-				<i class="fa fa-minus"></i></button>
-			</div>
-		</div>
-		<div class="box-body">
-			<form id="page-form" method="POST" action="{{ route('facilities.store') }}" enctype="multipart/form-data">
-				{{ csrf_field() }}
-				@include('site_modules.facilities.partial.form')
-				<div class="form-inline">
-					<div class="pull pull-right">
-						<div class="form-group">
-							<button class="btn btn-success pull-right" type="submit">Submit</button>
-						</div>
-						<div class="form-group">
-							<a class="btn btn-danger pull-right" href="{{ route('facilities.index') }}">Cancel</a>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</section>
+    <!-- Content Header (Facility header) -->
+    <section class="content-header">
+        <h1> Facilities</h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="{{ route('facilities.index') }}"> Facilities</a></li>
+            <li class="active">Create</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Create</h3>
+                <div class="box-tools pull-right">
+                    <label class="labellabel-danger">Fields with * are compulsory.</label>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                        <i class="fa fa-minus"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                {{ html()->form('POST', route('facilities.store'))->id('facility-form')->attribute('enctype', 'multipart/form-data')->open() }}
+                @include('site_modules.facilities.partial.form')
+                <div class="form-inline">
+                    <div class="pull pull-right">
+                        <div class="form-group">
+                            <button class="btn btn-success pull-right" type="submit">Submit</button>
+                        </div>
+                        <div class="form-group">
+                            <a class="btn btn-danger pull-right" href="{{ route('facilities.index') }}">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+                {{ html()->form()->close() }}
+                </form>
+            </div>
+        </div>
+    </section>
 
 @endsection
 
 @section('js')
-<script src="{{ asset('plugins/ckeditor5/ckeditor.js')}}"></script>
+    <script src="{{ asset('plugins/ckeditor5/ckeditor.js') }}"></script>
 
-<script>
-	ClassicEditor
-	.create( document.querySelector( '#editor' ),{
-		ckfinder:{
-			uploadUrl:"{{ route('ckeditor.upload').'?_token='.csrf_token() }}"
-		}
-	} ,{
-			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
-	} )
-	.then( editor => {
-		window.editor = editor;
-	} )
-	.catch( err => {
-		console.error( err.stack );
-	} );
-</script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                ckfinder: {
+                    uploadUrl: "{{ route('ckeditor.upload') . '?_token=' . csrf_token() }}"
+                }
+            }, {
+                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+    </script>
 @endsection

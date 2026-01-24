@@ -11,7 +11,7 @@ use App\Managers\RoleManager;
 
 use App\Http\Requests\UserRequest;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class UserController extends Controller
@@ -30,7 +30,7 @@ class UserController extends Controller
 
             if (Sentinel::hasAccess('users.index')) {
                 $setting = defaultSetting();
-                $users = User::paginate($setting->per_page);
+                $users = User::with('role')->paginate($setting->per_page);
                 return view('admin.user.index', compact('users'));
             }
             return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');
