@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Setting;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 
 function defaultSetting()
@@ -154,7 +155,6 @@ function sidebarlist()
             'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
             'is_active' => true
         ]
-
     ];
     return $data;
 }
@@ -173,4 +173,53 @@ function embeddingType($key)
             return $types[$key];
         }
     }
+}
+
+function checkAccess($permission)
+{
+    if (is_string($permission)) {
+        return Sentinel::hasAccess($permission);
+    }
+
+    if (is_array($permission)) {
+        return Sentinel::hasAnyAccess($permission);
+    }
+
+    return false;
+}
+
+function getResourceFromRouteName($routeName)
+{
+    $routeArray = explode('.', $routeName);
+    return isset($routeArray[0]) ? $routeArray[0] : '';
+}
+
+function getResourceFromRouteUrl($routeUrl)
+{
+    $urlArray = explode('/', $routeUrl);
+    return isset($urlArray[6]) ? $urlArray[6] : '';
+}
+
+function checkIsMenuActive($menuUrl)
+{
+    $currentUrl = url()->current();
+    $currentResource = getResourceFromRouteUrl($currentUrl);
+
+    if (is_string($menuUrl)) {
+        $menuResource = getResourceFromRouteName($menuUrl);
+        return $currentResource == $menuResource;
+    }
+
+    if (is_array($menuUrl)) {
+
+        foreach ($menuUrl as $child) {
+            $childResource = getResourceFromRouteName($child['route_name']);
+            if ($currentResource == $childResource) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    return false;
 }
