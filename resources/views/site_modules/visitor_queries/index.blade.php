@@ -58,11 +58,11 @@
                                     <td>
                                         <div class="action-button-list">
                                             <a class="btn btn-sm btn-info"
-                                                href="{{ route('visitor_queries.show', $visitor_query->id) }}"><i
+                                                href="{{ route('visitor-queries.show', $visitor_query->id) }}"><i
                                                     class="fa fa-eye"></i></a>
                                             <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"
                                                 data-id="{{ $visitor_query->id }}"
-                                                data-route="{{ route('visitor_queries.destroy', $visitor_query->id) }}"><i
+                                                data-route="{{ route('visitor-queries.destroy', $visitor_query->id) }}"><i
                                                     class="fa fa-trash"></i></a>
                                         </div>
                                     </td>

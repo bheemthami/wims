@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\Actions;
+use App\Constants\Modules;
+use App\Constants\Permissions;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Setting;

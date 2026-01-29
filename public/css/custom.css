@@ -214,3 +214,7 @@ tr td .faculty-img {
 .mt-1 {
     margin-top: 1rem !important;
 }
+
+.sidebar {
+    padding-bottom: 0 !important;
+}

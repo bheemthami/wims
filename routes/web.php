@@ -120,7 +120,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['sauth'], 'namespace' => 'Fr
 
 	Route::post('/upload', 'PageController@uploadimage')->name('ckeditor.upload');
 	Route::resource('pages', 'PageController');
-	Route::resource('visitor_queries', 'VisitorQueryController');
+	Route::resource('visitor-queries', 'VisitorQueryController')->except(['create', 'store', 'edit', 'update']);
 	Route::resource('post-categories', 'PostCategoryController');
 	Route::resource('posts', 'PostController');
 	Route::resource('events', 'EventController');
