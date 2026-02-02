@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        {{ html()->label('Academic Year')->for('academic_year_id') }}
+                        {{ html()->label('Year')->for('academic_year_id') }}
                         <div class="form-group">
                             {{ html()->select('academic_year_id', $data['year_options'])->id('academic_year_id')->class('form-control') }}
                         </div>

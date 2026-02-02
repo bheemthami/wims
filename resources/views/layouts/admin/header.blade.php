@@ -29,7 +29,7 @@
 
                 <li class="dropdown user user-menu">
                     <a href="#">
-                        <span class="hidden-xs"> Academic Year - {{ $settings['setting']->academicYear->year }}
+                        <span class="hidden-xs"> Year - {{ $settings['setting']->academicYear->year }}
                         </span>
                     </a>
                 </li>

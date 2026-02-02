@@ -12,7 +12,7 @@
         </div>
 
         <div class="col-md-6 form-group">
-            {{ html()->label('Academic Year')->for('academic_year_id') }} <span>*</span>
+            {{ html()->label('Year')->for('academic_year_id') }} <span>*</span>
 
             {{ html()->select('academic_year_id', $data['year_options'], $data['setting']->academic_year_id)->class('form-control') }}
 

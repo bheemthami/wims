@@ -19,10 +19,8 @@
                 <h3 class="box-title">Pages List</h3>
                 <div class="box-tools pull-right">
                     <a class="btn btn-sm btn-success" href="{{ route('pages.create') }}"> <i class="fa fa-plus"></i> Add New
-                        Page</a>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fa fa-minus"></i></button>
+                        Page
+                    </a>
                 </div>
             </div>
             <div class="box-body">

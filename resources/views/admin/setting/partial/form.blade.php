@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            {{ html()->label('Academic Year')->for('academic_year_id') }} <span>*</span>
+            {{ html()->label('Year')->for('academic_year_id') }} <span>*</span>
             {{ html()->select('academic_year_id', $year_options)->class('form-control') }}
             @error('academic_year_id')
                 <span class="text-danger"><i>{{ $message }}</i></span>

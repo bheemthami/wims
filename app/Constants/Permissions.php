@@ -4,7 +4,7 @@ namespace App\Constants;
 
 final class Permissions
 {
-  // Academic Years Permissions
+  // Years Permissions
   public const ACADEMIC_YEARS_INDEX = Modules::ACADEMIC_YEARS . '.' . Actions::INDEX;
   public const ACADEMIC_YEARS_CREATE = Modules::ACADEMIC_YEARS . '.' . Actions::CREATE;
   public const ACADEMIC_YEARS_STORE = Modules::ACADEMIC_YEARS . '.' . Actions::STORE;

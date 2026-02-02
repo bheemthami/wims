@@ -22,7 +22,7 @@
                     </div>
                     <div class="box-body">
                         <div class="row form-group">
-                            <label class="col-md-4">Current Academic Year</label>
+                            <label class="col-md-4">Current Year</label>
                             <div class="col-md-8">{{ $setting->academicYear->year }}</div>
                         </div>
                         <div class="row form-group">

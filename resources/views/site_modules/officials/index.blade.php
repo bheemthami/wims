@@ -19,10 +19,8 @@
                 <h3 class="box-title">Officials List</h3>
                 <div class="box-tools pull-right">
                     <a class="btn btn-sm btn-success" href="{{ route('officials.create') }}"> <i class="fa fa-plus"></i> Add
-                        New Official</a>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fa fa-minus"></i></button>
+                        New Official
+                    </a>
                 </div>
             </div>
             <div class="box-body no-padding">

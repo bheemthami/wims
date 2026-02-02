@@ -23,7 +23,7 @@ return [
       [
         'key' => Modules::ACADEMIC_YEARS,
         'title' => 'Years',
-        'icon'  => 'fa fa-university',
+        'icon'  => 'fa fa-calendar-o',
         'route_name' => Modules::ACADEMIC_YEARS . '.' . Actions::INDEX,
         'parent_key' => 'settings',
         'permission' => Permissions::ACADEMIC_YEARS_INDEX,
