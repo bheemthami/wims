@@ -120,7 +120,7 @@
     <legend class="legend-border">Other Details</legend>
     <div class="row-auto">
         <div class="col-md-3 form-group">
-            {{ html()->label('Academic Year')->for('academic_year_id') }} <span>*</span>
+            {{ html()->label('Year')->for('academic_year_id') }} <span>*</span>
             {{ html()->select('academic_year_id', $data['year_options'], $data['setting']->academic_year_id)->class('form-control') }}
             @error('academic_year_id')
                 <span class="text-danger"><i>{{ $message }}</i></span>

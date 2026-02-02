@@ -19,7 +19,7 @@
                 <h3 class="box-title">Profile details</h3>
                 <div class="box-tools pull-right">
                     <a class="btn btn-sm btn-success" href="{{ route('profile.edit', $profile->id) }}"><i
-                            class="fa fa-edit"></i>Edit Profile
+                            class="fa fa-edit me-1"></i>Edit Profile
                     </a>
                 </div>
             </div>

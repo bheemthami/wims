@@ -2,7 +2,7 @@
     <legend class="legend-border">Document Details</legend>
 
     <div class="col-md-4 form-group">
-        {{ html()->label('Academic Year')->for('academic_year_id') }} <span>*</span>
+        {{ html()->label('Year')->for('academic_year_id') }} <span>*</span>
 
         {{ html()->select('academic_year_id', $data['year_options'])->class('form-control') }}
 

@@ -29,7 +29,7 @@
                     <legend class="legend-border">Office Details</legend>
                     <div class="row-auto">
                         <div class="col-md-4">
-                            <p><strong> Joining Academic Year: </strong><label
+                            <p><strong> Joining Year: </strong><label
                                     class="label label-success">{{ $official->academicYear->year }}
                             </p>
                         </div>
