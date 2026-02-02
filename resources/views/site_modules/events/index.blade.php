@@ -19,14 +19,12 @@
                 <h3 class="box-title">Events List</h3>
                 <div class="box-tools pull-right">
                     <a class="btn btn-sm btn-success" href="{{ route('events.create') }}"> <i class="fa fa-plus"></i> Add
-                        New Event</a>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fa fa-minus"></i></button>
+                        New Event
+                    </a>
                 </div>
             </div>
-            <div class="box-body table-responsive padding-10">
-                <div class="filtration">
+            <div class="box-body">
+                <div class="row filtration">
                     <div class="col-md-3">
                         {{ html()->label('Title')->for('title') }}
                         <div class="form-group">
@@ -53,7 +51,7 @@
                     </div>
                 </div>
 
-                <div id="table-wrapper">
+                <div id="table-wrapper" class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <thead>
                             <th>S.No.</th>

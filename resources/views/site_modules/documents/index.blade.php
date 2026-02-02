@@ -20,9 +20,6 @@
                 <div class="box-tools pull-right">
                     <a class="btn btn-sm btn-success" href="{{ route('documents.create') }}"> <i class="fa fa-plus"></i> Add
                         New Document</a>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fa fa-minus"></i></button>
                 </div>
             </div>
             <div class="box-body">

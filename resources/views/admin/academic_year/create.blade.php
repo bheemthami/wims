@@ -18,6 +18,9 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Create</h3>
+                <div class="box-tools pull-right">
+                    <p style="color:red;">Fileds with (*) are compulsory.</p>
+                </div>
             </div>
             <div class="box-body">
                 {{ html()->form('POST', route('academic-years.store'))->id('academic-year-form')->open() }}

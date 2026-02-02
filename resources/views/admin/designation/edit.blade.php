@@ -20,7 +20,6 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Edit</h3>
-
                 <div class="box-tools pull-right">
                     <p style="color:red;">Fileds with (*) are compulsory.</p>
                 </div>

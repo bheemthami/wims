@@ -22,10 +22,6 @@
                             class="fa fa-edit"></i></a>
 
                     <a class="btn btn-sm btn-danger" href="{{ route('galleries.index') }}"><i class="fa fa-times"></i></a>
-
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fa fa-minus"></i></button>
                 </div>
             </div>
 

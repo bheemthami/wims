@@ -1,19 +1,21 @@
 <div class="row">
-	<div class="col-md-6 form-group">
-		<label for="name">First Name <span>* </span></label>
-		{!! Form::text('first_name',$profile->first_name,['class'=>'form-control','placeholder'=>'Name']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('first_name')}}</i></span>
-		@endif
-	</div>
-</div>
+    <div class="col-md-6 form-group">
+        {{ html()->label('First Name')->for('first_name') }} <span>*</span>
 
-<div class="row">
-	<div class="col-md-6 form-group">
-		<label for="name">Last Name <span>* </span></label>
-		{!! Form::text('last_name',$profile->last_name,['class'=>'form-control','placeholder'=>'Last Name']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('last_name')}}</i></span>
-		@endif
-	</div>
+        {{ html()->text('first_name')->class('form-control')->placeholder('Name') }}
+
+        @error('first_name')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
+
+    <div class="col-md-6 form-group">
+        {{ html()->label('Last Name')->for('last_name') }} <span>*</span>
+
+        {{ html()->text('last_name')->class('form-control')->placeholder('Last Name') }}
+
+        @error('last_name')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
 </div>
