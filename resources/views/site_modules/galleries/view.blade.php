@@ -49,6 +49,8 @@
                             <p>{{ $gallery->summary }} </p>
                         </div>
 
+                    </div>
+                    <div class="row px-15">
                         @if ($gallery->type === 'image')
                             <div class="mb-3 col-md-12">
                                 <h4>Images</h4>
@@ -95,13 +97,23 @@
                                 </div>
                             </div>
                         @else
-                            <div class="mb-3 col-md-12">
-                                <div class="iframe-container">
-                                    <iframe width="560" height="315" src="{{ $gallery->link }}"
-                                        title="YouTube video player" frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        allowfullscreen></iframe>
-                                </div>
+                            <div class="mb-3 col-md-6">
+                                @if (explode('v=', $gallery->link)[1])
+                                    <div class="iframe-container">
+                                        <iframe width="560" height="315"
+                                            src="https://www.youtube.com/embed/{{ explode('v=', $gallery->link)[1] }}"
+                                            title="{{ $gallery->title ?? '' }}" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen></iframe>
+                                    </div>
+                                @else
+                                    <div class="iframe-container">
+                                        <iframe width="560" height="315" src="{{ $gallery->link ?? '' }}"
+                                            title="{{ $gallery->title ?? '' }}" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen></iframe>
+                                    </div>
+                                @endif
                             </div>
                         @endif
                     </div>
