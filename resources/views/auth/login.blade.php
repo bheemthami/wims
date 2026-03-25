@@ -37,12 +37,11 @@
                     @endif
                 </div>
                 <div class="row">
-
                     <div class="col-xs-4">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                     </div>
                     <div class="col-xs-8">
-                        <a href="#" class="btn btn-link btn-block">Forgot Passward?</a>
+                        <a href="{{ route('password.request') }}" class="btn btn-link btn-block">Forgot Password?</a>
                     </div>
                 </div>
             </form>

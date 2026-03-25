@@ -1,9 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+
 <body>
     <style>
         @media only screen and (max-width: 600px) {
@@ -37,8 +40,9 @@
                                 <tr>
                                     <td class="content-cell">
                                         {{ Illuminate\Mail\Markdown::parse($slot) }}
-
-                                        {{ $subcopy or '' }}
+                                        @if (isset($subcopy))
+                                            {{ $subcopy or '' }}
+                                        @endif
                                     </td>
                                 </tr>
                             </table>
@@ -51,4 +55,5 @@
         </tr>
     </table>
 </body>
+
 </html>
