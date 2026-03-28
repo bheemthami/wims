@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -40,19 +41,35 @@ class LoginController extends Controller
     }
 
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
 
 
         $credentials = $request->only('email', 'password');
 
-        $user  = Sentinel::authenticate($credentials);
+        // Check if user exists first
+        $user = Sentinel::findByCredentials(['email' => $credentials['email']]);
 
-        if ($user) {
-            return redirect()->route('dashboard');
-        } else {
-            return redirect()->to('/login')->with('error', 'Oops something went wrong!!');
+        if (!$user) {
+            return back()
+                ->withInput($request->only('email'))
+                ->withErrors([
+                    'email' => 'No account found with this email address.'
+                ]);
         }
+
+        // Check password / authenticate
+        $authenticated = Sentinel::authenticate($credentials);
+
+        if (!$authenticated) {
+            return back()
+                ->withInput($request->only('email'))
+                ->withErrors([
+                    'password' => 'The password is incorrect.'
+                ]);
+        }
+
+        return redirect()->route('dashboard');
     }
 
     public function logout(Request $request)
