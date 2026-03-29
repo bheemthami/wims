@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\Request;
 
 class ResetPasswordController extends Controller
 {
@@ -25,7 +28,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -35,5 +38,25 @@ class ResetPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    protected function resetPassword($user, $password)
+    {
+        // Find user through Sentinel first, then update
+        $sentinelUser = Sentinel::findById($user->id);
+        // Update via Sentinel (handles hashing automatically)
+        Sentinel::update($sentinelUser, ['password' => $password]);
+
+        // Flush old session to avoid conflicts
+        request()->session()->flush();
+        request()->session()->regenerate();
+
+        // Login the user via Sentinel
+        Sentinel::login($sentinelUser, true);
+    }
+
+    protected function sendResetResponse(Request $request, $response)
+    {
+        return redirect($this->redirectTo);
     }
 }
