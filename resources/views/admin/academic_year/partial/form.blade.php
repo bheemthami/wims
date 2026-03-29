@@ -1,9 +1,10 @@
-<div class="col-md-12">
-	<div class="col-md-4 form-group">
-		<label for="name">Academic Year (BS)<span>*</span></label>
-		{!! Form::text('year',null,['class'=>'form-control','autofocus'=>true,'placeholder'=>'Academic Year']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('year')}}</i></span>
-		@endif
-	</div>
+<div class="row">
+    <div class="col-md-12 form-group">
+        {{ html()->label('Year')->for('year') }} <span>*</span>
+        {{ html()->text('year')->class('form-control')->placeholder('Year')->autofocus() }}
+
+        @error('year')
+            <span class="text-danger"><i>{{ $message }}</i></span>
+        @enderror
+    </div>
 </div>

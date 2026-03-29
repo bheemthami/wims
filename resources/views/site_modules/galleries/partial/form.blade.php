@@ -1,98 +1,97 @@
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Details</legend>
-	<div class="col-md-12 form-group">
-		<label for="name">Title <span>* </span></label>
-		{!! Form::text('title',null,['class'=>'form-control','placeholder'=>'Title']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('title')}}</i></span> 
-		@endif 
-	</div>
+    <legend class="legend-border">Details</legend>
+    <div class="row px-15">
+        <div class="col-md-12 form-group">
+            {{ html()->label('Title')->for('title') }} <span>*</span>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Summary <span></span></label>
+            {{ html()->text('title')->class('form-control')->placeholder('Title') }}
 
-		<textarea id="summary" name="summary" class="form-control" rows="2" placeholder="summary goes here..."></textarea>
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('summary')}} </i></span> 
-		@endif 
-	</div>
+            @error('title')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="col-md-12 form-group">
+            {{ html()->label('Summary')->for('summary') }}
+
+            {{ html()->textarea('summary')->id('summary')->class('form-control')->rows(2)->placeholder('summary goes here...') }}
+
+            @error('summary')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 form-group">
+            {{ html()->label('Year')->for('academic_year_id') }} <span>*</span>
+
+            {{ html()->select('academic_year_id', $data['year_options'], $data['setting']->academic_year_id)->class('form-control') }}
+
+            @error('academic_year_id')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 form-group">
+            {{ html()->label('Type')->for('type') }} <span>*</span>
+
+            {{ html()->select('type', $data['type_options'], 'image')->id('gallery_type')->class('form-control') }}
+
+            @error('type')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
 
-	<div class="col-md-6 form-group">
-		<label for="name">Academic Year <span>* </span></label>
-		{!! Form::select('academic_year_id',$data['year_options'],$data['setting']->academic_year_id,['class'=>'form-control']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('academic_year_id')}}</i></span> 
-		@endif 
-	</div>
+        <div class="col-md-6 form-group">
+            <div class="image-container">
+                {{ html()->label('Image')->for('image') }}
 
-	<div class="col-md-6 form-group">
-		<label for="name">Type <span>* </span></label>
-		{!! Form::select('type',$data['type_options'],'image',['id'=>'gallery_type','class'=>'form-control']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('type')}}</i></span> 
-		@endif 
-	</div>
-	<div class="image-container">
-		<div class="col-md-6 form-group">
-			<label for="name">Image </label>
-			{!! Form::file('image[]',['id'=>'image','multiple'=>'true']) !!}
-			@if($errors)      
-			<span class="text-danger"><i>{{$errors->first('image')}} </i></span> 
-			@endif 
-			<span class="text-default">
-				<p>
-					<i>Files must be less than <strong>10 MB.</strong></i> <br>
-					<i>Allowed file types: <strong>png gif jpg jpeg.</strong></i> <br>
-				</p>
-			</span>		
-		</div>
-		<div class="row col-md-6">
-			<div class="col-md-6 form-group">
-				{!! Form::checkbox('is_slider',1,false) !!}
-				@if($errors)      
-				<span class="text-danger"><i>{{$errors->first('is_slider')}}</i></span> 
-				@endif 
-				<label for="name">Show on slider </label>
-			</div>
-		</div>
-	</div>
-	<div class="video-container">
-		<div class="row col-md-12">
-			<div class="col-md-6 form-group">
-				<label for="name">Video Link <span>* </span></label>
-				{!! Form::text('link',null,['class'=>'form-control','placeholder'=>'Title']) !!}
-				@if($errors)      
-				<span class="text-danger"><i>{{$errors->first('link')}}</i></span> 
-				@endif 
-			</div>
-		</div>
-	</div>
+                {{ html()->file('image[]')->id('image')->multiple() }}
 
+                @error('image')
+                    <span class="text-danger"><i>{{ $message }}</i></span>
+                @enderror
+
+                <span class="text-default">
+                    <p>
+                        <i>Files must be less than <strong>10 MB.</strong></i><br>
+                        <i>Allowed file types: <strong>png gif jpg jpeg.</strong></i>
+                    </p>
+                </span>
+            </div>
+
+            <div class="video-container">
+                {{ html()->label('Video Link (if type is video)')->for('link') }} <span>*</span>
+
+                {{ html()->text('link')->class('form-control')->placeholder('link') }}
+
+                @error('link')
+                    <span class="text-danger"><i>{{ $message }}</i></span>
+                @enderror
+            </div>
+        </div>
+        <div>
 </fieldset>
+
 <fieldset class="fieldset-border">
+    <legend class="legend-border">Published on website</legend>
+    <div class="row px-15">
+        <div class="col-md-6 form-groiup">
+            {{ html()->label('Publish on Website ?')->for('status') }}
 
-	<legend class="legend-border">Published on website</legend>
-	
-	<div class="row col-md-12">
-		<div class="col-md-6 form-group">
-			<label for="name">Publish on website ? <span>*</span></label>
-			{!! Form::select('status',$data['publish_options'],0,['class'=>'form-control']) !!}
-			@if($errors)      
-			<span class="text-danger"><i>{{$errors->first('status')}}</i></span> 
-			@endif 
-		</div>
-	</div>
-	<div class="row col-md-12">
-		<div class="col-md-6 form-group">
-			<label for="name">Publish date ? <span>*</span></label>
-			{!! Form::text('date',null,['class'=>'form-control','id'=>'published_date']) !!}
-			@if($errors)      
-			<span class="text-danger"><i>{{$errors->first('date')}}</i></span> 
-			@endif 
-		</div>
-	</div>
+            {{ html()->select('status', $data['publish_options'], 0)->class('form-control') }}
+
+            @error('status')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="col-md-6">
+            {{ html()->label('Publish Date')->for('date') }}
+            {{ html()->text('date')->id('published_date')->class('form-control') }}
+            @error('date')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+    </div>
 </fieldset>
-
-
-

@@ -56,19 +56,20 @@ class OfficialController extends Controller
             $data['teaching_status_options'] = $this->commonDataManager->yesNoDropdown();
             $data['publish_options'] = $this->commonDataManager->publishStatusDropdown();
 
+            $search_params['department_id'] = null;
+            $search_params['working_status'] = null;
+            $search_params['is_teaching_official'] = null;
+            $search_params['status'] = null;
+            $search_params['first_name'] = null;
+
             if (request()->ajax()) {
-                $search_params = request()->only('first_name', 'last_name', 'department_id', 'working_status', 'is_teaching_official', 'status');
+                $search_params = request()->only('first_name', 'department_id', 'working_status', 'is_teaching_official', 'status');
                 $officials = $this->officialManager->all($search_params, $setting->per_page);
                 return view('site_modules.officials.replace_index', compact('officials', 'data'));
             }
 
 
             if (Sentinel::hasAccess('officials.index')) {
-                $search_params['department_id'] = null;
-                $search_params['working_status'] = null;
-                $search_params['is_teaching_official'] = null;
-                $search_params['status'] = null;
-                $search_params['first_name'] = null;
                 $officials = $this->officialManager->all($search_params, $setting->per_page);
                 return view('site_modules.officials.index', compact('officials', 'data'));
             }
@@ -100,6 +101,7 @@ class OfficialController extends Controller
                 $data['working_status_options'] = $this->commonDataManager->yesNoDropdown();
                 $data['teaching_status_options'] = $this->commonDataManager->yesNoDropdown();
                 $data['publish_options'] = $this->commonDataManager->publishStatusDropdown();
+                $data['yes_no_options'] = $this->commonDataManager->yesNoDropdown();
                 return view('site_modules.officials.create', compact('data'));
             } else {
                 return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');

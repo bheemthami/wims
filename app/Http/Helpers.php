@@ -1,105 +1,160 @@
 <?php
 
 use App\Models\Setting;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 
-function defaultSetting(){
+function defaultSetting()
+{
     return Setting::select('*')->first();
-
 }
 
 function sidebarlist()
 {
     $data = [];
-   
-    $data['modules'] = [
-        [ 
-            'module' => 'Settings',
-            'actions' => ['index','edit','update']
-        ],[ 
-            'module' => 'Academic Years',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Users',
-            'actions' => ['index','create','store','view','edit','update','delete','restore-password']
-        ],[ 
-            'module' => 'Profile',
-            'actions' => ['index','edit','update']
-        ],[ 
-            'module' => 'Roles',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Designations',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Role Permissions',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'User Permissions',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Pages',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Visitor Queries',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Post Categories',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Posts',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Events',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Banners',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],
-        [ 
-            'module' => 'Document Types',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Documents',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Galleries',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Training Categories',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Training Types',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Trainings',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Programs',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Facilities',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Modules',
-            'actions' => ['index']
-        ],[ 
-            'module' => 'Testimonials',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Quick Links',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Departments',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Officials',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ],[ 
-            'module' => 'Embeddings',
-            'actions' => ['index','create','store','view','edit','update','delete']
-        ]
 
+    $data['modules'] = [
+        [
+            'module' => 'Years',
+            'actions' => ['index', 'create', 'store', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Settings',
+            'actions' => ['index', 'edit', 'update'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Roles',
+            'actions' => ['index', 'create', 'store', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+
+        [
+            'module' => 'Users',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete', 'restore-password'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Role Permissions',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'User Permissions',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => false
+        ],
+        [
+            'module' => 'Profile',
+            'actions' => ['index', 'edit', 'update'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Departments',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Designations',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Officials',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Document Types',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Documents',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Post Categories',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Posts',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Events',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => false
+        ],
+        [
+            'module' => 'Pages',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Facilities',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Visitor Queries',
+            'actions' => ['index', 'view', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Banners',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Galleries',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Training Categories',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => false
+        ],
+        [
+            'module' => 'Training Types',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => false
+        ],
+        [
+            'module' => 'Trainings',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => false
+        ],
+        [
+            'module' => 'Programs',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Modules',
+            'actions' => ['index'],
+            'is_active' => false
+        ],
+        [
+            'module' => 'Testimonials',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Quick Links',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ],
+        [
+            'module' => 'Embeddings',
+            'actions' => ['index', 'create', 'store', 'view', 'edit', 'update', 'delete'],
+            'is_active' => true
+        ]
     ];
     return $data;
 }
@@ -108,14 +163,63 @@ function sidebarlist()
 function embeddingType($key)
 {
     $types =  [
-     'facebook-page' => 'Facebook Page', 
-     'twitter-handle' => 'Twitter Handle',
-     'google-map' => 'Google Map',
- ];
+        'facebook-page' => 'Facebook Page',
+        'twitter-handle' => 'Twitter Handle',
+        'google-map' => 'Google Map',
+    ];
 
- foreach ($types as $k => $value) {
-    if ($k == $key) {
-        return $types[$key];
+    foreach ($types as $k => $value) {
+        if ($k == $key) {
+            return $types[$key];
+        }
     }
 }
+
+function checkAccess($permission)
+{
+    if (is_string($permission)) {
+        return Sentinel::hasAccess($permission);
+    }
+
+    if (is_array($permission)) {
+        return Sentinel::hasAnyAccess($permission);
+    }
+
+    return false;
+}
+
+function getResourceFromRouteName($routeName)
+{
+    $routeArray = explode('.', $routeName);
+    return isset($routeArray[0]) ? $routeArray[0] : '';
+}
+
+function getResourceFromRouteUrl($routeUrl)
+{
+    $urlArray = explode('/', $routeUrl);
+    return isset($urlArray[6]) ? $urlArray[6] : '';
+}
+
+function checkIsMenuActive($menuUrl)
+{
+    $currentUrl = url()->current();
+    $currentResource = getResourceFromRouteUrl($currentUrl);
+
+    if (is_string($menuUrl)) {
+        $menuResource = getResourceFromRouteName($menuUrl);
+        return $currentResource == $menuResource;
+    }
+
+    if (is_array($menuUrl)) {
+
+        foreach ($menuUrl as $child) {
+            $childResource = getResourceFromRouteName($child['route_name']);
+            if ($currentResource == $childResource) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    return false;
 }

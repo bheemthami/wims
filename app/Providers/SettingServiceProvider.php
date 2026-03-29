@@ -13,13 +13,20 @@ class SettingServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['welcome','layouts.admin.app','layouts.admin.head','admin.home','admin.school.ledgers.new_grade_ledger','admin.student.grade_sheet.new_sheet',
-            'admin.student.grade_sheet.third_template',
-            'admin.student.grade_sheet.annual_report',
-            'admin.student.grade_sheet.terminal_report',
-            'auth.login','admin.school.individual.index',
-            'layouts.admin.sidebar','layouts.frontend.head',
-            'layouts.frontend.header','layouts.frontend.footer',
+        view()->composer([
+            'welcome',
+            'layouts.admin.app',
+            'layouts.admin.head',
+            'admin.home',
+            'auth.login',
+            'auth.passwords.email',
+            'auth.passwords.reset',
+            'auth.register',
+            'admin.school.individual.index',
+            'layouts.admin.sidebar',
+            'layouts.frontend.head',
+            'layouts.frontend.header',
+            'layouts.frontend.footer',
         ], 'App\Http\ViewComposers\SettingComposer');
     }
 

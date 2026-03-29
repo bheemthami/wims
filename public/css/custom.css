@@ -10,6 +10,14 @@
     border-left: 1px solid #3c8dbc;
     border-right: 1px solid #3c8dbc;
     padding-bottom: 20px;
+
+    .fieldset-body {
+        padding: 10px 15px 10px 15px;
+    }
+}
+
+.filteration {
+    overflow: hidden;
 }
 
 .legend-border {
@@ -105,7 +113,8 @@ tr td .faculty-img {
     height: 0;
     padding-bottom: 56.25%;
     overflow: hidden;
-    margin-bottom: 50px;
+    margin-bottom: 12px;
+    border-radius: 10px;
 }
 
 .iframe-container iframe {
@@ -122,4 +131,91 @@ tr td .faculty-img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.ck-editor__editable_inline {
+    min-height: 120px; /* ≈ 3 rows */
+}
+
+.img-wrapper {
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 4px;
+    width: 150px;
+    height: 100px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+        &:hover {
+            transform: scale(1.1);
+            transition: transform 0.6s ease;
+        }
+    }
+}
+
+.m-0 {
+    margin: 0 !important;
+}
+
+.mx-0 {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.my-0 {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.m-15 {
+    margin: 15px !important;
+}
+
+.mx-15 {
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+}
+
+.my-15 {
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.px-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.py-0 {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.p-15 {
+    padding: 15px !important;
+}
+
+.px-15 {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+.py-15 {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.mt-1 {
+    margin-top: 1rem !important;
+}
+
+.sidebar {
+    padding-bottom: 0 !important;
 }

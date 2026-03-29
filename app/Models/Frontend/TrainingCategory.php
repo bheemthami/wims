@@ -9,7 +9,7 @@ class TrainingCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','slug','image','status','order'];
+    protected $fillable = ['title', 'slug', 'image', 'status', 'order'];
 
     protected $table = 'training_categories';
 

@@ -1,122 +1,140 @@
 <div class="row">
-	<div class="col-md-6">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ html()->label('Year')->for('academic_year_id') }} <span>*</span>
+            {{ html()->select('academic_year_id', $year_options)->class('form-control') }}
+            @error('academic_year_id')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-		<div class="form-group">
-			<label for="name">Academic Year <span>* </span></label>
-			{!! Form::select('academic_year_id',$year_options,null,['class'=>'form-control']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('academic_year_id')}}</i></span>
-			@endif
-		</div>
+        <div class="form-group">
+            {{ html()->label('Local Level')->for('municipality') }} <span>*</span>
+            {{ html()->text('municipality')->class('form-control')->placeholder('Local Level') }}
+            @error('municipality')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-		<div class="form-group">
-			<label for="name">Local Level <span>*</span></label>
-			{!! Form::text('municipality',null,['class'=>'form-control','placeholder'=>'Local Level']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('municipality')}}</i></span>
-			@endif
-		</div>
+        <div class="form-group">
+            {{ html()->label('Name')->for('office') }} <span>*</span>
+            {{ html()->text('office')->class('form-control')->placeholder('Office') }}
+            @error('office')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-		<div class="form-group">
-			<label for="name">Name <span>*</span></label>
-			{!! Form::text('office',null,['class'=>'form-control','placeholder'=>'Office']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('office')}}</i></span>
-			@endif
-		</div>
+        <div class="form-group">
+            {{ html()->label('Address')->for('office_address') }} <span>*</span>
+            {{ html()->text('office_address')->class('form-control')->placeholder('Office Address') }}
+            @error('office_address')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-		<div class="form-group">
-			<label for="name">Address<span>*</span></label>
-			{!! Form::text('office_address',null,['class'=>'form-control','placeholder'=>'Office Address']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('office_address')}}</i></span>
-			@endif
-		</div>
+        <div class="form-group">
+            {{ html()->label('Province Name')->for('province_name') }} <span>*</span>
+            {{ html()->text('province_name')->class('form-control')->placeholder('Province Name') }}
+            @error('province_name')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-		<div class="form-group">
-			<label for="name">Province Name <span>*</span></label>
-			{!! Form::text('province_name',null,['class'=>'form-control','placeholder'=>'Province Name']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('province_name')}}</i></span>
-			@endif
-		</div>
+        <div class="form-group">
+            {{ html()->label('District Name')->for('district_name') }} <span>*</span>
+            {{ html()->text('district_name')->class('form-control')->placeholder('district') }}
+            @error('district_name')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-		<div class="form-group">
-			<label for="name">District Name <span>*</span></label>
-			{!! Form::text('district_name',null,['class'=>'form-control','placeholder'=>'district']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('district_name')}}</i></span>
-			@endif
-		</div>
+        <div class="form-group">
+            {{ html()->label('Phone')->for('phone') }} <span>*</span>
+            {{ html()->text('phone')->class('form-control')->placeholder('Phone') }}
+            @error('phone')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-		<div class="form-group">
-			<label for="name">Phone <span>*</span></label>
-			{!! Form::text('phone',null,['class'=>'form-control','placeholder'=>'Phone']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('phone')}}</i></span>
-			@endif
-		</div>
+        <div class="form-group">
+            {{ html()->label('Email')->for('email') }} <span>*</span>
+            {{ html()->email('email')->class('form-control')->placeholder('example@gmail.com') }}
+            @error('email')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+    </div>
 
-		<div class="form-group">
-			<label for="name">Email <span>*</span></label>
-			{!! Form::email('email',null,['class'=>'form-control','placeholder'=>'example@gmail.com']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('email')}}</i></span>
-			@endif
-		</div>
-	</div>
+    <div class="col-md-6">
 
-	<div class="col-md-6">
+        <div class="form-group">
+            {{ html()->label('Logo')->for('logo') }}
+            {{ html()->file('logo') }}
+            @error('logo')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
 
-		<div class="form-group">
-			<label for="name">Logo</label>
-			{!! Form::file('logo',null,['class'=>'form-control']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('logo')}}</i></span>
-			@endif
-			<img class="image img-responsive" src="{{ asset('uploads/setting/'.$setting->logo) }}" height="100" width="100" alt="LOGO">
-		</div>
+            @if (isset($setting) && $setting->logo)
+                <div class="mt-1">
+                    <img class="img-responsive" src="{{ asset('uploads/setting/' . $setting->logo) }}" height="100"
+                        width="100" alt="LOGO">
+                </div>
+            @endif
+        </div>
 
-		<div class="form-group">
-			<label for="name">Website main Logo</label>
-			{!! Form::file('local_logo',null,['class'=>'form-control']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('local_logo')}}</i></span>
-			@endif
-			<img class="image img-responsive" src="{{ asset('uploads/setting/'.$setting->local_logo) }}" height="100" width="100" alt="LOCAL LOGO">
-		</div>
+        <div class="form-group">
+            {{ html()->label('Website main Logo')->for('local_logo') }}
+            {{ html()->file('local_logo') }}
+            @error('local_logo')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
 
-		<div class="form-group">
-			<label for="name">Favicon</label>
-			{!! Form::file('favicon',null,['class'=>'form-control']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('favicon')}}</i></span>
-			@endif
-			<img class="image img-responsive" src="{{ asset('uploads/setting/'.$setting->favicon) }}" height="100" width="100" alt="FAVICON">
-		</div>
+            @if (isset($setting) && $setting->local_logo)
+                <div class="mt-1">
+                    <img class="img-responsive" src="{{ asset('uploads/setting/' . $setting->local_logo) }}"
+                        height="100" width="100" alt="LOCAL LOGO">
+                </div>
+            @endif
+        </div>
 
+        <div class="form-group">
+            {{ html()->label('Favicon')->for('favicon') }}
+            {{ html()->file('favicon') }}
+            @error('favicon')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
 
-		<div class="form-group">
-			<label for="name">System Name <span>*</span></label>
-			{!! Form::text('system_name',null,['class'=>'form-control','placeholder'=>'System Name']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('systme_name')}}</i></span>
-			@endif
-		</div>
+            @if (isset($setting) && $setting->favicon)
+                <div class="mt-1">
+                    <img class="img-responsive" src="{{ asset('uploads/setting/' . $setting->favicon) }}"
+                        height="100" width="100" alt="FAVICON">
+                </div>
+            @endif
+        </div>
 
-		<div class="form-group">
-			<label for="name">System Short Name <span>*</span></label>
-			{!! Form::text('system_short_name',null,['class'=>'form-control','placeholder'=>'System Short Name']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('system_short_name')}}</i></span>
-			@endif
-		</div>
-		<div class="form-group">
-			<label for="name">Tag Line <span>*</span></label>
-			{!! Form::text('tag_line',null,['class'=>'form-control','placeholder'=>'System Short Name']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('tag_line')}}</i></span>
-			@endif
-		</div>
-	</div>
+        <div class="form-group">
+            {{ html()->label('System Name')->for('system_name') }} <span>*</span>
+            {{ html()->text('system_name')->class('form-control')->placeholder('System Name') }}
+            @error('system_name')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            {{ html()->label('System Short Name')->for('system_short_name') }} <span>*</span>
+            {{ html()->text('system_short_name')->class('form-control')->placeholder('System Short Name') }}
+            @error('system_short_name')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            {{ html()->label('Tag Line')->for('tag_line') }} <span>*</span>
+            {{ html()->text('tag_line')->class('form-control')->placeholder('System Short Name') }}
+            @error('tag_line')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+    </div>
 </div>

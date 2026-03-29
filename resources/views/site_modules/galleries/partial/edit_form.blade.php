@@ -1,126 +1,130 @@
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Details</legend>
-	<div class="col-md-12 form-group">
-		<label for="name">Title <span>* </span></label>
-		{!! Form::text('title',null,['class'=>'form-control','placeholder'=>'Title']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('title')}}</i></span>
-		@endif
-	</div>
+    <legend class="legend-border">Details</legend>
+    <div>
+        <div class="col-md-12 form-group">
+            {{ html()->label('Title')->for('title') }} <span>*</span>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Summary <span></span></label>
+            {{ html()->text('title')->class('form-control')->placeholder('Title') }}
 
-		<textarea id="summary" name="summary" class="form-control" rows="2" placeholder="summary goes here..."></textarea>
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('summary')}} </i></span>
-		@endif
-	</div>
+            @error('title')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
+        <div class="col-md-12 form-group">
+            {{ html()->label('Summary')->for('summary') }}
 
-	<div class="col-md-6 form-group">
-		<label for="name">Academic Year <span>* </span></label>
-		{!! Form::select('academic_year_id',$data['year_options'],$data['setting']->academic_year_id,['class'=>'form-control']) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('academic_year_id')}}</i></span>
-		@endif
-	</div>
+            {{ html()->textarea('summary')->id('summary')->class('form-control')->rows(2)->placeholder('summary goes here...') }}
 
-	<div class="col-md-6 form-group">
-		<label for="name">Type <span>* </span></label>
-		{!! Form::text('type',$gallery->type,['id'=>'gallery_type','class'=>'form-control', 'readOnly'=>true]) !!}
-		@if($errors)
-		<span class="text-danger"><i>{{$errors->first('type')}}</i></span>
-		@endif
-	</div>
+            @error('summary')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
+        <div class="col-md-6 form-group">
+            {{ html()->label('Year')->for('academic_year_id') }} <span>*</span>
 
-	@if($gallery->type === 'image')
-	<div class="image-container">
-		<div class="col-md-12 form-group">
-			<table class="table table-bordered table-striped">
-				<thead>
-					<th>Image</th>
-					<th>Image</th>
-					<th>Order</th>
-				</thead>
-				<tbody>
-					@forelse($gallery->images as $img)
-					<tr>
-						<td>
-							<input type="hidden" name="old_images[{{ $img->id}}][id]" value="{{ $img->id }}" class="form-control">
-							<img src="{{asset('uploads/galleries/'.$img->image)}}" width="80px" alt="No image">
-						</td>
-						<td>
-							<input type="text" name="old_images[{{ $img->id}}][title]" value="{{ $img->title }}" class="form-control">
-						</td>
-						<td>
-							<input type="number" name="old_images[{{ $img->id}}][order]" value="{{ $img->order }}" class="form-control">
-						</td>
-					</tr>
-					@empty
-					<tr>
-						<td colspan="8"> Not found!!!</td>
-					</tr>
-					@endforelse
+            {{ html()->select('academic_year_id', $data['year_options'], $data['setting']->academic_year_id)->class('form-control') }}
 
-				</tbody>
-			</table>
+            @error('academic_year_id')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
 
-			<br>
-			<label for="name">Image </label>
-			{!! Form::file('image[]',['id'=>'image','multiple'=>'true']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('image')}} </i></span>
-			@endif
-			<span class="text-default">
-				<p>
-					<i>Files must be less than <strong>10 MB.</strong></i> <br>
-					<i>Allowed file types: <strong>png gif jpg jpeg.</strong></i> <br>
-				</p>
-			</span>
-		</div>
-		<div class="row col-md-12">
-			<div class="col-md-6 form-group">
-				{!! Form::checkbox('is_slider',$gallery->is_slider,($gallery->is_slider == 1) ? 'true' : 'false' ) !!}
-				@if($errors)
-				<span class="text-danger"><i>{{$errors->first('is_slider')}}</i></span>
-				@endif
-				<label for="name">Show on slider </label>
-			</div>
-		</div>
-	</div>
-	@else
-	<div class="row col-md-12">
-		<div class="col-md-6 form-group">
-			<label for="name">Youtube video ID <span>* </span></label>
-			{!! Form::text('link',null,['class'=>'form-control','placeholder'=>'Title']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('link')}}</i></span>
-			@endif
-		</div>
-	</div>
-	@endif
+        <div class="col-md-6 form-group">
+            {{ html()->label('Type')->for('type') }} <span>*</span>
 
+            {{ html()->text('type', $gallery->type)->id('gallery_type')->class('form-control')->attribute('readonly', true) }}
+
+            @error('type')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        @if ($gallery->type === 'image')
+            <div class="image-container">
+                <div class="col-md-12 form-group">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($gallery->images as $img)
+                                <tr>
+                                    <td>
+                                        {{ html()->hidden("old_images[{$img->id}][id]", $img->id) }}
+                                        <img src="{{ asset('uploads/galleries/' . $img->image) }}" width="80"
+                                            alt="No image">
+                                    </td>
+                                    <td>
+                                        {{ html()->text("old_images[{$img->id}][title]", $img->title)->class('form-control') }}
+                                    </td>
+                                    <td>
+                                        {{ html()->number("old_images[{$img->id}][order]", $img->order)->class('form-control') }}
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3">Not found!!!</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <br>
+                    {{ html()->label('Image')->for('image') }}
+                    {{ html()->file('image[]')->id('image')->multiple() }}
+
+                    @error('image')
+                        <span class="text-danger"><i>{{ $message }}</i></span>
+                    @enderror
+
+                    <span class="text-default">
+                        <p>
+                            <i>Files must be less than <strong>10 MB.</strong></i><br>
+                            <i>Allowed file types: <strong>png gif jpg jpeg.</strong></i>
+                        </p>
+                    </span>
+                </div>
+            </div>
+        @else
+            <div class="row col-md-12">
+                <div class="col-md-6 form-group">
+                    {{ html()->label('Youtube video ID')->for('link') }}
+                    {{ html()->text('link')->class('form-control')->placeholder('Title') }}
+                    @error('link')
+                        <span class="text-danger"><i>{{ $message }}</i></span>
+                    @enderror
+                </div>
+            </div>
+        @endif
+    </div>
 </fieldset>
+
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Published on website</legend>
-	<div class="row col-md-12">
-		<div class="col-md-6 form-group">
-			<label for="name">Publish on website ? <span>*</span></label>
-			{!! Form::select('status',$data['publish_options'],$gallery->status,['class'=>'form-control']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('status')}}</i></span>
-			@endif
-		</div>
-	</div>
-	<div class="row col-md-12">
-		<div class="col-md-6 form-group">
-			<label for="name">Publish date ? <span>*</span></label>
-			{!! Form::text('date',null,['class'=>'form-control','id'=>'published_date']) !!}
-			@if($errors)
-			<span class="text-danger"><i>{{$errors->first('date')}}</i></span>
-			@endif
-		</div>
-	</div>
+    <legend class="legend-border">Published on website</legend>
+    <div class="row px-15">
+        <div class="col-md-6 form-group">
+            {{ html()->label('Publish on Website ?')->for('status') }} <span>*</span>
+
+            {{ html()->select('status', $data['publish_options'], $gallery->status)->class('form-control') }}
+
+            @error('status')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 form-group">
+            {{ html()->label('Publish Date')->for('date') }} <span>*</span>
+
+            {{ html()->text('date')->id('published_date')->class('form-control') }}
+
+            @error('date')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+    </div>
 </fieldset>

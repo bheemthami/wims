@@ -16,6 +16,8 @@ class SettingComposer
 
     public $menu = [];
 
+    public $admin_menu = [];
+
     public function __construct()
     {
         $data['setting'] = Setting::select('municipality', 'office', 'phone', 'email', 'office_address', 'province_name', 'province_no', 'logo', 'local_logo', 'favicon', 'system_name', 'system_short_name', 'tag_line', 'academic_year_id', 'per_page')->first();
@@ -29,6 +31,8 @@ class SettingComposer
         $this->menu = Menu::with(['children' => function ($query) {
             return $query->where('is_active', 1)->orderBy('position', 'ASC');
         }])->where(['is_active' => 1, 'parent_id' => null])->orderBy('position', 'ASC')->get();
+
+        $this->admin_menu = config('admin_menu');
     }
     /*
      * Bind data to the view.
@@ -40,5 +44,6 @@ class SettingComposer
     {
         $view->with('settings', $this->settings);
         $view->with('menu', $this->menu);
+        $view->with('admin_menu', $this->admin_menu);
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\Actions;
+use App\Constants\Modules;
+use App\Constants\Permissions;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Setting;
@@ -64,7 +67,8 @@ class HomeController extends Controller
   protected $trainingTypeManager;
 
 
-  public function __construct(HomeManager $homeManager,
+  public function __construct(
+    HomeManager $homeManager,
     AcademicYearManager $academicYearManager,
     SettingManager $settingManager,
     UserManager $userManager,
@@ -88,7 +92,7 @@ class HomeController extends Controller
     TrainingManager $trainingManager,
     TrainingCategoryManager $trainingCategoryManager,
     TrainingTypeManager $trainingTypeManager,
-  ){
+  ) {
     $this->homeManager = $homeManager;
     $this->settingManager = $settingManager;
     $this->userManager = $userManager;
@@ -103,20 +107,19 @@ class HomeController extends Controller
     $this->embedManager = $embedManager;
     $this->eventManager = $eventManager;
     $this->facilityManager = $facilityManager;
-    $this->pageManager = $pageManager; 
+    $this->pageManager = $pageManager;
     $this->officialManager = $officialManager;
     $this->galleryManager = $galleryManager;
 
     $this->postCategoryManager = $postCategoryManager;
-    $this->postManager = $postManager; 
+    $this->postManager = $postManager;
     $this->programManager = $programManager;
 
-    $this->quickLinkManager = $quickLinkManager; 
+    $this->quickLinkManager = $quickLinkManager;
     $this->testimonialManager = $testimonialManager;
     $this->trainingManager = $trainingManager;
     $this->trainingCategoryManager = $trainingCategoryManager;
     $this->trainingTypeManager = $trainingTypeManager;
-
   }
 
 
@@ -127,8 +130,8 @@ class HomeController extends Controller
 
       $setting = defaultSetting();
 
-      if(!$setting){
-        return redirect('admin/setting')->with('error','Plz configure default setting before continue.');
+      if (!$setting) {
+        return redirect('admin/setting')->with('error', 'Plz configure default setting before continue.');
       }
 
       $count['settings'] = $this->settingManager->count();
@@ -145,22 +148,20 @@ class HomeController extends Controller
       $count['events'] = $this->eventManager->count();
       $count['facilities'] = $this->facilityManager->count();
       $count['galleries'] = $this->galleryManager->count();
-      $count['officials'] = $this->officialManager->count(1,1);
+      $count['officials'] = $this->officialManager->count();
       $count['pages'] = $this->pageManager->count();
       $count['post_categories'] = $this->postCategoryManager->count();
       $count['posts'] = $this->postManager->count();
       $count['programs'] = $this->programManager->count();
       $count['quick_links'] = $this->quickLinkManager->count();
-      $count['testimonials'] = $this->testimonialManager->count();     
+      $count['testimonials'] = $this->testimonialManager->count();
       $count['training_categories'] = $this->trainingCategoryManager->count();
       $count['trainings'] = $this->trainingManager->count();
       $count['training_types'] = $this->trainingTypeManager->count();
 
       return view('admin.home', compact('count'));
     } catch (Exception $e) {
-      return redirect('/')->with('error','Oops! Something sent wrong.');
+      return redirect('/')->with('error', 'Oops! Something sent wrong.');
     }
-
   }
-
 }

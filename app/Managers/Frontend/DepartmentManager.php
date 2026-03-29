@@ -16,19 +16,18 @@ class DepartmentManager
 		$this->department = $department;
 	}
 
-	public function all($params = null, $perPage, $status = null, $isTeachingOfficial = null)
+	public function all($params = null, $perPage)
 	{
+
 		$query = $this->department::select('*');
 
-		if ($status) {
-			$query->where(['status' => $status]);
+		if ($params['title']) {
+			$query->where('title', 'like', $params['title'] . '%');
 		}
 
-		$query->with(['officials' => function ($query) use ($isTeachingOfficial) {
-			if ($isTeachingOfficial) {
-				$query->where(['officials.is_teaching_official' => 1]);
-			}
-		}]);
+		if ($params['status'] !== null) {
+			$query->where(['status' => $params['status']]);
+		}
 
 		return $query->orderBy('order', 'ASC')->paginate($perPage);
 	}

@@ -1,53 +1,60 @@
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Details</legend>
+    <legend class="legend-border">Details</legend>
 
-	<div class="col-md-12 form-group">
-		<label for="name">Title <span>* </span></label>
-		{!! Form::text('title',null,['class'=>'form-control','placeholder'=>'Title']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('title')}}</i></span> 
-		@endif 
-	</div>
-	<div class="col-md-12 form-group">
-		<label for="name">Link <span>* </span></label>
-		{!! Form::text('link',null,['class'=>'form-control','placeholder'=>'https://www.example.com/']) !!}
-		@if($errors)      
-		<span class="text-danger"><i>{{$errors->first('link')}}</i></span> 
-		@endif 
-	</div>
+    <div class="row-auto">
+        <div class="col-md-6 form-group">
+            {{ html()->label('Title')->for('title') }} <span>*</span>
 
+            {{ html()->text('title')->class('form-control')->placeholder('Title') }}
+
+            @error('title')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 form-group">
+            {{ html()->label('Link')->for('link') }} <span>*</span>
+
+            {{ html()->text('link')->class('form-control')->placeholder('https://www.example.com/') }}
+
+            @error('link')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+    </div>
 </fieldset>
 
 <fieldset class="fieldset-border">
-	<legend class="legend-border">Website Display Options</legend>
-	<div class="row col-md-12">
-		<div class="col-md-4 form-group">
-			<label for="name">Display Section <span>*</span></label>
-			{!! Form::select('type',$data['type_options'],'footer',['class'=>'form-control']) !!}
-			@if($errors)      
-			<span class="text-danger"><i>{{$errors->first('type')}}</i></span> 
-			@endif 
-		</div>
-	</div>
-	<div class="row col-md-12">
-		<div class="col-md-4 form-group">
-			<label for="name">Display Order <span>*</span></label>
-			{!! Form::number('order',null,['class'=>'form-control']) !!}
-			@if($errors)      
-			<span class="text-danger"><i>{{$errors->first('order')}}</i></span> 
-			@endif 
-		</div>
-	</div>
-	<div class="row col-md-12">
-		<div class="col-md-4 form-group">
-			<label for="name">Publish on website ? <span>*</span></label>
-			{!! Form::select('status',$data['publish_options'],0,['class'=>'form-control']) !!}
-			@if($errors)      
-			<span class="text-danger"><i>{{$errors->first('status')}}</i></span> 
-			@endif 
-		</div>
-	</div>
+    <legend class="legend-border">Website Display Options</legend>
+    <div class="row-auto">
+        <div class="col-md-6 form-group">
+            {{ html()->label('Display Section')->for('type') }} <span>*</span>
+
+            {{ html()->select('type', $data['type_options'])->class('form-control') }}
+
+            @error('type')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 form-group">
+            {{ html()->label('Display Order')->for('order') }} <span>*</span>
+
+            {{ html()->number('order')->class('form-control') }}
+
+            @error('order')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+
+        <div class="col-md-6 form-group">
+            {{ html()->label('Publish on website ?')->for('status') }} <span>*</span>
+
+            {{ html()->select('status', $data['publish_options'])->class('form-control') }}
+
+            @error('status')
+                <span class="text-danger"><i>{{ $message }}</i></span>
+            @enderror
+        </div>
+    </div>
 </fieldset>
-
-
-

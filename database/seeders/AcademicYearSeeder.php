@@ -6,8 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\AcademicYear;
-
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class AcademicYearSeeder extends Seeder
 {
@@ -18,22 +17,23 @@ class AcademicYearSeeder extends Seeder
      */
     public function run()
     {
-    	$years = [
-    		[
-    			'year' => 2079
-    		],[
-                'year' => 2080
+        $years = [
+            [
+                'year' => 2081
+            ],
+            [
+                'year' => 2082
             ]
 
-    	];
+        ];
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-    	AcademicYear::truncate();
+        AcademicYear::truncate();
 
-    	foreach ($years as $year) {
-    		AcademicYear::create($year);
-    	}
+        foreach ($years as $year) {
+            AcademicYear::create($year);
+        }
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

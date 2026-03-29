@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Providers\RouteServiceProvider;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
@@ -18,7 +18,15 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
+
+        // default guard is web, but you can specify other guards like admin, api, etc.
+        // if (Auth::guard($guard)->check()) {
+        //     return redirect(RouteServiceProvider::HOME);
+        // }
+
+        // Sentinel check for authentication
+
+        if (Sentinel::check()) {
             return redirect(RouteServiceProvider::HOME);
         }
 

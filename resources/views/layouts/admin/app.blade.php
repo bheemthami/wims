@@ -12,7 +12,7 @@
         </div>
     </div>
     @include('include.deleteModal')
-    @include('include.customLoader');
+    @include('include.customLoader')
     @include('layouts.admin.footer_scripts')
 </body>
 

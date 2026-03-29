@@ -11,7 +11,7 @@ use App\Managers\RoleManager;
 
 use App\Http\Requests\UserRequest;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class UserController extends Controller
