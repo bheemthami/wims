@@ -16,7 +16,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
+        // Clear pivot first to avoid orphaned records
+        DB::table('role_users')->truncate();
+        DB::table('activations')->truncate();
         DB::table('users')->truncate();
+
         $userDetails = [
             'first_name' => 'Admin',
             'last_name' => 'Last',
@@ -24,9 +28,14 @@ class UsersTableSeeder extends Seeder
             'password' => 'demo@123'
         ];
 
-        // sentinel user register and activation
+        // Register and activate user via Sentinel
         $user = Sentinel::registerAndActivate($userDetails);
+
+        // Attach admin role with null check
         $role = Sentinel::findRoleBySlug('admin');
-        $role->users()->attach($user);
+
+        if ($role && $user) {
+            $role->users()->attach($user);
+        }
     }
 }

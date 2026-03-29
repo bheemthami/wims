@@ -14,8 +14,12 @@ class Role extends Model
         'permissions'
     ];
 
+    protected $casts = [
+        'permissions' => 'array',
+    ];
+
     public function users()
     {
-        return $this->hasManyThrough('App\Models\User','role_users');
+        return $this->hasManyThrough('App\Models\User', 'role_users');
     }
 }
