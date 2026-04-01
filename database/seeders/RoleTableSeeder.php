@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class RoleTableSeeder extends Seeder
@@ -18,12 +19,29 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         $adminPermissions = [
-            'rolls.index' => true,
-            'rolls.create' => true,
-            'rolls.store' => true,
-            'rolls.edit' => true,
-            'rolls.update' => true,
-            'rolls.delete' => true,
+            // role permissions
+            'roles.index' => true,
+            'roles.create' => true,
+            'roles.store' => true,
+            'roles.view' => true,
+            'roles.edit' => true,
+            'roles.update' => true,
+            'roles.delete' => true,
+            // user permissions
+            'users.index' => true,
+            'users.create' => true,
+            'users.store' => true,
+            'users.view' => true,
+            'users.edit' => true,
+            'users.update' => true,
+            'users.delete' => true,
+            // role permissions
+            'role-permissions.create' => true,
+            'role-permissions.store' => true,
+            'role-permissions.view' => true,
+            'role-permissions.edit' => true,
+            'role-permissions.update' => true,
+            'role-permissions.delete' => true,
         ];
 
         $userPermissions = [
@@ -39,24 +57,32 @@ class RoleTableSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'slug' => Str::slug('Admin'),
-                'permissions' => json_encode($adminPermissions)
+                'permissions' => $adminPermissions
 
             ],
             [
                 'name' => 'User',
                 'slug' => Str::slug('User'),
-                'permissions' => json_encode($userPermissions)
+                'permissions' => $userPermissions
 
             ]
         ];
 
+        // clear pivot table records
+        DB::table('role_users')->truncate();
+        // clear roles table records
         Role::truncate();
+
+        //
         foreach ($roles as $role) {
             Role::create($role);
         }
 
         $role = Sentinel::findRoleBySlug('admin');
         $user = Sentinel::findById(1);
-        $role->users()->attach($user);
+
+        if ($role && $user) {
+            $role->users()->attach($user);
+        }
     }
 }
