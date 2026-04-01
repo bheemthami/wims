@@ -120,7 +120,11 @@ class FrontendController extends Controller
             $data['marquee_recents']  = $this->postManager->publishedPosts(null, null, 10);
 
             $newsCategory = $this->postCategoryManager->getPostCategorysBySlug('news-and-events');
-            $data['events'] = $this->postManager->topPublishedPosts(null, $newsCategory->id, 6);
+            if ($newsCategory) {
+                $data['events'] = $this->postManager->topPublishedPosts(null, $newsCategory->id, 6);
+            } else {
+                $data['events'] = [];
+            }
 
 
             $data['programs'] = $this->programManager->publishedPrograms(3);
