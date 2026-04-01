@@ -2,16 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Constants\Actions;
-use App\Constants\Modules;
-use App\Constants\Permissions;
 use Illuminate\Http\Request;
-use App\User;
-use App\Models\Setting;
-
-use DB;
-use Session;
-use Sentinel;
 
 use App\Managers\HomeManager;
 use App\Managers\SettingManager;
@@ -38,6 +29,7 @@ use App\Managers\Frontend\TestimonialManager;
 use App\Managers\Frontend\TrainingCategoryManager;
 use App\Managers\Frontend\TrainingManager;
 use App\Managers\Frontend\TrainingTypeManager;
+use Exception;
 
 class HomeController extends Controller
 {
