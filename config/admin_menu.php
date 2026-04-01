@@ -3,6 +3,7 @@
 use App\Constants\Actions;
 use App\Constants\Modules;
 use App\Constants\Permissions;
+use Illuminate\Support\Str;
 
 return [
   [
@@ -49,7 +50,7 @@ return [
     'children' => [
       [
         'key' => Modules::ROLES,
-        'title' => Modules::ROLES,
+        'title' => Str::ucfirst(Modules::ROLES),
         'icon'  => 'fa fa-group',
         'route_name' => Modules::ROLES . '.' . Actions::INDEX,
         'parent_key' => 'user-management',
@@ -81,7 +82,7 @@ return [
     'children' => [
       [
         'key' => Modules::DEPARTMENTS,
-        'title' => Modules::DEPARTMENTS,
+        'title' => Str::ucfirst(Modules::DEPARTMENTS),
         'icon'  => 'fa fa-university',
         'route_name' => Modules::DEPARTMENTS . '.' . Actions::INDEX,
         'parent_key' => 'core-modules',
@@ -90,7 +91,7 @@ return [
       ],
       [
         'key' => Modules::DESIGNATIONS,
-        'title' => Modules::DESIGNATIONS,
+        'title' => Str::ucfirst(Modules::DESIGNATIONS),
         'icon'  => 'fa fa-black-tie',
         'route_name' => Modules::DESIGNATIONS . '.' . Actions::INDEX,
         'parent_key' => 'core-modules',

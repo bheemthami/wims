@@ -190,31 +190,51 @@ function checkAccess($permission)
 
 function getResourceFromRouteName($routeName)
 {
+    if (empty($routeName)) return '';
     $routeArray = explode('.', $routeName);
     return isset($routeArray[0]) ? $routeArray[0] : '';
 }
 
 function getResourceFromRouteUrl($routeUrl)
 {
-    $urlArray = explode('/', $routeUrl);
-    return isset($urlArray[6]) ? $urlArray[6] : '';
+    // Parse URL properly regardless of environment
+    $path = trim(parse_url($routeUrl, PHP_URL_PATH), '/');
+    $segments = array_values(array_filter(explode('/', $path)));
+
+    // Find 'admin' segment and return the next one
+    $adminIndex = array_search('admin', $segments);
+    if ($adminIndex !== false && isset($segments[$adminIndex + 1])) {
+        return $segments[$adminIndex + 1];
+    }
+
+    // Fallback: return last segment
+    return end($segments) ?: '';
 }
 
 function checkIsMenuActive($menuUrl)
 {
-    $currentUrl = url()->current();
-    $currentResource = getResourceFromRouteUrl($currentUrl);
+    // Primary: use route name — works on all environments
+    $currentRouteName = request()->route()?->getName() ?? '';
+
+    if (!empty($currentRouteName)) {
+        $currentResource = getResourceFromRouteName($currentRouteName);
+    } else {
+        // Fallback: parse URL if no route name available
+        $currentResource = getResourceFromRouteUrl(url()->current());
+    }
+
+    if (empty($currentResource)) return false;
 
     if (is_string($menuUrl)) {
         $menuResource = getResourceFromRouteName($menuUrl);
-        return $currentResource == $menuResource;
+        return $currentResource === $menuResource;
     }
 
     if (is_array($menuUrl)) {
-
         foreach ($menuUrl as $child) {
+            if (!isset($child['route_name'])) continue;
             $childResource = getResourceFromRouteName($child['route_name']);
-            if ($currentResource == $childResource) {
+            if ($currentResource === $childResource) {
                 return true;
             }
         }
