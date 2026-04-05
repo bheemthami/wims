@@ -3,7 +3,6 @@
 @section('title', $post ? $post->title : 'Post Title')
 
 @section('content')
-
     <div class="course-details-area gray-bg">
         <div class="container gray-bg pt-50 pb-50">
             <div class="row">
@@ -22,6 +21,7 @@
                                 <p class="mb-0">{{ $post ? $post->summary : 'summary' }}</p>
                             </blockquote>
                         @endif
+                        <x-share-buttons :url="url()->current()" :title="$post->title" />
                     </div>
                     @if ($post && $post->image)
                         <div class="blog-thumb">
@@ -36,18 +36,20 @@
                         <h4 class="widget-title">Recent Posts</h4>
                         <div class="sidebar-rc-post">
                             <ul>
-                                @forelse($posts as $not)
-                                    @if ($not->id != $post->id)
+                                @forelse($posts as $recentPost)
+                                    @if ($recentPost->id != $post->id)
                                         <li>
                                             <div class="sidebar-rc-post-main-area d-flex mb-20">
                                                 <div class="rc-post-content">
                                                     <h5>
                                                         <a
-                                                            href="{{ route('post-details', $not->slug . '?nid=' . base64_encode($not->id)) }}">{{ $not->title }}</a>
+                                                            href="{{ route('post-details', $recentPost->slug . '?nid=' . base64_encode($recentPost->id)) }}">{{ $recentPost->title }}</a>
                                                     </h5>
                                                     <div class="widget-advisors-name">
-                                                        <span>Date : <span
-                                                                class="f-500">{{ date('M j, Y', strtotime($post->date)) }}</span></span>
+                                                        <div>Date : <span class="f-500">
+                                                                {{ date('M j, Y', strtotime($recentPost->date)) }}
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

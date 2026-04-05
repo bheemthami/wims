@@ -969,3 +969,24 @@ h6 {
         top: 5px;
     }
 }
+
+/* share buttons */
+.share-buttons {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    align-items: center;
+
+    a {
+        background: transparent !important;
+        border-radius: 50%;
+        text-decoration: none;
+        font-size: 1.5rem;
+        padding: 0 !important;
+
+        img {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+}
