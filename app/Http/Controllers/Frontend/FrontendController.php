@@ -224,7 +224,15 @@ class FrontendController extends Controller
                 return $this->redirectTo404();
             }
             $posts = $this->postManager->publishedPosts();
-            return view('frontend.posts.post_details', compact('post', 'posts'));
+
+            $og_title       = $post->title;
+            $og_description = Str::limit(strip_tags($post->description), 150);
+            $og_image       = $post->image
+                ? asset('uploads/posts/' . $post->image)
+                : asset('uploads/setting/logo.png');
+            $og_type        = 'article';
+
+            return view('frontend.posts.post_details', compact('post', 'posts', 'og_title', 'og_description', 'og_image', 'og_type'));
         } catch (Exception $e) {
             return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
