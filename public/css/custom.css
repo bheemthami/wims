@@ -219,3 +219,7 @@ tr td .faculty-img {
 .sidebar {
     padding-bottom: 0 !important;
 }
+
+.skin-blue .sidebar a:hover {
+    border-left: 3px solid #3c8dbc;
+}

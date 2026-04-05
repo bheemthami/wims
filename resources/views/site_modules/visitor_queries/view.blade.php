@@ -8,7 +8,7 @@
         <h1> Details</h1>
         <ol class="breadcrumb">
             <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="{{ route('visitor_queries.index') }}">Visitor Queries</a></li>
+            <li><a href="{{ route('visitor-queries.index') }}">Visitor Queries</a></li>
             <li class="active">Show</li>
         </ol>
     </section>
@@ -18,7 +18,8 @@
         <div class="box">
             <div class="box-header with-border">
                 <div class="box-tools pull-right">
-                    <a class="btn btn-sm btn-danger" href="{{ route('visitor_queries.index') }}"><i class="fa fa-times"></i>
+                    <a class="btn btn-sm btn-danger" href="{{ route('visitor-queries.index') }}">
+                        <i class="fa fa-times"></i>
                     </a>
                 </div>
             </div>
@@ -27,9 +28,6 @@
                 <fieldset class="fieldset-border">
                     <legend class="legend-border">Query Details</legend>
                     <div class="row-auto">
-                        <div class="col-md-12">
-                            <p> <strong> Qid: </strong>{{ $visitor_query->qid }} </p>
-                        </div>
                         <div class="col-md-12">
                             <p> <strong> Year: </strong>{{ $visitor_query->academicYear->year }} </p>
                         </div>
@@ -55,11 +53,15 @@
                             @else
                                 <label class="btn btn-sm btn-success">Viewed</label>
                             @endif
-
-                            <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"
-                                data-id="{{ $visitor_query->id }}"
-                                data-route="{{ route('visitor_queries.destroy', $visitor_query->id) }}"><i
-                                    class="fa fa-trash"></i> Delete</a>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal"
+                                    data-id="{{ $visitor_query->id }}"
+                                    data-route="{{ route('visitor-queries.destroy', $visitor_query->id) }}">
+                                    <i class="fa fa-trash me-1"></i> Delete
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </fieldset>

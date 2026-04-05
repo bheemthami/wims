@@ -26,12 +26,11 @@
                         <thead>
                             <th>S.No.</th>
                             <th>Year</th>
-                            <th>Qid</th>
                             <th>Name</th>
                             <th>Subject</th>
                             <th>Message</th>
                             <th>Date</th>
-                            <th>status</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </thead>
                         <tbody>
@@ -40,7 +39,6 @@
                                 <tr>
                                     <td>{{ $sno++ }} </td>
                                     <td>{{ $visitor_query->academicYear->year }}</td>
-                                    <td>{{ $visitor_query->qid }}</td>
                                     <td>{{ $visitor_query->name }}</td>
                                     <td>{{ $visitor_query->subject }}</td>
                                     <td>
