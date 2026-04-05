@@ -235,7 +235,9 @@
                         </div>
                     @empty
                         <div class="col-xl-12 col-lg-12 text-center">
-                            <p>NO DATA</p>
+                            <div class="border rounded p-3 text-center">
+                                <p class="m-0">NO DATA</p>
+                            </div>
                         </div>
                     @endforelse
                 </div>
@@ -280,10 +282,8 @@
                     <div class="swiper-pagination"></div>
                 </div>
             @else
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 text-center">
-                        <p>No images available</p>
-                    </div>
+                <div class="border rounded p-3 text-center">
+                    <p class="m-0">No images available</p>
                 </div>
             @endif
         </div>
@@ -326,7 +326,9 @@
                     </div>
                 @empty
                     <div class="col-xl-12 col-lg-12 col-md-12 text-center">
-                        <p>NO DATA</p>
+                        <div class="border rounded p-3 text-center">
+                            <p class="m-0">NO DATA</p>
+                        </div>
                     </div>
                 @endforelse
             </div>
@@ -389,29 +391,24 @@
             </div>
             <div class="row">
                 <div class="col-xl-8 col-lg-8 col-md-8  col-sm-12  col-sm-12  col-xs-12">
-                    <div>
-                        @if ($embeddings['google_map'])
-                            <div class="google-map">
-                                {!! $embeddings['google_map']->iframe !!}
-                            </div>
-                        @else
-                            <p class="text-center">Not available</p>
-                        @endif
-                    </div>
+                    @if ($embeddings['google_map'])
+                        <div class="google-map">
+                            {!! $embeddings['google_map']->iframe !!}
+                        </div>
+                    @else
+                        <div class="border rounded p-3 text-center">
+                            <p class="text-center m-0">Google Map Not available</p>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4  col-sm-12  col-sm-12  col-xs-12">
-                    <div class="section-title mb-50 text-center follow-us-heading mt-50">
-                        <div class="section-title-heading mb-20">
-                            <h1 class="section-header-color">Follow Us</h1>
-                        </div>
-                    </div>
                     @if ($embeddings['facebook'])
                         <div class="facebook-page-block">
                             {!! $embeddings['facebook']->iframe !!}
                         </div>
                     @else
-                        <div class="facebook-page-block text-center">
-                            <p>Not available</p>
+                        <div class="border rounded p-3 text-center">
+                            <p class="text-center m-0">Facebook Page Not available</p>
                         </div>
                     @endif
                 </div>

@@ -73,10 +73,13 @@
                             <div class="footer-menu clearfix">
                                 <ul>
                                     @forelse($settings['links'] as $link)
-                                        <li><a href="{{ $link->link }}" target="_blank"> <i
-                                                    class="fa fa-caret-right"></i> {{ $link->title }}</a></li>
+                                        <li>
+                                            <a href="{{ $link->link }}" target="_blank">
+                                                <i class="fa fa-caret-right"></i> {{ $link->title }}
+                                            </a>
+                                        </li>
                                     @empty
-                                        <li>NO DATA</li>
+                                        <li class="text-white">NO DATA</li>
                                     @endforelse
                                 </ul>
                             </div>

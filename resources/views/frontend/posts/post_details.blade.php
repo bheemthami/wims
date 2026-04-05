@@ -25,7 +25,9 @@
                     </div>
                     @if ($post && $post->image)
                         <div class="blog-thumb">
-                            <img src="{{ asset('uploads/posts/' . $post->image) }}" alt="{{ $post->title }}">
+                            <a href="{{ asset('uploads/posts/' . $post->image) }}" target="_blank">
+                                <img src="{{ asset('uploads/posts/' . $post->image) }}" alt="{{ $post->title }}">
+                            </a>
                         </div>
                     @endif
                 </div>

@@ -19,7 +19,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Str;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {

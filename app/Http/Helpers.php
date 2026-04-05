@@ -3,7 +3,6 @@
 use App\Models\Setting;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
-
 function defaultSetting()
 {
     return Setting::select('*')->first();

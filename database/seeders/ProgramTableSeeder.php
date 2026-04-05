@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Enums\Program as ProgramEnum;
+use App\Models\Frontend\Program;
 
 class ProgramTableSeeder extends Seeder
 {
@@ -15,33 +16,28 @@ class ProgramTableSeeder extends Seeder
     public function run()
     {
         $programs = [
-            [
-                'title' => 'Diploma in Civil Engineering',
-                'slug'  => 'diploma-in-civil-engineering',
-                'quota' => '48 seats',
-                'duration' => '3 years',
-                'eligibility' => 'SLC/SEC with C Grading in Science & Math, D+ Grading in English.',
-                'description' => 'diploma-in-computer-engineering',
-                'order' => 1,
-                'status' => 1
-            ],
-            [
-                'title' => 'Diploma in Computer Engineering',
-                'slug'  => 'diploma-in-computer-engineering',
-                'quota' => '48 seats',
-                'duration' => '3 years',
-                'eligibility' => 'SLC/SEC with C Grading in Science & Math, D+ Grading in English.',
-                'description' => 'diploma-in-computer-engineering',
-                'order' => 2,
-                'status' => 1
-            ]
-
+            ProgramEnum::ECD,
+            ProgramEnum::PRIMARY_EDUCATION,
+            ProgramEnum::BASIC_EDUCATION,
+            ProgramEnum::SECONDARY_EDUCATION,
         ];
 
-        DB::table('programs')->truncate();
+        // Clear existing page data
+        Program::truncate();
 
-        foreach ($programs as $program) {
-            DB::table('programs')->insert($program);
+        foreach ($programs as $index => $programEnum) {
+            Program::updateOrCreate(
+                [
+                    'title' => $programEnum->title(),
+                    'slug' => $programEnum->slug(),
+                    'quota' => 'Available seats for' . $programEnum->title(),
+                    'duration' => 'Duration for ' . $programEnum->title(),
+                    'eligibility' => 'Eligibility criteria for ' . $programEnum->title(),
+                    'description' => 'Description for ' . $programEnum->title(),
+                    'order' => $index + 1,
+                    'status' => true,
+                ],
+            );
         }
     }
 }
