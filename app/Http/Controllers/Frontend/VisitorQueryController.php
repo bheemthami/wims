@@ -90,7 +90,7 @@ class VisitorQueryController extends Controller
     {
         try {
 
-            if (Sentinel::hasAccess('visitor-queries.store')) {
+            if (Sentinel::hasAccess('visitor-queries.view')) {
 
                 $visitor_query = VisitorQuery::find($id);
                 if ($visitor_query) {
@@ -150,10 +150,10 @@ class VisitorQueryController extends Controller
             if (Sentinel::hasAccess('visitor-queries.delete')) {
                 $visitorQuery = VisitorQuery::find($id);
                 if (!$visitorQuery->status) {
-                    return redirect()->route('visitor_queries.index')->with('error', 'Deletion not allowed');
+                    return redirect()->route('visitor-queries.index')->with('error', 'Deletion not allowed');
                 }
                 VisitorQuery::where(['id' => $id])->delete();
-                return redirect()->route('visitor_queries.index')->with('success', 'Successfully Deleted!');
+                return redirect()->route('visitor-queries.index')->with('success', 'Successfully Deleted!');
             }
 
             return redirect()->route('dashboard')->with('error', 'Oops! Permissions denied.');

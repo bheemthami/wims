@@ -10,7 +10,7 @@
                     <div class="contact-info-text">
                         <div class="section-title mb-20">
                             <div class="section-title-heading mb-10">
-                                <h1>Contact Info</h1>
+                                <h1>Contact Us</h1>
                             </div>
                             <div class="section-title-para">
                                 @if ($contactUs)
@@ -60,11 +60,6 @@
                     <div class="events-details-form faq-area-form mb-30 p-0">
                         <form id="visitor_query_form" method="POST">
                             <div class="row">
-                                <div class="col-xl-8">
-                                    <div class="events-form-title mb-25">
-                                        <h2>Do You Have Any Questions</h2>
-                                    </div>
-                                </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6">
                                     <input id="name" class="visitor-query" placeholder="Name :" type="text"
                                         name="name">
@@ -86,7 +81,7 @@
                                 </div>
                                 <div class="col-xl-12">
                                     <div class="faq-form-btn events-form-btn">
-                                        <button id="submit-now" class="btn m-0" type="submit">submit now</button>
+                                        <button id="submit-now" class="btn m-0" type="submit">Send Message</button>
                                     </div>
                                 </div>
                             </div>
@@ -160,7 +155,7 @@
 
                 if (form_data.name != "" | form_data.email != "" | form_data.phone != "" | form_data
                     .subject != "" | form_data.message != "") {
-                    $(document).find('#submit-now').html('submitting...')
+                    $(document).find('#submit-now').html('sending...')
 
                     var baseUrl = "<?php echo url('/collect-visitor-queries'); ?>";
                     $.ajax({
@@ -173,7 +168,7 @@
                         success: function(response) {
                             if (response.status === 'ok') {
                                 $(document).find('#submit-now').html(
-                                    'Submitted! Please check your mail.')
+                                    'Message sent successfully. Thank you.')
                                 $(document).find('#name').val('');
                                 $(document).find('#email').val('');
                                 $(document).find('#phone').val('');
