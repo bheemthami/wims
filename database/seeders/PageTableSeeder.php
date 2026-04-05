@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Page as PageEnum;
+use App\Models\Frontend\Page;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class PageTableSeeder extends Seeder
@@ -16,37 +17,29 @@ class PageTableSeeder extends Seeder
     public function run()
     {
         $pages = [
-            [
-                'title' => 'About Us',
-                'slug'  => Str::slug('About Us'),
-                'summary' => 'summary',
-                'description' => 'description',
-                'order' => 1,
-                'status' => 1
-            ],
-            [
-                'title' => 'Message from Principal',
-                'slug'  => Str::slug('Message from Principal'),
-                'summary' => 'summary',
-                'description' => 'description',
-                'order' => 2,
-                'status' => 1
-            ],
-            [
-                'title' => 'School Management Committee',
-                'slug'  => Str::slug('School Management Committee'),
-                'summary' => 'summary',
-                'description' => 'description',
-                'order' => 3,
-                'status' => 1
-            ]
-
+            PageEnum::ABOUT,
+            PageEnum::INTRODUCTION,
+            PageEnum::MISSION_VISION_GOAL_AND_OBJECTIVES,
+            PageEnum::STUDENT_CLUBS,
+            PageEnum::SMC,
+            PageEnum::PTA,
+            PageEnum::CONTACT_US,
         ];
 
-        DB::table('pages')->truncate();
+        // Clear existing page data
+        Page::truncate();
 
-        foreach ($pages as $page) {
-            DB::table('pages')->insert($page);
+        foreach ($pages as $index => $pageEnum) {
+            Page::updateOrCreate(
+                ['slug' => $pageEnum->value], // unique key
+                [
+                    'title' => $pageEnum->title(),
+                    'summary' => 'Default summary for ' . $pageEnum->title(),
+                    'description' => 'Default description for ' . $pageEnum->title(),
+                    'order' => $index + 1,
+                    'status' => true,
+                ]
+            );
         }
     }
 }

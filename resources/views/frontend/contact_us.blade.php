@@ -13,7 +13,11 @@
                                 <h1>Contact Info</h1>
                             </div>
                             <div class="section-title-para">
-                                <p>We highly welcome your suggesttions. Please, keep in touch with us.</p>
+                                @if ($contactUs)
+                                    <p>{{ $contactUs->summary }}</p>
+                                @else
+                                    <p>We highly welcome your suggesttions. Please, keep in touch with us.</p>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -95,15 +99,15 @@
     <div class="container pb-50">
         <div class="row">
             <div class="col-xl-8 col-lg-8 col-md-8  col-sm-12  col-sm-12  col-xs-12">
-                <div>
-                    @if ($embeddings['google_map'])
-                        <div class="google-map">
-                            {!! $embeddings['google_map']->iframe !!}
-                        </div>
-                    @else
-                        <p class="text-center">Not available</p>
-                    @endif
-                </div>
+                @if ($embeddings['google_map'])
+                    <div class="google-map">
+                        {!! $embeddings['google_map']->iframe !!}
+                    </div>
+                @else
+                    <div class="border rounded p-3 text-center">
+                        <p class="text-center m-0">Google Map Not available</p>
+                    </div>
+                @endif
             </div>
             <div class="col-xl-4 col-lg-4 col-md-4  col-sm-12  col-sm-12  col-xs-12">
                 @if ($embeddings['facebook'])
@@ -111,8 +115,8 @@
                         {!! $embeddings['facebook']->iframe !!}
                     </div>
                 @else
-                    <div class="facebook-page-block text-center">
-                        <p>Not available</p>
+                    <div class="border rounded p-3 text-center">
+                        <p class="text-center m-0">Facebook Page Not available</p>
                     </div>
                 @endif
             </div>
@@ -120,7 +124,6 @@
     </div>
 @endsection
 @section('js')
-
     <script type="text/javascript">
         $(document).ready(function() {
             $('#visitor_query_form').on('submit', function(e) {

@@ -23,7 +23,7 @@
 
         <div class="col-md-6 form-group">
             {{ html()->label('Post Category')->for('post_category_id') }} <span>*</span>
-            {{ html()->select('post_category_id', $data['post_category_options'], optional($post)->post_category_id)->class('form-control') }}
+            {{ html()->select('post_category_id', $data['post_category_options'])->class('form-control') }}
             @error('post_category_id')
                 <span class="text-danger"><i>{{ $message }}</i></span>
             @enderror
@@ -106,7 +106,7 @@
     <div class="col-md-4 form-group">
         {{ html()->label('Publish on website ?')->for('status') }} <span>*</span>
 
-        {{ html()->select('status', $data['publish_options'], optional($post)->status)->class('form-control') }}
+        {{ html()->select('status', $data['publish_options'])->class('form-control') }}
 
         @error('status')
             <span class="text-danger"><i>{{ $message }}</i></span>
@@ -116,7 +116,7 @@
     <div class="col-md-4 form-group">
         {{ html()->label('Show on modal ?')->for('show_on_modal') }} <span>*</span>
 
-        {{ html()->select('show_on_modal', [1 => 'YES', 0 => 'NO'], optional($post)->show_on_modal)->class('form-control') }}
+        {{ html()->select('show_on_modal', [1 => 'YES', 0 => 'NO'])->class('form-control') }}
 
         @error('show_on_modal')
             <span class="text-danger"><i>{{ $message }}</i></span>

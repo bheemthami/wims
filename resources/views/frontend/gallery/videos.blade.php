@@ -39,8 +39,8 @@
                         <h5>{{ $video->title }}</h5>
                     </div>
                 @empty
-                    <div class="video-item">
-                        <p>NO DATA</p>
+                    <div class="col-md-12">
+                        <p class="text-center">NO DATA</p>
                     </div>
                 @endforelse
 

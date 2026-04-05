@@ -4,9 +4,6 @@ namespace App\Managers\Frontend;
 
 use App\Models\Frontend\Department;
 
-use DB;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-
 class DepartmentManager
 {
 	protected $department;
@@ -21,11 +18,11 @@ class DepartmentManager
 
 		$query = $this->department::select('*');
 
-		if ($params['title']) {
+		if (isset($params['title'])) {
 			$query->where('title', 'like', $params['title'] . '%');
 		}
 
-		if ($params['status'] !== null) {
+		if (isset($params['status'])) {
 			$query->where(['status' => $params['status']]);
 		}
 

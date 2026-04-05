@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Constants\PostConstants;
+use App\Enums\Message;
+use App\Enums\Page as EnumsPage;
+use App\Enums\PostCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -119,7 +122,7 @@ class FrontendController extends Controller
 
             $data['marquee_recents']  = $this->postManager->publishedPosts(null, null, 10);
 
-            $newsCategory = $this->postCategoryManager->getPostCategorysBySlug('news-and-events');
+            $newsCategory = $this->postCategoryManager->getPostCategorysBySlug(PostCategory::NEWS_AND_EVENTS->slug());
             if ($newsCategory) {
                 $data['events'] = $this->postManager->topPublishedPosts(null, $newsCategory->id, 6);
             } else {
@@ -145,7 +148,7 @@ class FrontendController extends Controller
 
             return view('frontend.new-index', compact('settings', 'categories', 'data', 'page', 'embeddings'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -154,13 +157,13 @@ class FrontendController extends Controller
     {
 
         try {
-
+            $contactUs =  $this->pageManager->getPageBySlug(Str::slug(EnumsPage::CONTACT_US->value));
             $settings = $this->settingManager->defaultSetting();
             $embeddings['facebook'] = $this->embedManager->getEmbeddingByType('facebook-page');
             $embeddings['google_map'] = $this->embedManager->getEmbeddingByType('google-map');
-            return view('frontend.contact_us', compact('settings', 'embeddings'));
+            return view('frontend.contact_us', compact('settings', 'embeddings', 'contactUs'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -176,7 +179,7 @@ class FrontendController extends Controller
             $settings = $this->settingManager->defaultSetting();
             return view('frontend.about_us', compact('settings', 'about'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -189,23 +192,21 @@ class FrontendController extends Controller
             }
             return view('frontend.page', compact('page'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
 
     public function getPageBySlug($slug = null)
     {
-
         try {
             $page =  $this->pageManager->getPageBySlug(Str::slug($slug));
-
             if (!$page) {
                 return $this->redirectTo404();
             }
             return view('frontend.page', compact('page'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -225,7 +226,7 @@ class FrontendController extends Controller
             $posts = $this->postManager->publishedPosts();
             return view('frontend.posts.post_details', compact('post', 'posts'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -248,7 +249,7 @@ class FrontendController extends Controller
             $links = $this->quickLinkManager->publishedQuickLinks(['body' => 'body', 'footer' => 'footer']);
             return view('frontend.posts.all_posts', compact('posts', 'topPosts', 'links'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -265,19 +266,16 @@ class FrontendController extends Controller
             $links = $this->quickLinkManager->publishedQuickLinks(['body' => 'body', 'footer' => 'footer']);
             return view('frontend.posts.resources', compact('category', 'posts', 'topPosts', 'links'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
     public function allPublishedNewsAndEvents()
     {
         try {
-            $catSlug = 'news-and-events';
-            $category_id = null;
-            if ($catSlug) {
-                $category = $this->postCategoryManager->getPostCategorysBySlug($catSlug);
-                $category_id = $category ? $category->id : null;
-            }
+
+            $category = $this->postCategoryManager->getPostCategorysBySlug(PostCategory::NEWS_AND_EVENTS->slug());
+            $category_id = $category ? $category->id : null;
 
             if (!$category_id) {
                 return $this->redirectTo404();
@@ -288,7 +286,7 @@ class FrontendController extends Controller
             $links = $this->quickLinkManager->publishedQuickLinks(['body' => 'body', 'footer' => 'footer']);
             return view('frontend.posts.news-and-events', compact('posts', 'topPosts', 'links'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -302,15 +300,14 @@ class FrontendController extends Controller
             $posts = $this->postManager->publishedPosts();
             return view('frontend.posts.post_details', compact('post', 'posts'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
     public function allPublishedCareerPost()
     {
         try {
-            $catSlug = 'career';
-            $category = $this->postCategoryManager->getPostCategorysBySlug($catSlug);
+            $category = $this->postCategoryManager->getPostCategorysBySlug(PostCategory::CAREER->slug());
 
             if (!$category) {
                 return $this->redirectTo404();
@@ -321,7 +318,7 @@ class FrontendController extends Controller
             $links = $this->quickLinkManager->publishedQuickLinks(['body' => 'body', 'footer' => 'footer']);
             return view('frontend.posts.career', compact('category', 'posts', 'topPosts', 'links'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -335,7 +332,7 @@ class FrontendController extends Controller
             $posts = $this->postManager->publishedPosts();
             return view('frontend.posts.post_details', compact('post', 'posts'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -345,10 +342,8 @@ class FrontendController extends Controller
     public function allPublishedNoticePost()
     {
         try {
-            $catSlug = 'notices';
 
-            $category = $this->postCategoryManager->getPostCategorysBySlug($catSlug);
-
+            $category = $this->postCategoryManager->getPostCategorysBySlug(PostCategory::NOTICE->slug());
             if (!$category) {
                 return $this->redirectTo404();
             }
@@ -358,7 +353,7 @@ class FrontendController extends Controller
             $links = $this->quickLinkManager->publishedQuickLinks(['body' => 'body', 'footer' => 'footer']);
             return view('frontend.posts.notices', compact('category', 'posts', 'topPosts', 'links'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -372,7 +367,7 @@ class FrontendController extends Controller
             $posts = $this->postManager->publishedPosts();
             return view('frontend.posts.post_details', compact('post', 'posts'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -394,7 +389,7 @@ class FrontendController extends Controller
 
             return view('frontend.publications.list', compact('documents', 'documentType'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -408,7 +403,7 @@ class FrontendController extends Controller
             $documents = $this->documentManager->getPublishedDocuments($document->document_type_id);
             return view('frontend.publications.details', compact('document', 'documents'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -425,7 +420,7 @@ class FrontendController extends Controller
             $events = $this->eventManager->publishedEvents();
             return view('frontend.events.event_details', compact('event', 'events'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -437,7 +432,7 @@ class FrontendController extends Controller
 
             return view('frontend.events.all_events', compact('events', 'topEvents'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -452,7 +447,7 @@ class FrontendController extends Controller
             $trainings = $this->trainingManager->publishedTrainings();
             return view('frontend.programs.details', compact('program', 'programs', 'trainings'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -467,7 +462,7 @@ class FrontendController extends Controller
             $programs = $this->programManager->publishedPrograms();
             return view('frontend.trainings.details', compact('training', 'programs', 'trainings'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -482,7 +477,7 @@ class FrontendController extends Controller
             $photos = $this->galleryManager->publishedGallery($params, $setting->per_page, $published);
             return view('frontend.gallery.images', compact('photos'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -495,7 +490,7 @@ class FrontendController extends Controller
             }
             return view('frontend.gallery.image-details', compact('photo'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -512,7 +507,7 @@ class FrontendController extends Controller
             $videos = $this->galleryManager->publishedGallery($params, $setting->per_page, $published);
             return view('frontend.gallery.videos', compact('videos'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -529,7 +524,7 @@ class FrontendController extends Controller
             }
             return view('frontend.publications.publications', compact('categories'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -549,7 +544,7 @@ class FrontendController extends Controller
             }
             return view('frontend.faculties', compact('faculties'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -559,7 +554,7 @@ class FrontendController extends Controller
             $programs = $this->programManager->publishedPrograms();
             return view('frontend.programs', compact('programs'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -581,7 +576,7 @@ class FrontendController extends Controller
 
             return view('frontend.trainings', compact('categories'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -589,10 +584,9 @@ class FrontendController extends Controller
     {
         try {
             $facilities = $this->facilityManager->publishedFacilities();
-
             return view('frontend.facilities', compact('facilities'));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -601,7 +595,7 @@ class FrontendController extends Controller
         try {
             return response()->download(public_path('/uploads/documents/' . $file));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -610,7 +604,7 @@ class FrontendController extends Controller
         try {
             return response()->download(public_path('/uploads/posts/' . $file));
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
@@ -627,7 +621,7 @@ class FrontendController extends Controller
 
             return array_slice($images, 0, 16);
         } catch (Exception $e) {
-            return "Oops, something went wrong!";
+            return Message::OOPS_SOMETHING_WENT_WRONG->title();
         }
     }
 
