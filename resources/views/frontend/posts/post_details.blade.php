@@ -1,6 +1,9 @@
 @extends('layouts.frontend.app')
 
 @section('title', $post ? $post->title : 'Post Title')
+@section('og_title', $post ? $post->title : 'Post Title')
+@section('og_description', $post ? substr(strip_tags($post->description), 0, 150) : 'Post Description')
+@section('og_image', $post && $post->image ? asset('uploads/posts/' . $post->image) : asset('uploads/setting/logo.png'))
 
 @section('content')
     <div class="course-details-area gray-bg">
